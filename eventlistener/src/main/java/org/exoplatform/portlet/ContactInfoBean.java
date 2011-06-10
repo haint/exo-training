@@ -14,19 +14,35 @@
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, see<http://www.gnu.org/licenses/>.
  */
-package exo.portal.service.impl;
-
-import exo.portal.service.NewCommer;
+package org.exoplatform.portlet;
 
 /**
  * Created by The eXo Platform SAS
  * Author : Nguyen Thanh Hai
  *          haint@exoplatform.com
- * Jun 9, 2011  
+ * Jun 20, 2011  
  */
-public class NewCommerImpl implements NewCommer {
+public class ContactInfoBean {
+  private String name ;
+  private String email ;
   
-  public void test() {
-    System.out.println("This is portal new commer's component!!");
+  public String getName() {
+    return name;
+  }
+
+  public void setName(String name) {
+    this.name = name;
+  }
+
+  public String getEmail() {
+    return email;
+  }
+
+  public void setEmail(String email) {
+    this.email = email;
+  }
+
+  public ContactInfoBean() {
+    
   }
 }

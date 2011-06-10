@@ -25,4 +25,6 @@ package exo.portal.service;
 public interface Sample {
 
   public void dump() ;
+  
+  public boolean expected() ;
 }

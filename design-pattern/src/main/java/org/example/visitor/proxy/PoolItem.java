@@ -14,19 +14,24 @@
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, see<http://www.gnu.org/licenses/>.
  */
-package exo.portal.service.impl;
-
-import exo.portal.service.NewCommer;
+package org.example.visitor.proxy;
 
 /**
  * Created by The eXo Platform SAS
  * Author : Nguyen Thanh Hai
  *          haint@exoplatform.com
- * Jun 9, 2011  
+ * Jul 11, 2011  
  */
-public class NewCommerImpl implements NewCommer {
-  
-  public void test() {
-    System.out.println("This is portal new commer's component!!");
-  }
+public class PoolItem
+{
+   private boolean inUse = false ;
+   private Object item ;
+   
+   public PoolItem(Object item) {
+      this.item = item ;
+   }
+   
+   public void setUse(boolean inUse) { this.inUse = inUse ; }
+   public boolean isUse() { return inUse ; }
+   public Object getItem() { return item ; }
 }

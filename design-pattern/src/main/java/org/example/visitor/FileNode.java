@@ -14,19 +14,34 @@
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, see<http://www.gnu.org/licenses/>.
  */
-package exo.portal.service.impl;
+package org.example.visitor;
 
-import exo.portal.service.NewCommer;
+import java.io.File;
 
 /**
  * Created by The eXo Platform SAS
  * Author : Nguyen Thanh Hai
  *          haint@exoplatform.com
- * Jun 9, 2011  
+ * Jul 11, 2011  
  */
-public class NewCommerImpl implements NewCommer {
-  
-  public void test() {
-    System.out.println("This is portal new commer's component!!");
-  }
+public class FileNode implements FileSystemNode
+{
+   private File file ;
+   
+   public FileNode(File file) 
+   {
+      this.file = file ;
+   }
+   
+   @Override
+   public void visit(PrintVisitor visitor)
+   {
+      visitor.visitFileNode(this) ;
+   }
+   
+   public File getFile() 
+   {
+      return file ;
+   }
+
 }

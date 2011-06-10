@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE web-app PUBLIC "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
+                         "http://java.sun.com/dtd/web-app_2_3.dtd">
+<web-app>
+	<display-name>SimplePortlet</display-name>
+	<description>Simple Portlet</description>
+	
+	<!--
+	<listener>
+		<listener-class>org.exoplatform.services.portletcontainer.impl.servlet.PortletApplicationListener</listener-class>
+	</listener>
+	
+	<servlet>
+		<servlet-name>PortletWrapper</servlet-name>
+		<servlet-class>org.exoplatform.services.portletcontainer.impl.servlet.ServletWrapper</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>PortletWrapper</servlet-name>
+		<url-pattern>/PortletWrapper</url-pattern>
+	</servlet-mapping>
+	
+	<taglib>
+		<taglib-uri>http://java.sun.com/portlet</taglib-uri>
+		<taglib-location>/WEB-INF/tld/portlet.tld</taglib-location>
+	</taglib>	
+	 
+	<servlet>
+		<servlet-name>exoplatform</servlet-name>
+		<display-name>exoplatform Portlet</display-name>
+		<description>Generated Portlet Wrapper</description>
+		<servlet-class>org.apache.pluto.core.PortletServlet</servlet-class>
+
+		<init-param>
+			<param-name>portlet-class</param-name>
+			<param-value>exoplatform.exoplatform</param-value>
+		</init-param>
+
+		<init-param>
+			<param-name>portlet-guid</param-name>
+			<param-value>yourportlet.exoplatform</param-value>
+		</init-param>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>exoplatform</servlet-name>
+		<url-pattern>/exoplatform/*</url-pattern>
+	</servlet-mapping>
+	 -->
+</web-app>

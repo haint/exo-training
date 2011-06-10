@@ -1,0 +1,7 @@
+<div id="<%=uicomponent.getId();%>">  
+  <div class="MyText"><%= uicomponent.getMyText() %></div>
+  
+  <div class="ActionButton"> 
+    <a href="<%=uicomponent.event("ChangeText", "")%>">Change Text</a>
+  </div>
+</div>

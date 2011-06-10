@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<configuration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.exoplaform.org/xml/ns/kernel_1_0.xsd http://www.exoplaform.org/xml/ns/kernel_1_0.xsd"
+   xmlns="http://www.exoplaform.org/xml/ns/kernel_1_0.xsd">
+	<!--
+	<component>
+		<key>exo.portal.service.NewCommer</key>
+		<type>exo.portal.service.impl.NewCommerImpl</type>
+	</component>
+
+	<component>
+		<type>org.exoplatform.upload.UploadService</type>
+	</component>
+
+	<component>
+		<key>exo.portal.service.InitParamSample</key>
+		<type>exo.portal.service.impl.InitParamSampleImpl</type>
+		<init-params>
+			<value-param>
+				<name>sample-value</name>
+				<value>sampleValue</value>
+			</value-param>
+
+			<properties-param>
+				<name>sample-properties</name>
+				<property name="foo" value="foo" />
+				<property name="bar" value="bar" />
+			</properties-param>
+		</init-params>
+	</component>
+
+	<component>
+		<key>exo.portal.service.ObjectParamSample</key>
+		<type>exo.portal.service.impl.ObjectParamSampleImpl</type>
+		<init-params>
+			<object-param>
+				<name>sample.config</name>
+				<description>Sample Object Parameters</description>
+				<object type="exo.portal.service.impl.ObjectParamConfig">
+					<field name="stringField"><string>stringValue</string></field>
+					<field name="boolField"><boolean>true</boolean></field>
+					<field name="intField"><int>1</int></field>
+					<field name="longField"><long>9000000000</long></field>
+					<field name="doubleField"><double>1.234</double></field>
+					<field name="dateField"><date>2011-06-10T16:05:59</date></field>
+				</object>
+			</object-param>
+		</init-params>
+	</component>
+	
+	<component>
+		<key>exo.portal.service.CollectionParamSample</key>
+		<type>exo.portal.service.impl.CollectionParamSampleImpl</type>
+		<init-params>
+			<object-param>
+				<name>sample.collection.config</name>
+				<object type="exo.portal.service.impl.CollectionParamConfig">
+					<field name="list">
+						<collection type="java.util.ArrayList">
+							<value><string>sample</string></value>
+							<value>
+								<object type="exo.portal.service.impl.CollectionParamConfig$SampleObject">
+									<field name="name"><string>sample</string></field>
+								</object>
+							</value>
+						</collection>
+					</field>
+					<field name="map">
+						<map type="java.util.HashMap">
+							<entry>
+								<key><string>string</string></key>
+								<value><string>sample</string></value>
+							</entry>
+							<entry>
+								<key><string>object</string></key>
+								<value>
+									<object type="exo.portal.service.impl.CollectionParamConfig$SampleObject">
+										<field name="name"><string>sample</string></field>
+									</object>
+								</value>
+							</entry>
+						</map>
+					</field>
+				</object>
+			</object-param>
+		</init-params>
+	</component>
+
+	<component>
+		<key>exo.portal.service.ComponentPluginSample</key>
+		<type>exo.portal.service.impl.ComponentPluginSampleImpl</type>
+		<component-plugins>
+			<component-plugin>
+				<name>Plugin1</name>
+				<set-method>register1</set-method>
+				<type>exo.portal.service.impl.ComponentPluginSampleImpl$ComponentPlugin1</type>
+			</component-plugin>
+			<component-plugin>
+				<name>Plugin2</name>
+				<set-method>register2</set-method>
+				<type>exo.portal.service.impl.ComponentPluginSampleImpl$ComponentPlugin2</type>
+			</component-plugin>
+			<component-plugin>
+				<name>Plugin3</name>
+				<set-method>register3</set-method>
+				<type>exo.portal.service.impl.ComponentPluginSampleImpl$ComponentPlugin3</type>
+			</component-plugin>
+		</component-plugins>
+	</component>
+	
+	<component>
+		<type>exo.portal.service.impl.ExternalComponentPluginSampleImpl</type>
+	</component>
+	
+	<external-component-plugins>
+		<target-component>exo.portal.service.impl.ExternalComponentPluginSampleImpl</target-component>
+		<component-plugin>
+			<name>External Sample Plugin</name>
+			<set-method>register</set-method>
+			<type>exo.portal.service.impl.ExternalSamplePlugin</type>
+			<init-params>
+				<value-param>
+					<name>value</name>
+					<value>sampleValue</value>
+				</value-param>
+			</init-params>
+		</component-plugin>
+	</external-component-plugins>
+
+	<component>
+		<type>org.exoplatform.upload.UploadService</type>
+		<init-params>
+        	<value-param>
+            	<name>upload.limit.size</name>
+            	<description>Maximum size of the file to upload in MB</description>
+            	<value>10</value>
+         	</value-param>
+      	</init-params>
+	</component>
+	-->
+	
+	<external-component-plugins>
+		<target-component>org.exoplatform.upload.UploadService</target-component>
+		<component-plugin>
+			<name>MIME type Plugins for UploadService</name>
+			<set-method>register</set-method>
+			<type>org.exoplatform.upload.MimeTypeUploadPlugin</type>
+			<init-params>
+				<value-param>
+					<name>mimetype-path</name>
+					<value>jar:/conf/mimetype/mimetypes.properties</value>
+				</value-param>
+				<value-param>
+					<name>mimetype-default</name>
+					<value>application/rtf</value>
+				</value-param>
+			</init-params>
+		</component-plugin>
+	</external-component-plugins>
+</configuration>

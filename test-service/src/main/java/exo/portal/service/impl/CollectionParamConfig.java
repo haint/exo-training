@@ -16,17 +16,41 @@
  */
 package exo.portal.service.impl;
 
-import exo.portal.service.NewCommer;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Created by The eXo Platform SAS
  * Author : Nguyen Thanh Hai
  *          haint@exoplatform.com
- * Jun 9, 2011  
+ * Jun 13, 2011  
  */
-public class NewCommerImpl implements NewCommer {
+public class CollectionParamConfig {
+
+  @SuppressWarnings("rawtypes")
+  private List list ;
+  @SuppressWarnings("rawtypes")
+  private Map map ;
   
-  public void test() {
-    System.out.println("This is portal new commer's component!!");
+  @SuppressWarnings("rawtypes")
+  public void setList(List list) { this.list = list ; }
+  @SuppressWarnings("rawtypes")
+  public List getList() { return list ; }
+
+  @SuppressWarnings("rawtypes")
+  public void setMap(Map map) { this.map = map ; }
+  @SuppressWarnings("rawtypes")
+  public Map getMap() { return map ; }
+  
+  public static class SampleObject {
+    private String name ;
+    
+    public void setName(String name) { this.name = name ; }
+    public String getName() { return name ; }
+    
+    public boolean equals(Object obj) {
+      if(((SampleObject)obj).getName().equals(name)) return true ;
+      return false ;
+    }
   }
 }

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<portlet-app xmlns="http://java.sun.com/xml/ns/portlet/portlet-app_1_0.xsd"
+	version="1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/portlet/portlet-app_1_0.xsd
+                        http://java.sun.com/xml/ns/portlet/portlet-app_1_0.xsd">
+
+	<portlet>
+		<description>Webui portlet</description>
+		<portlet-name>WebuiPortlet</portlet-name>
+		<display-name>webui-portlet Portlet</display-name>
+		<portlet-class>org.exoplatform.webui.application.portlet.PortletApplicationController</portlet-class>
+		
+		<init-param>
+			<name>webui.configuration</name>
+			<value>/WEB-INF/conf/portlet/WebuiPortlet/webui/configuration.xml</value>
+		</init-param>
+
+		<supports>
+			<mime-type>text/html</mime-type>
+			<portlet-mode>view</portlet-mode>
+			<portlet-mode>edit</portlet-mode>
+			<portlet-mode>help</portlet-mode>
+		</supports>
+
+		<supported-locale>en</supported-locale>
+		<supported-locale>vi</supported-locale>
+		<resource-bundle>locale.portlet.WebuiPortlet.WebuiPortlet</resource-bundle>
+
+		<portlet-info>
+			<title>WebuiPortlet</title>
+			<short-title>WebuiPortlet</short-title>
+			<keywords>WebuiPortlet</keywords>
+		</portlet-info>
+		
+		<portlet-preferences>
+			<preference>
+				<name>text</name>
+				<value>Hello World</value>
+				<read-only>false</read-only>
+			</preference>
+		</portlet-preferences>
+	</portlet>
+</portlet-app>

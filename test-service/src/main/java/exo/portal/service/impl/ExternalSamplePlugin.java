@@ -16,17 +16,26 @@
  */
 package exo.portal.service.impl;
 
-import exo.portal.service.NewCommer;
+import org.exoplatform.container.component.BaseComponentPlugin;
+import org.exoplatform.container.xml.InitParams;
 
 /**
  * Created by The eXo Platform SAS
  * Author : Nguyen Thanh Hai
  *          haint@exoplatform.com
- * Jun 9, 2011  
+ * Jun 15, 2011  
  */
-public class NewCommerImpl implements NewCommer {
-  
-  public void test() {
-    System.out.println("This is portal new commer's component!!");
-  }
+public class ExternalSamplePlugin extends BaseComponentPlugin {
+
+   private String value ;
+   
+   public ExternalSamplePlugin(InitParams initParams) {
+      value = initParams.getValueParam("value").getValue() ;
+   }
+
+   public String getName() {
+      return "ExternalSamplePlugin" ;
+   }
+   
+   public String getValue() { return value ; }
 }

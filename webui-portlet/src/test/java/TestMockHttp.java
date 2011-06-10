@@ -1,3 +1,9 @@
+import org.exoplatform.portal.application.PortalController;
+import org.springframework.mock.web.MockHttpServletRequest;
+import org.springframework.mock.web.MockServletConfig;
+
+import junit.framework.TestCase;
+
 /*
  * Copyright (C) 2003-2011 eXo Platform SAS.
  *
@@ -14,19 +20,18 @@
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, see<http://www.gnu.org/licenses/>.
  */
-package exo.portal.service.impl;
-
-import exo.portal.service.NewCommer;
 
 /**
- * Created by The eXo Platform SAS
- * Author : Nguyen Thanh Hai
- *          haint@exoplatform.com
- * Jun 9, 2011  
+ * @author <a href="mailto:haint@exoplatform.com">Nguyen Thanh Hai</a>
+ *
+ * @datAug 16, 2011
  */
-public class NewCommerImpl implements NewCommer {
-  
-  public void test() {
-    System.out.println("This is portal new commer's component!!");
-  }
+public class TestMockHttp extends TestCase
+{
+   public void testMockHttpRequest() throws Exception {
+      MockHttpServletRequest request = new MockHttpServletRequest();
+      PortalController controller = new PortalController();
+      MockServletConfig servletConfig = new MockServletConfig();
+      controller.init(servletConfig);
+   }
 }

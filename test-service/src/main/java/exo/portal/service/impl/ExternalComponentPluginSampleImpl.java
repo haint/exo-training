@@ -16,17 +16,30 @@
  */
 package exo.portal.service.impl;
 
-import exo.portal.service.NewCommer;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by The eXo Platform SAS
  * Author : Nguyen Thanh Hai
  *          haint@exoplatform.com
- * Jun 9, 2011  
+ * Jun 13, 2011  
  */
-public class NewCommerImpl implements NewCommer {
+public class ExternalComponentPluginSampleImpl {
+  private List<ExternalSamplePlugin> plugins ;
   
-  public void test() {
-    System.out.println("This is portal new commer's component!!");
+  public void register(ExternalSamplePlugin plugin) {
+    if(plugins == null) plugins = new ArrayList<ExternalSamplePlugin>() ;
+    plugins.add(plugin) ;
+  }
+
+  public void dump() {
+  }
+
+  public boolean expected() {
+    if(plugins.size() == 1 &&
+             plugins.get(0).getName().equals("ExternalSamplePlugin") &&
+             plugins.get(0).getValue().equals("sampleValue")) return true ;
+    return false;
   }
 }

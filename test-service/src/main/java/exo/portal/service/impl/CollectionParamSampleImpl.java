@@ -17,41 +17,36 @@
 package exo.portal.service.impl;
 
 import org.exoplatform.container.xml.InitParams;
-import org.exoplatform.container.xml.PropertiesParam;
-import org.exoplatform.container.xml.ValueParam;
 
-import exo.portal.service.InitParamSample;
+import exo.portal.service.CollectionParamSample;
 
 /**
  * Created by The eXo Platform SAS
  * Author : Nguyen Thanh Hai
  *          haint@exoplatform.com
- * Jun 9, 2011  
+ * Jun 13, 2011  
  */
-public class InitParamSampleImpl implements InitParamSample {
-  private String value ;
-  private String foo ;
-  private String bar ;
+public class CollectionParamSampleImpl implements CollectionParamSample {
+  private CollectionParamConfig config ;
   
-  public InitParamSampleImpl(InitParams initParams) {
+  public CollectionParamSampleImpl(InitParams initParams) {
     super() ;
-    ValueParam valueParam = initParams.getValueParam("sample-value") ;
-    value = valueParam.getValue() ;
-    PropertiesParam propParam = initParams.getPropertiesParam("sample-properties") ;
-    if(propParam != null) {
-      foo = propParam.getProperty("foo") ;
-      bar = propParam.getProperty("bar") ;
-    }
+    config = (CollectionParamConfig) initParams.getObjectParam("sample.collection.config").getObject() ;
   }
 
   public void dump() {
-    System.out.println("Value: " + value);
-    System.out.println("Property foo: " + foo);
-    System.out.println("Property bar: " + bar);
+    
   }
 
   public boolean expected() {
-    if("sampleValue".equals(value) && "foo".equals(foo) && "bar".equals("bar")) return true ; 
-    return false ;
+    CollectionParamConfig.SampleObject obj = new CollectionParamConfig.SampleObject() ;
+    obj.setName("sample") ;
+    if(config.getList().size() == 2
+        && config.getMap().size() == 2
+        && config.getList().get(0).equals("sample")
+        && config.getList().get(1).equals(obj)
+        && config.getMap().get("string").equals("sample")
+        && config.getMap().get("object").equals(obj)) return true ;
+    return false;
   }
 }

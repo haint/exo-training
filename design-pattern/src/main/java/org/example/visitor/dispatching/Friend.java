@@ -14,19 +14,44 @@
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, see<http://www.gnu.org/licenses/>.
  */
-package exo.portal.service.impl;
-
-import exo.portal.service.NewCommer;
+package org.example.visitor.dispatching;
 
 /**
  * Created by The eXo Platform SAS
  * Author : Nguyen Thanh Hai
  *          haint@exoplatform.com
- * Jun 9, 2011  
+ * Jul 11, 2011  
  */
-public class NewCommerImpl implements NewCommer {
-  
-  public void test() {
-    System.out.println("This is portal new commer's component!!");
-  }
+public interface Friend
+{
+   public void accept(Visitor v) ;
+   
+   public static class FriendsInHighSchool implements Friend 
+   {
+
+      public void accept(Visitor v)
+      {
+         v.visit(this) ;
+      }
+      
+   }
+   
+   public static class FriendsFromNeighbour implements Friend
+   {
+
+      public void accept(Visitor v)
+      {
+         v.visit(this) ;
+      }
+      
+   }
+   
+   public static class NewFriends implements Friend
+   {
+
+      public void accept(Visitor v)
+      {
+         v.visit(this) ;
+      }
+   }
 }

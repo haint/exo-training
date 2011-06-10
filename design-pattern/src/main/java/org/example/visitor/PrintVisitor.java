@@ -14,19 +14,39 @@
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, see<http://www.gnu.org/licenses/>.
  */
-package exo.portal.service.impl;
+package org.example.visitor;
 
-import exo.portal.service.NewCommer;
+import java.io.File;
 
 /**
  * Created by The eXo Platform SAS
  * Author : Nguyen Thanh Hai
  *          haint@exoplatform.com
- * Jun 9, 2011  
+ * Jul 11, 2011  
  */
-public class NewCommerImpl implements NewCommer {
-  
-  public void test() {
-    System.out.println("This is portal new commer's component!!");
-  }
+public class PrintVisitor
+{
+
+   private int level  = 0;
+   
+   public void visitFileNode(FileNode node) 
+   {
+      for(int i = 0; i < level; i++) System.out.print("  ");
+      System.out.println(node.getFile().getName());
+   }
+   
+   public void visitDirectoryNode(DirectoryNode node)
+   {
+      for(int i = 0; i < level; i++) System.out.print("  ");
+      System.out.println(node.getDirectory().getName());
+      level++ ;
+      FileSystemNode[] child = node.getChildren() ;
+      for(int i = 0; i < child.length; i++) child[i].visit(this) ;
+      level-- ;
+   }
+   
+   public static void main(String[] args) throws Exception {
+      DirectoryNode node = new DirectoryNode(new File("/home/haint")) ;
+      node.visit(new PrintVisitor()) ;
+   }
 }
