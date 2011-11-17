@@ -8,7 +8,7 @@
 	<portlet>
 		<description>Webui portlet</description>
 		<portlet-name>WebuiPortlet</portlet-name>
-		<display-name>webui-portlet Portlet</display-name>
+		<display-name>a.webui-portlet Portlet</display-name>
 		<portlet-class>org.exoplatform.webui.application.portlet.PortletApplicationController</portlet-class>
 		
 		<init-param>
@@ -28,9 +28,9 @@
 		<resource-bundle>locale.portlet.WebuiPortlet.WebuiPortlet</resource-bundle>
 
 		<portlet-info>
-			<title>WebuiPortlet</title>
-			<short-title>WebuiPortlet</short-title>
-			<keywords>WebuiPortlet</keywords>
+			<title>A.WebuiPortlet</title>
+			<short-title>A.WebuiPortlet</short-title>
+			<keywords>A.WebuiPortlet</keywords>
 		</portlet-info>
 		
 		<portlet-preferences>

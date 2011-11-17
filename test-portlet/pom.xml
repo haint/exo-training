@@ -63,9 +63,9 @@
 		
 			<plugin>
 				<groupId>org.mortbay.jetty</groupId>
-				<artifactId>maven-jetty-plugin</artifactId>
+				<artifactId>jetty-maven-plugin</artifactId>
 				<configuration>
-					<webApp>target/test-portlet</webApp>
+					<war>target/test-portlet</war>
 				</configuration>
 			</plugin>
 		</plugins>

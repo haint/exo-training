@@ -1,6 +1,0 @@
-<%
-
-%>
-<div class="$uicomponent.id">
-	<div class="Text"><%=uicomponent.getText()%></div>
-</div>
