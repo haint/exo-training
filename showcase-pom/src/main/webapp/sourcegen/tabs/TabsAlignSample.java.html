@@ -1,0 +1,105 @@
+<html>
+<head>
+<link rel='stylesheet' href='../../js/sh/SyntaxHighlighter.css' type='text/css' />
+<script src='../../js/sh/shCore.js'></script>
+<script src='../../js/sh/shBrushJava.js'></script>
+<style>
+* {
+font-family:Courier New,monospace;
+  padding: 0;
+  margin: 0;
+  white-space: nowrap;
+  font-size: 11px;
+}
+.dp-highlighter {
+  white-space: nowrap;
+  overflow: visible;
+  width: 600px;
+  font-size: 11px;
+  font-family:Courier New,monospace;
+}
+</style>
+</head>
+<body>
+<textarea name='code' class='java:nogutter' rows='15' cols='120'>
+/*
+ * Smart GWT (GWT for SmartClient)
+ * Copyright 2008 and beyond, Isomorphic Software, Inc.
+ *
+ * Smart GWT is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License version 3
+ * as published by the Free Software Foundation.  Smart GWT is also
+ * available under typical commercial license terms - see
+ * http://smartclient.com/license
+ *
+ * This software is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * Lesser General Public License for more details.
+ */
+
+import com.smartgwt.client.types.Side;
+import com.smartgwt.client.widgets.Canvas;
+import com.smartgwt.client.widgets.Img;
+import com.smartgwt.client.widgets.layout.VLayout;
+import com.smartgwt.client.widgets.tab.Tab;
+import com.smartgwt.client.widgets.tab.TabSet;
+
+import com.google.gwt.core.client.EntryPoint;
+
+public class TabsAlignSample implements EntryPoint {
+
+    public void onModuleLoad() {
+
+        final TabSet topTabSet = new TabSet();
+        topTabSet.setTabBarPosition(Side.TOP);
+        topTabSet.setTabBarAlign(Side.RIGHT);
+        topTabSet.setWidth(400);
+        topTabSet.setHeight(200);
+
+        Tab tTab1 = new Tab("Blue", "pieces/16/pawn_blue.png");
+        Img tImg1 = new Img("pieces/48/pawn_blue.png", 48, 48);
+        tTab1.setPane(tImg1);
+
+        Tab tTab2 = new Tab("Green", "pieces/16/pawn_green.png");
+        Img tImg2 = new Img("pieces/48/pawn_green.png", 48, 48);
+        tTab2.setPane(tImg2);
+
+        topTabSet.addTab(tTab1);
+        topTabSet.addTab(tTab2);
+
+        final TabSet leftTabSet = new TabSet();
+        leftTabSet.setTabBarPosition(Side.LEFT);
+        leftTabSet.setTabBarAlign(Side.BOTTOM);
+        leftTabSet.setWidth(300);
+        leftTabSet.setHeight(300);
+
+        Tab lTab1 = new Tab();
+        lTab1.setIcon("pieces/16/pawn_blue.png", 16);
+        Img lImg1 = new Img("pieces/48/pawn_blue.png", 48, 48);
+        lTab1.setPane(lImg1);
+
+        Tab lTab2 = new Tab();
+        lTab2.setIcon("pieces/16/pawn_green.png", 16);
+        Img lImg2 = new Img("pieces/48/pawn_green.png", 48, 48);
+        lTab2.setPane(lImg2);
+
+        leftTabSet.addTab(lTab1);
+        leftTabSet.addTab(lTab2);
+
+        VLayout vLayout = new VLayout();
+        vLayout.setMembersMargin(15);
+        vLayout.addMember(topTabSet);
+        vLayout.addMember(leftTabSet);
+        vLayout.setHeight("auto");
+        
+        vLayout.draw();
+    }
+
+}
+</textarea>
+<script class='javascript'>
+dp.SyntaxHighlighter.HighlightAll("code");
+</script>
+</body>
+</html>

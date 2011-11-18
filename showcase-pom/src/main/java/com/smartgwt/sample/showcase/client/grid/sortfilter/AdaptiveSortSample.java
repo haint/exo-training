@@ -5,6 +5,7 @@ import com.smartgwt.client.data.Criteria;
 import com.smartgwt.client.data.DSRequest;
 import com.smartgwt.client.data.DSResponse;
 import com.smartgwt.client.data.Record;
+import com.smartgwt.client.types.DSOperationType;
 import com.smartgwt.client.util.SC;
 import com.smartgwt.client.widgets.Canvas;
 import com.smartgwt.client.widgets.Label;
@@ -60,6 +61,7 @@ public class AdaptiveSortSample extends ShowcasePanel {
             @Override
             public DSResponse getClientOnlyResponse(DSRequest request, Record[] serverData) {
                 DSResponse response = super.getClientOnlyResponse(request, serverData);
+                if(request.getOperationType() == DSOperationType.FETCH)  {}
                 int totalRows = response.getTotalRows();
                 int startRow = response.getStartRow();
                 int endRow = response.getEndRow();

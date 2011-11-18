@@ -1,0 +1,96 @@
+<html>
+<head>
+<link rel='stylesheet' href='../../../js/sh/SyntaxHighlighter.css' type='text/css' />
+<script src='../../../js/sh/shCore.js'></script>
+<script src='../../../js/sh/shBrushJava.js'></script>
+<style>
+* {
+font-family:Courier New,monospace;
+  padding: 0;
+  margin: 0;
+  white-space: nowrap;
+  font-size: 11px;
+}
+.dp-highlighter {
+  white-space: nowrap;
+  overflow: visible;
+  width: 600px;
+  font-size: 11px;
+  font-family:Courier New,monospace;
+}
+</style>
+</head>
+<body>
+<textarea name='code' class='java:nogutter' rows='15' cols='120'>
+/*
+ * Smart GWT (GWT for SmartClient)
+ * Copyright 2008 and beyond, Isomorphic Software, Inc.
+ *
+ * Smart GWT is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License version 3
+ * as published by the Free Software Foundation.  Smart GWT is also
+ * available under typical commercial license terms - see
+ * http://smartclient.com/license
+ *
+ * This software is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * Lesser General Public License for more details.
+ */
+
+import com.google.gwt.user.client.Random;
+import com.smartgwt.client.widgets.Canvas;
+import com.smartgwt.client.widgets.IButton;
+import com.smartgwt.client.widgets.Img;
+import com.smartgwt.client.widgets.events.ClickEvent;
+import com.smartgwt.client.widgets.events.ClickHandler;
+import com.smartgwt.client.widgets.layout.VLayout;
+
+import com.google.gwt.core.client.EntryPoint;
+
+public class CreateSample implements EntryPoint {
+
+    public void onModuleLoad() {
+
+        VLayout layout = new VLayout();
+        layout.setMembersMargin(10);
+
+        final Canvas cubeBin = new Canvas("cubeBin");
+        cubeBin.setTop(40);
+        cubeBin.setWidth(400);
+        cubeBin.setHeight(300);
+        cubeBin.setShowEdges(true);
+
+        IButton button = new IButton();
+        button.setTitle("Create");
+        button.setIcon("pieces/16/cube_blue.png");
+        button.addClickHandler(new ClickHandler() {
+            public void onClick(ClickEvent event) {
+                final Img img = new Img();
+                img.setLeft(Random.nextInt(340));
+                img.setTop(Random.nextInt(240));
+                img.setWidth(48);
+                img.setHeight(48);
+                img.setParentElement(cubeBin);
+                img.setSrc("pieces/48/cube_blue.png");
+                img.addClickHandler(new ClickHandler() {
+                    public void onClick(ClickEvent event) {
+                        img.destroy();
+                    }
+                });
+                img.draw();
+            }
+        });
+        layout.addMember(button);
+        layout.addMember(cubeBin);
+
+        layout.draw();
+    }
+
+}
+</textarea>
+<script class='javascript'>
+dp.SyntaxHighlighter.HighlightAll("code");
+</script>
+</body>
+</html>

@@ -1,0 +1,102 @@
+<html>
+<head>
+<link rel='stylesheet' href='../../../js/sh/SyntaxHighlighter.css' type='text/css' />
+<script src='../../../js/sh/shCore.js'></script>
+<script src='../../../js/sh/shBrushJava.js'></script>
+<style>
+* {
+font-family:Courier New,monospace;
+  padding: 0;
+  margin: 0;
+  white-space: nowrap;
+  font-size: 11px;
+}
+.dp-highlighter {
+  white-space: nowrap;
+  overflow: visible;
+  width: 600px;
+  font-size: 11px;
+  font-family:Courier New,monospace;
+}
+</style>
+</head>
+<body>
+<textarea name='code' class='java:nogutter' rows='15' cols='120'>
+/*
+ * Smart GWT (GWT for SmartClient)
+ * Copyright 2008 and beyond, Isomorphic Software, Inc.
+ *
+ * Smart GWT is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License version 3
+ * as published by the Free Software Foundation.  Smart GWT is also
+ * available under typical commercial license terms - see
+ * http://smartclient.com/license
+ *
+ * This software is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * Lesser General Public License for more details.
+ */
+
+import com.smartgwt.client.types.Alignment;
+import com.smartgwt.client.widgets.Canvas;
+import com.smartgwt.client.widgets.Label;
+import com.smartgwt.client.widgets.layout.HStack;
+import com.smartgwt.client.widgets.layout.VStack;
+
+import com.google.gwt.core.client.EntryPoint;
+
+public class StackSample implements EntryPoint {
+
+    public void onModuleLoad() {
+
+        Canvas canvas = new Canvas();
+
+        VStack vStack = new VStack();
+        vStack.setShowEdges(true);
+        vStack.setWidth(150);
+        vStack.setMembersMargin(5);
+        vStack.setLayoutMargin(10);
+        vStack.addMember(new BlueBox(null, 40, "height 40"));
+        vStack.addMember(new BlueBox(null, 80, "height 80"));
+        vStack.addMember(new BlueBox(null, 160, "height 160"));
+        canvas.addChild(vStack);
+
+        HStack hStack = new HStack();
+        hStack.setLeft(170);
+        hStack.setShowEdges(true);
+        hStack.setHeight(150);
+        hStack.setMembersMargin(5);
+        hStack.setLayoutMargin(10);
+        hStack.addMember(new BlueBox(60, null, "width 60"));
+        hStack.addMember(new BlueBox(80, null, "width 80"));
+        hStack.addMember(new BlueBox(160, null, "width 160"));
+        canvas.addChild(hStack);
+
+        canvas.draw();
+    }
+
+    class BlueBox extends Label {
+
+        public BlueBox(String contents) {
+            setAlign(Alignment.CENTER);
+            setBorder("1px solid #808080");
+            setBackgroundColor("#C3D9FF");
+            setContents(contents);
+        }
+
+        public BlueBox(Integer width, Integer height, String contents) {
+            this(contents);
+            if (width != null) setWidth(width);
+            if (height != null) setHeight(height);
+        }
+    }
+
+}
+
+</textarea>
+<script class='javascript'>
+dp.SyntaxHighlighter.HighlightAll("code");
+</script>
+</body>
+</html>

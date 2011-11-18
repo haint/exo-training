@@ -1,0 +1,103 @@
+<html>
+<head>
+<link rel='stylesheet' href='../../../js/sh/SyntaxHighlighter.css' type='text/css' />
+<script src='../../../js/sh/shCore.js'></script>
+<script src='../../../js/sh/shBrushJava.js'></script>
+<style>
+* {
+font-family:Courier New,monospace;
+  padding: 0;
+  margin: 0;
+  white-space: nowrap;
+  font-size: 11px;
+}
+.dp-highlighter {
+  white-space: nowrap;
+  overflow: visible;
+  width: 600px;
+  font-size: 11px;
+  font-family:Courier New,monospace;
+}
+</style>
+</head>
+<body>
+<textarea name='code' class='java:nogutter' rows='15' cols='120'>
+/*
+ * Smart GWT (GWT for SmartClient)
+ * Copyright 2008 and beyond, Isomorphic Software, Inc.
+ *
+ * Smart GWT is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License version 3
+ * as published by the Free Software Foundation.  Smart GWT is also
+ * available under typical commercial license terms - see
+ * http://smartclient.com/license
+ *
+ * This software is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * Lesser General Public License for more details.
+ */
+
+import com.smartgwt.client.data.MultiSortCallback;
+import com.smartgwt.client.data.MultiSortDialog;
+import com.smartgwt.client.data.SortSpecifier;
+import com.smartgwt.client.types.SortDirection;
+import com.smartgwt.client.widgets.Canvas;
+import com.smartgwt.client.widgets.IButton;
+import com.smartgwt.client.widgets.events.ClickEvent;
+import com.smartgwt.client.widgets.events.ClickHandler;
+import com.smartgwt.client.widgets.grid.ListGrid;
+import com.smartgwt.client.widgets.layout.VLayout;
+import com.smartgwt.sample.showcase.client.data.ItemSupplyXmlDS;
+
+import com.google.gwt.core.client.EntryPoint;
+
+public class MultiLevelSortSample implements EntryPoint {
+
+    protected boolean isTopIntro() {
+        return true;
+    }
+
+    public void onModuleLoad() {
+        VLayout layout = new VLayout(10);
+
+        final ListGrid listGrid = new ListGrid();
+        listGrid.setWidth(700);
+        listGrid.setHeight(300);
+        listGrid.setDataSource(ItemSupplyXmlDS.getInstance());
+        listGrid.setAutoFetchData(true);
+        listGrid.setCanMultiSort(true);
+        listGrid.setInitialSort(new SortSpecifier[]{
+                new SortSpecifier("category", SortDirection.ASCENDING),
+                new SortSpecifier("itemName", SortDirection.DESCENDING)
+        });
+
+        IButton button = new IButton("Multilevel Sort");
+        button.setIcon("crystal/16/actions/sort_incr.png");
+        button.setWidth(120);
+        button.addClickHandler(new ClickHandler() {
+            public void onClick(ClickEvent event) {
+                MultiSortDialog.askForSort(listGrid, listGrid.getSort(), new MultiSortCallback() {
+                    public void execute(SortSpecifier[] sortLevels) {
+                        //if sortLevels is null, it means that the Cancel button was clicked
+                        //in which case we simply want to dismiss the dialog
+                        if(sortLevels != null) {
+                            listGrid.setSort(sortLevels);
+                        }
+                    }
+                });
+            }
+        });
+
+        layout.addMember(button);
+        layout.addMember(listGrid);
+        layout.draw();
+    }
+
+}
+</textarea>
+<script class='javascript'>
+dp.SyntaxHighlighter.HighlightAll("code");
+</script>
+</body>
+</html>

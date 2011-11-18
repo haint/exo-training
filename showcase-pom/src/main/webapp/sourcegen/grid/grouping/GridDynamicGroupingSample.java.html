@@ -1,0 +1,124 @@
+<html>
+<head>
+<link rel='stylesheet' href='../../../js/sh/SyntaxHighlighter.css' type='text/css' />
+<script src='../../../js/sh/shCore.js'></script>
+<script src='../../../js/sh/shBrushJava.js'></script>
+<style>
+* {
+font-family:Courier New,monospace;
+  padding: 0;
+  margin: 0;
+  white-space: nowrap;
+  font-size: 11px;
+}
+.dp-highlighter {
+  white-space: nowrap;
+  overflow: visible;
+  width: 600px;
+  font-size: 11px;
+  font-family:Courier New,monospace;
+}
+</style>
+</head>
+<body>
+<textarea name='code' class='java:nogutter' rows='15' cols='120'>
+/*
+ * Smart GWT (GWT for SmartClient)
+ * Copyright 2008 and beyond, Isomorphic Software, Inc.
+ *
+ * Smart GWT is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License version 3
+ * as published by the Free Software Foundation.  Smart GWT is also
+ * available under typical commercial license terms - see
+ * http://smartclient.com/license
+ *
+ * This software is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * Lesser General Public License for more details.
+ */
+
+import com.smartgwt.client.types.Alignment;
+import com.smartgwt.client.types.GroupStartOpen;
+import com.smartgwt.client.types.ListGridFieldType;
+import com.smartgwt.client.widgets.Canvas;
+import com.smartgwt.client.widgets.IButton;
+import com.smartgwt.client.widgets.events.ClickEvent;
+import com.smartgwt.client.widgets.events.ClickHandler;
+import com.smartgwt.client.widgets.grid.ListGrid;
+import com.smartgwt.client.widgets.grid.ListGridField;
+import com.smartgwt.client.widgets.layout.HLayout;
+import com.smartgwt.client.widgets.layout.VLayout;
+import com.smartgwt.sample.showcase.client.data.CountryXmlDS;
+
+import com.google.gwt.core.client.EntryPoint;
+
+public class GridDynamicGroupingSample implements EntryPoint {
+
+    public void onModuleLoad() {
+
+        VLayout layout = new VLayout(15);
+
+        CountryXmlDS dataSource = CountryXmlDS.getInstance();
+
+        final ListGrid countryGrid = new ListGrid();
+        countryGrid.setCanEdit(true);
+
+        countryGrid.setWidth(522);
+        countryGrid.setHeight(224);
+        countryGrid.setShowAllRecords(true);
+        countryGrid.setCellHeight(22);
+
+        countryGrid.setGroupStartOpen(GroupStartOpen.ALL);
+        countryGrid.setGroupByField("continent");
+        countryGrid.setDataSource(dataSource);
+
+        ListGridField countryCodeField = new ListGridField("countryCode", "Flag", 40);
+        countryCodeField.setAlign(Alignment.CENTER);
+        countryCodeField.setType(ListGridFieldType.IMAGE);
+        countryCodeField.setImageURLPrefix("flags/16/");
+        countryCodeField.setImageURLSuffix(".png");
+        countryCodeField.setCanEdit(false);
+
+        ListGridField nameField = new ListGridField("countryName");
+
+        ListGridField governmentField = new ListGridField("government");
+        ListGridField continentField = new ListGridField("continent");
+        countryGrid.setFields(countryCodeField, nameField, governmentField, continentField);
+
+        countryGrid.setAutoFetchData(true);
+
+        HLayout buttonLayout = new HLayout(15);
+
+        IButton unGroupButton = new IButton("Ungroup");
+        unGroupButton.addClickHandler(new ClickHandler() {
+            public void onClick(ClickEvent event) {
+                countryGrid.ungroup();
+            }
+        });
+
+
+        IButton groupByButton = new IButton("Group By Continent");
+        groupByButton.setWidth(140);
+        groupByButton.addClickHandler(new ClickHandler() {
+            public void onClick(ClickEvent event) {
+                countryGrid.groupBy("continent");
+            }
+        });
+
+        buttonLayout.addMember(unGroupButton);
+        buttonLayout.addMember(groupByButton);
+        
+        layout.addMember(countryGrid);
+        layout.addMember(buttonLayout);
+
+        layout.draw();
+    }
+
+}
+</textarea>
+<script class='javascript'>
+dp.SyntaxHighlighter.HighlightAll("code");
+</script>
+</body>
+</html>

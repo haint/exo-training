@@ -1,0 +1,52 @@
+<html>
+<head>
+<link rel='stylesheet' href='../../../../js/sh/SyntaxHighlighter.css' type='text/css' />
+<script src='../../../../js/sh/shCore.js'></script>
+<script src='../../../../js/sh/shBrushJScript.js'></script>
+<style>
+* {
+font-family:Courier New,monospace;
+  padding: 0;
+  margin: 0;
+  white-space: nowrap;
+  font-size: 11px;
+}
+.dp-highlighter {
+  white-space: nowrap;
+  overflow: visible;
+  width: 600px;
+  font-size: 11px;
+  font-family:Courier New,monospace;
+}
+</style>
+</head>
+<body>
+<textarea name='code' class='js:nogutter' rows='15' cols='120'>
+isc.DataSource.create({
+    ID:"contacts",
+    dataFormat:"json",
+    dataURL:"/isomorphic/system/reference/inlineExamples/dataIntegration/json/contactsData.js",
+    fields:[
+        {name:"name"},
+        {name:"email"},
+        {name:"organization"},
+        {name:"phone"},
+        {valueXPath:"address/street", name:"street"},
+        {valueXPath:"address/city", name:"city"},
+        {valueXPath:"address/state", name:"state"},
+        {valueXPath:"address/zip", name:"zip"}
+    ]
+});
+
+isc.ListGrid.create({
+    ID: "boundGrid",
+	dataSource: "contacts",
+	width: "100%",
+	autoFetchData: true
+});
+</textarea>
+<script class='javascript'>
+dp.SyntaxHighlighter.HighlightAll("code");
+</script>
+</body>
+</html>

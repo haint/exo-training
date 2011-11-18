@@ -1,0 +1,97 @@
+<html>
+<head>
+<link rel='stylesheet' href='../../../js/sh/SyntaxHighlighter.css' type='text/css' />
+<script src='../../../js/sh/shCore.js'></script>
+<script src='../../../js/sh/shBrushJava.js'></script>
+<style>
+* {
+font-family:Courier New,monospace;
+  padding: 0;
+  margin: 0;
+  white-space: nowrap;
+  font-size: 11px;
+}
+.dp-highlighter {
+  white-space: nowrap;
+  overflow: visible;
+  width: 600px;
+  font-size: 11px;
+  font-family:Courier New,monospace;
+}
+</style>
+</head>
+<body>
+<textarea name='code' class='java:nogutter' rows='15' cols='120'>
+/*
+ * Smart GWT (GWT for SmartClient)
+ * Copyright 2008 and beyond, Isomorphic Software, Inc.
+ *
+ * Smart GWT is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License version 3
+ * as published by the Free Software Foundation.  Smart GWT is also
+ * available under typical commercial license terms - see
+ * http://smartclient.com/license
+ *
+ * This software is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * Lesser General Public License for more details.
+ */
+
+import com.smartgwt.client.data.DateRange;
+import com.smartgwt.client.data.RelativeDate;
+import com.smartgwt.client.widgets.Canvas;
+import com.smartgwt.client.widgets.form.DynamicForm;
+import com.smartgwt.client.widgets.form.fields.*;
+
+import com.google.gwt.core.client.EntryPoint;
+
+public class DateControlsSample implements EntryPoint {
+
+    public void onModuleLoad() {
+
+        DynamicForm dateForm = new DynamicForm();
+        dateForm.setWidth(450);
+        dateForm.setHeight(300);
+        dateForm.setCellPadding(5);
+        dateForm.setIsGroup(true);
+        dateForm.setGroupTitle("Date Controls");
+
+        DateItem dateItem = new DateItem();
+        dateItem.setTitle("Date");
+        dateItem.setHint("<nobr>Picklist based date input</nobr>");
+
+        DateItem dateItem2 = new DateItem();
+        dateItem2.setTitle("Date");
+        dateItem2.setUseTextField(true);
+        dateItem2.setHint("<nobr>Direct date input</nobr>");
+
+        TimeItem timeItem = new TimeItem("timeItem", "Time");
+
+        DateRangeItem dateRangeItem = new DateRangeItem("dri", "Date Range");
+        dateRangeItem.setAllowRelativeDates(true);
+        DateRange dateRange = new DateRange();
+        dateRange.setRelativeStartDate(RelativeDate.TODAY);
+        dateRange.setRelativeEndDate(new RelativeDate("-1m"));
+        dateRangeItem.setValue(dateRange);
+
+        MiniDateRangeItem miniDateRangeItem = new MiniDateRangeItem("mdri", "Mini Date Range");
+
+        RelativeDateItem relativeDateItem = new RelativeDateItem("rdi", "Relative Date");
+
+        dateForm.setItems(dateItem, dateItem2, timeItem, dateRangeItem, miniDateRangeItem, relativeDateItem);
+
+        dateForm.draw();
+    }
+
+    @Override
+    protected boolean isTopIntro() {
+        return true;
+    }
+}
+</textarea>
+<script class='javascript'>
+dp.SyntaxHighlighter.HighlightAll("code");
+</script>
+</body>
+</html>

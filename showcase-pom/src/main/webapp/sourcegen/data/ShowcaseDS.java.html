@@ -1,0 +1,62 @@
+<html>
+<head>
+<link rel='stylesheet' href='../../js/sh/SyntaxHighlighter.css' type='text/css' />
+<script src='../../js/sh/shCore.js'></script>
+<script src='../../js/sh/shBrushJava.js'></script>
+<style>
+* {
+font-family:Courier New,monospace;
+  padding: 0;
+  margin: 0;
+  white-space: nowrap;
+  font-size: 11px;
+}
+.dp-highlighter {
+  white-space: nowrap;
+  overflow: visible;
+  width: 600px;
+  font-size: 11px;
+  font-family:Courier New,monospace;
+}
+</style>
+</head>
+<body>
+<textarea name='code' class='java:nogutter' rows='15' cols='120'>
+package com.smartgwt.sample.showcase.client.data;
+
+import com.smartgwt.client.data.DataSource;
+import com.smartgwt.client.data.fields.DataSourceTextField;
+
+public class ShowcaseDS extends DataSource {
+
+    public ShowcaseDS(String id) {
+        setID(id);
+        DataSourceTextField nameField = new DataSourceTextField("name", "Name");
+
+        DataSourceTextField nodeIdField = new DataSourceTextField("nodeID", "Node ID");
+        nodeIdField.setPrimaryKey(true);
+        nodeIdField.setRequired(true);
+
+        DataSourceTextField parentNodeIdField = new DataSourceTextField("parentNodeID", "Parent Node ID");
+        parentNodeIdField.setRequired(true);
+        parentNodeIdField.setForeignKey(id + ".nodeID");
+
+        String idSuffix = "_" + id;
+        parentNodeIdField.setRootValue("root" + idSuffix);
+
+        DataSourceTextField iconField = new DataSourceTextField("icon", "Icon");
+
+        DataSourceTextField descriptionField = new DataSourceTextField("description", "Description");
+        addField(descriptionField);
+
+        setFields(nameField, parentNodeIdField, nodeIdField, nodeIdField, iconField);
+        setClientOnly(true);
+        setTestData(ShowcaseData.getData(idSuffix));
+    }
+}
+</textarea>
+<script class='javascript'>
+dp.SyntaxHighlighter.HighlightAll("code");
+</script>
+</body>
+</html>

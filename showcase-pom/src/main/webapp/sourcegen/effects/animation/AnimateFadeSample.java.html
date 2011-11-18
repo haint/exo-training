@@ -1,0 +1,99 @@
+<html>
+<head>
+<link rel='stylesheet' href='../../../js/sh/SyntaxHighlighter.css' type='text/css' />
+<script src='../../../js/sh/shCore.js'></script>
+<script src='../../../js/sh/shBrushJava.js'></script>
+<style>
+* {
+font-family:Courier New,monospace;
+  padding: 0;
+  margin: 0;
+  white-space: nowrap;
+  font-size: 11px;
+}
+.dp-highlighter {
+  white-space: nowrap;
+  overflow: visible;
+  width: 600px;
+  font-size: 11px;
+  font-family:Courier New,monospace;
+}
+</style>
+</head>
+<body>
+<textarea name='code' class='java:nogutter' rows='15' cols='120'>
+/*
+ * Smart GWT (GWT for SmartClient)
+ * Copyright 2008 and beyond, Isomorphic Software, Inc.
+ *
+ * Smart GWT is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License version 3
+ * as published by the Free Software Foundation.  Smart GWT is also
+ * available under typical commercial license terms - see
+ * http://smartclient.com/license
+ *
+ * This software is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * Lesser General Public License for more details.
+ */
+
+import com.smartgwt.client.widgets.Canvas;
+import com.smartgwt.client.widgets.IButton;
+import com.smartgwt.client.widgets.Img;
+import com.smartgwt.client.widgets.events.ClickEvent;
+import com.smartgwt.client.widgets.events.ClickHandler;
+import com.smartgwt.client.widgets.layout.HLayout;
+import com.smartgwt.client.widgets.layout.VLayout;
+
+import com.google.gwt.core.client.EntryPoint;
+
+public class AnimateFadeSample implements EntryPoint {
+
+    public void onModuleLoad() {
+
+        VLayout layout = new VLayout();
+		layout.setMembersMargin(10);
+
+		final Img image = new Img("other/eyes.jpg", 300,188);
+        //need to set useOpacityFilter:true to support setting of opacity on IE 7 and greater
+        image.setUseOpacityFilter(true);
+		image.setParentElement(layout);
+		image.setTop(105);
+		image.setLeft(10); 
+		image.setAnimateTime(1200); // milliseconds
+
+		IButton fadeOutButton = new IButton();
+		fadeOutButton.setTitle("Fade Out");
+		fadeOutButton.setLeft(40);
+		fadeOutButton.addClickHandler(new ClickHandler() {
+			public void onClick(ClickEvent event) {
+				image.animateFade(0);
+
+			}
+		});
+
+		IButton fadeInButton = new IButton();
+		fadeInButton.setTitle("Fade In");
+		fadeInButton.addClickHandler(new ClickHandler() {
+			public void onClick(ClickEvent event) {
+				image.animateFade(100);
+			}
+		});
+
+		HLayout hLayout = new HLayout();
+		hLayout.setMembersMargin(10);
+		hLayout.addMember(fadeInButton);		
+		hLayout.addMember(fadeOutButton);		
+		layout.addMember(hLayout);
+
+		layout.draw();
+	}
+
+}
+</textarea>
+<script class='javascript'>
+dp.SyntaxHighlighter.HighlightAll("code");
+</script>
+</body>
+</html>

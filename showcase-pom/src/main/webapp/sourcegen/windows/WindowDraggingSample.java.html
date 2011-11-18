@@ -1,0 +1,79 @@
+<html>
+<head>
+<link rel='stylesheet' href='../../js/sh/SyntaxHighlighter.css' type='text/css' />
+<script src='../../js/sh/shCore.js'></script>
+<script src='../../js/sh/shBrushJava.js'></script>
+<style>
+* {
+font-family:Courier New,monospace;
+  padding: 0;
+  margin: 0;
+  white-space: nowrap;
+  font-size: 11px;
+}
+.dp-highlighter {
+  white-space: nowrap;
+  overflow: visible;
+  width: 600px;
+  font-size: 11px;
+  font-family:Courier New,monospace;
+}
+</style>
+</head>
+<body>
+<textarea name='code' class='java:nogutter' rows='15' cols='120'>
+/*
+ * Smart GWT (GWT for SmartClient)
+ * Copyright 2008 and beyond, Isomorphic Software, Inc.
+ *
+ * Smart GWT is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License version 3
+ * as published by the Free Software Foundation.  Smart GWT is also
+ * available under typical commercial license terms - see
+ * http://smartclient.com/license
+ *
+ * This software is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * Lesser General Public License for more details.
+ */
+
+import com.smartgwt.client.types.VerticalAlignment;
+import com.smartgwt.client.widgets.Canvas;
+import com.smartgwt.client.widgets.Label;
+import com.smartgwt.client.widgets.Window;
+
+import com.google.gwt.core.client.EntryPoint;
+
+public class WindowDraggingSample implements EntryPoint {
+    
+
+    public void onModuleLoad() {
+        Label label = new Label(
+                "<b>Severity 1</b> - Critical problem<br/>System is unavailable in production or is corrupting data, and the error severely impacts the user's operations.<br/><br/>"
+                        + "<b>Severity 2</b> - Major problem<br/>An important function of the system is not available in production, and the user's operations are restricted.<br/><br/>"
+                        + "<b>Severity 3</b> - Minor problem<br/>Inability to use a function of the system occurs, but it does not seriously affect the user's operations.");
+        label.setHeight100();
+        label.setPadding(5);
+        label.setValign(VerticalAlignment.TOP);
+
+        Window window = new Window();
+        window.setTitle("Dragging a window");
+        window.setWidth(300);
+        window.setHeight(230);
+        window.setCanDragReposition(true);
+        window.setCanDragResize(true);
+        window.addItem(label);
+        
+        Canvas canvasMain = new Canvas();
+        canvasMain.addChild(window);
+        canvasMain.draw();
+    }
+
+}
+</textarea>
+<script class='javascript'>
+dp.SyntaxHighlighter.HighlightAll("code");
+</script>
+</body>
+</html>

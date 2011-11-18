@@ -1,0 +1,103 @@
+<html>
+<head>
+<link rel='stylesheet' href='../../../../js/sh/SyntaxHighlighter.css' type='text/css' />
+<script src='../../../../js/sh/shCore.js'></script>
+<script src='../../../../js/sh/shBrushJava.js'></script>
+<style>
+* {
+font-family:Courier New,monospace;
+  padding: 0;
+  margin: 0;
+  white-space: nowrap;
+  font-size: 11px;
+}
+.dp-highlighter {
+  white-space: nowrap;
+  overflow: visible;
+  width: 600px;
+  font-size: 11px;
+  font-family:Courier New,monospace;
+}
+</style>
+</head>
+<body>
+<textarea name='code' class='java:nogutter' rows='15' cols='120'>
+<?xml version="1.0"?>
+<xsd:schema xmlns="http://www.w3.org/2001/XMLSchema" 
+            targetNamespace="urn:datasources.smartclient.com"
+            xmlns:tns="urn:datasources.smartclient.com"
+            xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+    <xsd:complexType name="supplyItem">
+        <xsd:element name="itemName" minOccurs="1">
+            <xsd:simpleType>
+                <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="1"/>
+                    <xsd:maxLength value="128"/>
+                </xsd:restriction>
+            </xsd:simpleType>
+        </xsd:element>
+        <xsd:element name="SKU" minOccurs="1">
+            <xsd:simpleType>
+                <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="1"/>
+                    <xsd:maxLength value="10"/>
+                </xsd:restriction>
+            </xsd:simpleType>
+        </xsd:element>
+        <xsd:element name="description">
+            <xsd:simpleType>
+                <xsd:restriction base="xsd:string">
+                    <xsd:maxLength value="2000"/>
+                </xsd:restriction>
+            </xsd:simpleType>
+        </xsd:element>
+        <xsd:element name="category" minOccurs="1">
+            <xsd:simpleType>
+                <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="1"/>
+                    <xsd:maxLength value="128"/>
+                </xsd:restriction>
+            </xsd:simpleType>
+        </xsd:element>
+
+        <xsd:element name="units" minOccurs="1">
+            <xsd:simpleType>
+                <xsd:restriction base="xsd:string">
+                    <xsd:enumeration value="Roll"/>
+                    <xsd:enumeration value="Ea"/>
+                    <xsd:enumeration value="Pkt"/>
+                    <xsd:enumeration value="Set"/>
+                    <xsd:enumeration value="Tube"/>
+                    <xsd:enumeration value="Pad"/>
+                    <xsd:enumeration value="Ream"/>
+                    <xsd:enumeration value="Tin"/>
+                    <xsd:enumeration value="Bag"/>
+                    <xsd:enumeration value="Ctn"/>
+                    <xsd:enumeration value="Box"/>
+                </xsd:restriction>
+                <xsd:restriction base="xsd:string">
+                    <xsd:minLength value="1"/>
+                </xsd:restriction>
+            </xsd:simpleType>  
+        </xsd:element>
+
+        <xsd:element name="unitCost">
+            <xsd:simpleType>
+                <xsd:restriction base="xsd:float">
+                    <xsd:minInclusive value="0"/>
+                    <xsd:fractionDigits value="2"/>
+                </xsd:restriction>
+            </xsd:simpleType>
+        </xsd:element>
+
+        <xsd:element name="inStock"        type="xsd:boolean"/>
+        <xsd:element name="nextShipment"   type="xsd:date"/>
+    </xsd:complexType>
+</xsd:schema>
+</textarea>
+<script class='javascript'>
+dp.SyntaxHighlighter.HighlightAll("code");
+</script>
+</body>
+</html>

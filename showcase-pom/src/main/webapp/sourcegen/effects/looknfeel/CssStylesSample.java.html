@@ -1,0 +1,101 @@
+<html>
+<head>
+<link rel='stylesheet' href='../../../js/sh/SyntaxHighlighter.css' type='text/css' />
+<script src='../../../js/sh/shCore.js'></script>
+<script src='../../../js/sh/shBrushJava.js'></script>
+<style>
+* {
+font-family:Courier New,monospace;
+  padding: 0;
+  margin: 0;
+  white-space: nowrap;
+  font-size: 11px;
+}
+.dp-highlighter {
+  white-space: nowrap;
+  overflow: visible;
+  width: 600px;
+  font-size: 11px;
+  font-family:Courier New,monospace;
+}
+</style>
+</head>
+<body>
+<textarea name='code' class='java:nogutter' rows='15' cols='120'>
+/*
+ * Smart GWT (GWT for SmartClient)
+ * Copyright 2008 and beyond, Isomorphic Software, Inc.
+ *
+ * Smart GWT is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License version 3
+ * as published by the Free Software Foundation.  Smart GWT is also
+ * available under typical commercial license terms - see
+ * http://smartclient.com/license
+ *
+ * This software is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * Lesser General Public License for more details.
+ */
+
+import com.smartgwt.client.widgets.Canvas;
+import com.smartgwt.client.widgets.HTMLFlow;
+import com.smartgwt.client.widgets.form.DynamicForm;
+import com.smartgwt.client.widgets.form.fields.RadioGroupItem;
+import com.smartgwt.client.widgets.form.fields.events.ChangedEvent;
+import com.smartgwt.client.widgets.form.fields.events.ChangedHandler;
+
+import java.util.LinkedHashMap;
+
+import com.google.gwt.core.client.EntryPoint;
+
+public class CssStylesSample implements EntryPoint {
+
+    private static final String EXAMPLE_TEXT = "When in the Course of human events, it becomes necessary for one people "
+            + "to dissolve the political bands which have connected them with another, "
+            + "and to assume among the powers of the earth, the separate and equal station "
+            + "to which the Laws of Nature and of Nature's God entitle them, a decent respect "
+            + "to the opinions of mankind requires that they should declare the causes which impel "
+            + "them to the separation.";
+
+    public void onModuleLoad() {
+        
+        final HTMLFlow textBox = new HTMLFlow(EXAMPLE_TEXT);
+        textBox.setLeft(100);
+        textBox.setWidth(300);
+        textBox.setStyleName("exampleStyleOnline");
+        
+        LinkedHashMap<String, String> styleMap = new LinkedHashMap<String, String>();
+        styleMap.put("exampleStyleOnline", "Online");
+        styleMap.put("exampleStyleLegal", "Legal");
+        styleMap.put("exampleStyleCode", "Code");
+        styleMap.put("exampleStyleInformal", "Informal");
+        
+        RadioGroupItem style = new RadioGroupItem();
+        style.setDefaultValue("exampleStyleOnline");
+        style.setShowTitle(false);
+        style.setValueMap(styleMap);
+        style.addChangedHandler(new ChangedHandler() {
+            public void onChanged(ChangedEvent event) {
+                textBox.setStyleName((String)event.getValue());
+                textBox.markForRedraw();
+            }
+        });
+        
+        DynamicForm controls = new DynamicForm();
+        controls.setFields(style);
+        
+        Canvas canvas = new Canvas();
+        canvas.addChild(textBox);
+        canvas.addChild(controls);
+        
+        canvas.draw();
+    }
+
+}
+</textarea>
+<script class='javascript'>
+dp.SyntaxHighlighter.HighlightAll("code");
+</script>
+</body>
+</html>

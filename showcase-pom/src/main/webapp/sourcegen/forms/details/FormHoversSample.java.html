@@ -1,0 +1,110 @@
+<html>
+<head>
+<link rel='stylesheet' href='../../../js/sh/SyntaxHighlighter.css' type='text/css' />
+<script src='../../../js/sh/shCore.js'></script>
+<script src='../../../js/sh/shBrushJava.js'></script>
+<style>
+* {
+font-family:Courier New,monospace;
+  padding: 0;
+  margin: 0;
+  white-space: nowrap;
+  font-size: 11px;
+}
+.dp-highlighter {
+  white-space: nowrap;
+  overflow: visible;
+  width: 600px;
+  font-size: 11px;
+  font-family:Courier New,monospace;
+}
+</style>
+</head>
+<body>
+<textarea name='code' class='java:nogutter' rows='15' cols='120'>
+/*
+ * Smart GWT (GWT for SmartClient)
+ * Copyright 2008 and beyond, Isomorphic Software, Inc.
+ *
+ * Smart GWT is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License version 3
+ * as published by the Free Software Foundation.  Smart GWT is also
+ * available under typical commercial license terms - see
+ * http://smartclient.com/license
+ *
+ * This software is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * Lesser General Public License for more details.
+ */
+
+import com.smartgwt.client.widgets.Canvas;
+import com.smartgwt.client.widgets.form.DynamicForm;
+import com.smartgwt.client.widgets.form.fields.ButtonItem;
+import com.smartgwt.client.widgets.form.fields.ComboBoxItem;
+import com.smartgwt.client.widgets.form.fields.events.ClickEvent;
+import com.smartgwt.client.widgets.form.fields.events.ClickHandler;
+import com.smartgwt.client.widgets.form.fields.events.ItemHoverEvent;
+import com.smartgwt.client.widgets.form.fields.events.ItemHoverHandler;
+
+import java.util.HashMap;
+
+import com.google.gwt.core.client.EntryPoint;
+
+public class FormHoversSample implements EntryPoint {
+	private static HashMap hoverText = null;
+
+      
+    public void onModuleLoad() {
+    	
+        final DynamicForm form = new DynamicForm();
+        form.setID("severityForm");
+        form.setWidth(200);
+        form.setItemHoverWidth(200);
+
+        final ComboBoxItem severityLevel = new ComboBoxItem();
+        severityLevel.setTitle("Severity Level");
+        severityLevel.setValueMap("Severity 1", "Severity 2", "Severity 3");
+        severityLevel.setDefaultValue("Severity 2");
+        severityLevel.addItemHoverHandler(new ItemHoverHandler() {
+			public void onItemHover(ItemHoverEvent event) {
+				String prompt = "Status can only be changed by the bug's owner";
+	        	if (!severityLevel.isDisabled()) {
+	        		prompt = getHoverText((String) severityLevel.getValue());
+	        	}
+				severityLevel.setPrompt(prompt);
+			}
+        });
+        
+        final ButtonItem buttonItem = new ButtonItem();
+        buttonItem.setTop(40);
+        buttonItem.setWidth(150);
+        buttonItem.setTitle("Enable/disable field");
+        buttonItem.addClickHandler(new ClickHandler() {
+			public void onClick(ClickEvent event) {
+				severityLevel.setDisabled(!severityLevel.isDisabled());
+			}
+        });
+
+        form.setFields(severityLevel, buttonItem);
+
+        form.draw();
+    }
+
+    private static String getHoverText(String key) {
+    	if (hoverText == null) {
+    		hoverText = new HashMap<String, String>();
+        	hoverText.put("Severity 1", "<b>Severity 1</b><p>Critical problem.  System is unavailable in production or is corrupting data, and the error severely impacts the user's operations.");
+        	hoverText.put("Severity 2", "<b>Severity 2</b><p> Major problem.  An important function of the system is not available in production, and the user's operations are restricted.");
+        	hoverText.put("Severity 3", "<b>Severity 3</b><p> Minor problem.  Inability to use a function of the system occurs, but it does not seriously affect the user's operations.");
+    	}
+    	
+    	return (String) hoverText.get(key);
+    }
+}
+</textarea>
+<script class='javascript'>
+dp.SyntaxHighlighter.HighlightAll("code");
+</script>
+</body>
+</html>

@@ -1,0 +1,162 @@
+<html>
+<head>
+<link rel='stylesheet' href='../../../js/sh/SyntaxHighlighter.css' type='text/css' />
+<script src='../../../js/sh/shCore.js'></script>
+<script src='../../../js/sh/shBrushJava.js'></script>
+<style>
+* {
+font-family:Courier New,monospace;
+  padding: 0;
+  margin: 0;
+  white-space: nowrap;
+  font-size: 11px;
+}
+.dp-highlighter {
+  white-space: nowrap;
+  overflow: visible;
+  width: 600px;
+  font-size: 11px;
+  font-family:Courier New,monospace;
+}
+</style>
+</head>
+<body>
+<textarea name='code' class='java:nogutter' rows='15' cols='120'>
+/*
+ * Smart GWT (GWT for SmartClient)
+ * Copyright 2008 and beyond, Isomorphic Software, Inc.
+ *
+ * Smart GWT is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License version 3
+ * as published by the Free Software Foundation.  Smart GWT is also
+ * available under typical commercial license terms - see
+ * http://smartclient.com/license
+ *
+ * This software is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * Lesser General Public License for more details.
+ */
+
+import com.smartgwt.client.types.Alignment;
+import com.smartgwt.client.types.Cursor;
+import com.smartgwt.client.types.DragAppearance;
+import com.smartgwt.client.types.Overflow;
+import com.smartgwt.client.util.EventHandler;
+import com.smartgwt.client.widgets.Canvas;
+import com.smartgwt.client.widgets.Img;
+import com.smartgwt.client.widgets.events.*;
+import com.smartgwt.client.widgets.layout.HStack;
+import com.smartgwt.client.widgets.layout.VStack;
+
+import com.google.gwt.core.client.EntryPoint;
+
+public class DragCreateSample implements EntryPoint {
+
+    public void onModuleLoad() {
+        
+        HStack cubes = new HStack();
+        cubes.setLayoutMargin(20);
+        cubes.setMembersMargin(40);
+        cubes.setLayoutAlign(Alignment.CENTER);
+        cubes.addMember(new DragPiece("cube_blue.png", "b"));
+        cubes.addMember(new DragPiece("cube_yellow.png", "y"));
+        cubes.addMember(new DragPiece("cube_green.png", "g"));
+        
+        HStack edges = new HStack();
+        edges.setMembersMargin(20);
+        edges.addMember(new PieceBin("edges/blue/6.png", "b"));
+        edges.addMember(new PieceBin("edges/yellow/6.png", "y"));
+        edges.addMember(new PieceBin("edges/green/6.png", "g"));
+        edges.addMember(new PieceBin("edges/gray/6.png", "b", "y", "g"));
+        
+        VStack main = new VStack();
+        main.addMember(cubes);
+        main.addMember(edges);      
+        main.draw();
+    }
+
+    public static class DragPiece extends Img {
+        public DragPiece(String src, String dragType) {
+            setSrc(src);
+            setWidth(48);
+            setHeight(48);
+            setCursor(Cursor.MOVE);
+            setAppImgDir("pieces/48/");
+            setCanDrag(true);
+            setCanDrop(true);
+            setDragType(dragType);
+            setDragAppearance(DragAppearance.TRACKER);
+        }
+        @Override
+        protected boolean setDragTracker() {
+            EventHandler.setDragTracker(Canvas.imgHTML("pieces/24/" + getSrc(), 24, 24), 24, 24, 15, 15);
+            return false;
+        }
+    }
+
+    public static class DroppedPiece extends Img {
+        public DroppedPiece(String src, int left, int top) {
+            setSrc(src);
+            setLeft(left);
+            setTop(top);
+            setWidth(24);
+            setHeight(24);
+            setAppImgDir("pieces/24/");
+            setCanDragReposition(true);
+            setKeepInParentRect(true);
+            setDragAppearance(DragAppearance.TARGET);
+            addShowContextMenuHandler(new ShowContextMenuHandler() {
+                public void onShowContextMenu(ShowContextMenuEvent event) {
+                    destroy();
+                    event.cancel();
+                }
+            });
+        }
+    }
+
+    public static class PieceBin extends Canvas {
+        public PieceBin(String edgeImage, String... dropTypes) {
+            setWidth(100);
+            setHeight(100);
+            setShowEdges(true);
+            setEdgeSize(6);
+            setEdgeImage(edgeImage);
+            setOverflow(Overflow.HIDDEN);
+            setCanAcceptDrop(true);
+            setDropTypes(dropTypes);         
+            addShowContextMenuHandler(new ShowContextMenuHandler() {
+                public void onShowContextMenu(ShowContextMenuEvent event) {
+                    event.cancel();
+                }
+            });
+            addDropOverHandler(new DropOverHandler() {
+                public void onDropOver(DropOverEvent event) {
+                    //if (willAcceptDrop())
+                        setBackgroundColor("#ffff80");
+                }
+            });
+            addDropOutHandler(new DropOutHandler() {
+                public void onDropOut(DropOutEvent event) {
+                    setBackgroundColor("#ffffff");
+                }
+            });
+            addDropHandler(new DropHandler() {
+                public void onDrop(DropEvent event) {
+                    addChild(new DroppedPiece(
+                            ((Img) EventHandler.getDragTarget()).getSrc(),
+                            getOffsetX() - 15 - getEdgeSize(),
+                            getOffsetY() - 15 - getEdgeSize()
+                    ));
+                }
+            });
+        }
+    }
+
+}
+</textarea>
+<script class='javascript'>
+dp.SyntaxHighlighter.HighlightAll("code");
+</script>
+</body>
+</html>

@@ -1,0 +1,71 @@
+<html>
+<head>
+<link rel='stylesheet' href='../../../../js/sh/SyntaxHighlighter.css' type='text/css' />
+<script src='../../../../js/sh/shCore.js'></script>
+<script src='../../../../js/sh/shBrushJScript.js'></script>
+<style>
+* {
+font-family:Courier New,monospace;
+  padding: 0;
+  margin: 0;
+  white-space: nowrap;
+  font-size: 11px;
+}
+.dp-highlighter {
+  white-space: nowrap;
+  overflow: visible;
+  width: 600px;
+  font-size: 11px;
+  font-family:Courier New,monospace;
+}
+</style>
+</head>
+<body>
+<textarea name='code' class='js:nogutter' rows='15' cols='120'>
+isc.IButton.create({
+    ID:"loadButton",
+    title: "Load Schema",
+    click : function () {
+        isc.XMLTools.loadXMLSchema("/isomorphic/system/reference/inlineExamples/dataIntegration/xml/supplyItem.xsd", 
+                                   this.getID()+".loadXMLSchemaReply(schemaSet)");
+    },
+    loadXMLSchemaReply : function (schemaSet) {
+        var ds = schemaSet.getSchema("supplyItem");
+        listGrid.setDataSource(ds);
+        dynamicForm.setDataSource(ds);
+
+        // to demonstrate grid editors, add sample data and start editing
+        listGrid.setData([{ itemId:123, itemName:"Sample Item" }]);        
+        listGrid.startEditing();
+
+        // to demonstrate validation, use values that will fail validation
+        dynamicForm.setValue("unitCost", -1.234);
+        dynamicForm.setValue("SKU", "thisSkuIsWayTooLong");
+        validateButton.enable();
+    }
+});
+
+
+isc.ListGrid.create({ ID: "listGrid", canEdit:true });
+
+isc.DynamicForm.create({ ID: "dynamicForm" });
+
+isc.IButton.create({
+    ID: "validateButton",
+    title: "Validate",
+    click: "dynamicForm.validate()",
+    enabled: false
+});
+
+isc.VLayout.create({
+    width:"100%",
+    height:"100%",
+    membersMargin:10,
+    members:[loadButton, listGrid, dynamicForm, validateButton]
+});
+</textarea>
+<script class='javascript'>
+dp.SyntaxHighlighter.HighlightAll("code");
+</script>
+</body>
+</html>

@@ -1,0 +1,131 @@
+<html>
+<head>
+<link rel='stylesheet' href='../../../js/sh/SyntaxHighlighter.css' type='text/css' />
+<script src='../../../js/sh/shCore.js'></script>
+<script src='../../../js/sh/shBrushJava.js'></script>
+<style>
+* {
+font-family:Courier New,monospace;
+  padding: 0;
+  margin: 0;
+  white-space: nowrap;
+  font-size: 11px;
+}
+.dp-highlighter {
+  white-space: nowrap;
+  overflow: visible;
+  width: 600px;
+  font-size: 11px;
+  font-family:Courier New,monospace;
+}
+</style>
+</head>
+<body>
+<textarea name='code' class='java:nogutter' rows='15' cols='120'>
+/*
+ * Smart GWT (GWT for SmartClient)
+ * Copyright 2008 and beyond, Isomorphic Software, Inc.
+ *
+ * Smart GWT is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License version 3
+ * as published by the Free Software Foundation.  Smart GWT is also
+ * available under typical commercial license terms - see
+ * http://smartclient.com/license
+ *
+ * This software is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * Lesser General Public License for more details.
+ */
+
+import com.smartgwt.client.widgets.Canvas;
+import com.smartgwt.client.widgets.IButton;
+import com.smartgwt.client.widgets.events.ClickEvent;
+import com.smartgwt.client.widgets.events.ClickHandler;
+import com.smartgwt.client.widgets.form.DynamicForm;
+import com.smartgwt.client.widgets.form.fields.TextAreaItem;
+import com.smartgwt.client.widgets.form.fields.TextItem;
+import com.smartgwt.client.widgets.layout.HLayout;
+import com.smartgwt.client.widgets.layout.VLayout;
+
+import com.google.gwt.core.client.EntryPoint;
+
+public class FormFillingSample implements EntryPoint {
+
+      
+    public void onModuleLoad() {
+        VLayout messageLayout = new VLayout();
+        messageLayout.setWidth(200);
+        messageLayout.setHeight(300);
+        messageLayout.setBorder("1px solid #6a6a6a");
+        messageLayout.setLayoutMargin(5);
+        
+        final Canvas textCanvas = new Canvas();
+        textCanvas.setPrefix("<b>Message from Rob:</b><BR>"); 
+        textCanvas.setPadding(5);
+        textCanvas.setHeight(1);
+
+        final DynamicForm form = new DynamicForm();
+        form.setNumCols(2);
+        form.setHeight("*");
+        form.setColWidths(60, "*");
+        
+        TextItem subjectItem = new TextItem();
+        subjectItem.setTitle("Subject");
+        subjectItem.setWidth("*");
+        subjectItem.setDefaultValue("Re: your message");
+
+        TextAreaItem messageItem = new TextAreaItem();
+        messageItem.setShowTitle(false);
+        messageItem.setColSpan(2);
+        messageItem.setHeight("*");
+        messageItem.setWidth("*");
+        messageItem.setLength(5000);
+        form.setFields(subjectItem, messageItem);
+        
+        messageLayout.addMember(textCanvas);
+        messageLayout.addMember(form);
+        
+        VLayout buttonLayout = new VLayout(10);        
+        
+        IButton shortMessageButton = new IButton("Short message");
+        shortMessageButton.addClickHandler(new ClickHandler() {
+            public void onClick(ClickEvent event) {
+                textCanvas.setContents(textCanvas.getPrefix() + "I'll be in town Saturday.  Give me a call on my cell and" +
+                                       " we'll get a bite to eat.");
+            }
+        });
+
+        IButton longMessageButton = new IButton("Long message");
+        longMessageButton.addClickHandler(new ClickHandler() {
+            public void onClick(ClickEvent event) {
+                updateContents(textCanvas);
+            }
+        });
+        
+        buttonLayout.addMember(shortMessageButton);
+        buttonLayout.addMember(longMessageButton);
+        
+        HLayout layout = new HLayout(15);
+        layout.setAutoHeight();
+        layout.addMember(messageLayout);
+        layout.addMember(buttonLayout);
+        
+        updateContents(textCanvas);        
+        layout.draw();
+    }
+
+    private void updateContents(Canvas textCanvas) {
+        textCanvas.setContents(textCanvas.getPrefix() + "I'll be in town Saturday.  Give me a call on my cell and" +
+                               " we'll check out the new Thai restaurant on Polk Street." +
+                               " Jamie said it's great but too spicy for him, shouldn't" +
+                               " be a problem for you :)");
+    }
+
+}
+</textarea>
+<script class='javascript'>
+dp.SyntaxHighlighter.HighlightAll("code");
+</script>
+</body>
+</html>

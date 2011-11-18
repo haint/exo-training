@@ -1,0 +1,42 @@
+<html>
+<head>
+<link rel='stylesheet' href='../../js/sh/SyntaxHighlighter.css' type='text/css' />
+<script src='../../js/sh/shCore.js'></script>
+<script src='../../js/sh/shBrushXml.js'></script>
+<style>
+* {
+font-family:Courier New,monospace;
+  padding: 0;
+  margin: 0;
+  white-space: nowrap;
+  font-size: 11px;
+}
+.dp-highlighter {
+  white-space: nowrap;
+  overflow: visible;
+  width: 600px;
+  font-size: 11px;
+  font-family:Courier New,monospace;
+}
+</style>
+</head>
+<body>
+<textarea name='code' class='xml:nogutter' rows='15' cols='120'>
+<DataSource ID="itemCategoryListingsDS" constructor="EBayCategoryItemListingsDS">
+    <fields>
+        <field name="GalleryURL" title="Thumb" type="image" valueXPath="default:PictureDetails/default:GalleryURL"/>
+        <field name="ItemID" primaryKey="true"/>
+        <field name="Title"/>
+        <field name="Currency"/>
+        <field name="Price" valueXPath="default:SellingStatus/default:CurrentPrice"/>
+        <field name="StartTime" type="date" valueXPath="default:ListingDetails/default:StartTime"/>
+        <field name="EndTime" type="date" valueXPath="default:ListingDetails/default:EndTime"/>
+        <field name="BidCount" type="integer" valueXPath="default:SellingStatus/default:BidCount"/>
+    </fields>
+</DataSource>
+</textarea>
+<script class='javascript'>
+dp.SyntaxHighlighter.HighlightAll("code");
+</script>
+</body>
+</html>

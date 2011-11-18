@@ -1,0 +1,96 @@
+<html>
+<head>
+<link rel='stylesheet' href='../../../js/sh/SyntaxHighlighter.css' type='text/css' />
+<script src='../../../js/sh/shCore.js'></script>
+<script src='../../../js/sh/shBrushJava.js'></script>
+<style>
+* {
+font-family:Courier New,monospace;
+  padding: 0;
+  margin: 0;
+  white-space: nowrap;
+  font-size: 11px;
+}
+.dp-highlighter {
+  white-space: nowrap;
+  overflow: visible;
+  width: 600px;
+  font-size: 11px;
+  font-family:Courier New,monospace;
+}
+</style>
+</head>
+<body>
+<textarea name='code' class='java:nogutter' rows='15' cols='120'>
+/*
+ * Smart GWT (GWT for SmartClient)
+ * Copyright 2008 and beyond, Isomorphic Software, Inc.
+ *
+ * Smart GWT is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License version 3
+ * as published by the Free Software Foundation.  Smart GWT is also
+ * available under typical commercial license terms - see
+ * http://smartclient.com/license
+ *
+ * This software is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * Lesser General Public License for more details.
+ */
+
+import com.smartgwt.client.data.DataSource;
+import com.smartgwt.client.data.fields.DataSourceIntegerField;
+import com.smartgwt.client.widgets.Canvas;
+import com.smartgwt.client.widgets.IButton;
+import com.smartgwt.client.widgets.events.ClickEvent;
+import com.smartgwt.client.widgets.events.ClickHandler;
+import com.smartgwt.client.widgets.form.DynamicForm;
+import com.smartgwt.client.widgets.form.validator.IntegerRangeValidator;
+import com.smartgwt.client.widgets.layout.HLayout;
+
+import com.google.gwt.core.client.EntryPoint;
+
+public class FormBuiltinsSample implements EntryPoint {
+
+      
+    public void onModuleLoad() {
+    	
+        DataSource dataSource = new DataSource();
+        
+        IntegerRangeValidator integerRangeValidator = new IntegerRangeValidator();
+        integerRangeValidator.setMin(1);
+        integerRangeValidator.setMax(20);
+        
+        DataSourceIntegerField dsIntegerField = new DataSourceIntegerField("intField");
+        dsIntegerField.setTitle("Integer");
+        dsIntegerField.setValidators(integerRangeValidator);
+        
+        dataSource.setFields(dsIntegerField);
+        
+        final DynamicForm form = new DynamicForm();
+        form.setWidth(300);
+        form.setDataSource(dataSource);
+        
+        IButton validateButton = new IButton();
+        validateButton.setTitle("Validate");
+        validateButton.addClickHandler(new ClickHandler() {
+			public void onClick(ClickEvent event) {
+				form.validate();
+			}
+        });
+        
+        HLayout hLayout = new HLayout();
+        hLayout.setMembersMargin(10);
+        hLayout.addMember(form);
+        hLayout.addMember(validateButton);
+        
+        hLayout.draw();
+    }
+
+}
+</textarea>
+<script class='javascript'>
+dp.SyntaxHighlighter.HighlightAll("code");
+</script>
+</body>
+</html>

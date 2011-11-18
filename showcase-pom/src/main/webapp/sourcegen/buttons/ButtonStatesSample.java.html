@@ -1,0 +1,117 @@
+<html>
+<head>
+<link rel='stylesheet' href='../../js/sh/SyntaxHighlighter.css' type='text/css' />
+<script src='../../js/sh/shCore.js'></script>
+<script src='../../js/sh/shBrushJava.js'></script>
+<style>
+* {
+font-family:Courier New,monospace;
+  padding: 0;
+  margin: 0;
+  white-space: nowrap;
+  font-size: 11px;
+}
+.dp-highlighter {
+  white-space: nowrap;
+  overflow: visible;
+  width: 600px;
+  font-size: 11px;
+  font-family:Courier New,monospace;
+}
+</style>
+</head>
+<body>
+<textarea name='code' class='java:nogutter' rows='15' cols='120'>
+/*
+ * Smart GWT (GWT for SmartClient)
+ * Copyright 2008 and beyond, Isomorphic Software, Inc.
+ *
+ * Smart GWT is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License version 3
+ * as published by the Free Software Foundation.  Smart GWT is also
+ * available under typical commercial license terms - see
+ * http://smartclient.com/license
+ *
+ * This software is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * Lesser General Public License for more details.
+ */
+
+import com.smartgwt.client.widgets.Button;
+import com.smartgwt.client.widgets.Canvas;
+import com.smartgwt.client.widgets.IButton;
+import com.smartgwt.client.widgets.ImgButton;
+import com.smartgwt.client.widgets.events.ClickEvent;
+import com.smartgwt.client.widgets.events.ClickHandler;
+import com.smartgwt.client.widgets.layout.HLayout;
+import com.smartgwt.client.widgets.layout.VLayout;
+
+import com.google.gwt.core.client.EntryPoint;
+
+public class ButtonStatesSample implements EntryPoint {
+
+    public void onModuleLoad() {
+
+        final IButton stretchButton = new IButton("Stretch Button");
+        stretchButton.setWidth(150);
+        stretchButton.setShowRollOver(true);
+        stretchButton.setShowDisabled(true);
+        stretchButton.setShowDown(true);
+        stretchButton.setTitleStyle("stretchTitle");
+        stretchButton.setIcon("[SKINIMG]/headerIcons/arrow_right.png");
+
+        final Button cssButton = new Button("CSS Button");
+        cssButton.setShowRollOver(true);
+        cssButton.setShowDisabled(true);
+        cssButton.setShowDown(true);
+        cssButton.setIcon("icons/16/icon_add_files.png");
+
+        final ImgButton imgButton = new ImgButton();
+        imgButton.setWidth(18);
+        imgButton.setHeight(18);
+        imgButton.setShowRollOver(true);
+        imgButton.setShowDown(false);
+        imgButton.setSrc("[SKIN]/headerIcons/minimize.png");
+
+        final IButton button = new IButton("Disable All");
+        button.setWidth(120);
+        button.addClickHandler(new ClickHandler() {
+            public void onClick(ClickEvent event) {
+                if (cssButton.isDisabled()) {
+                    cssButton.enable();
+                    stretchButton.enable();
+                    imgButton.enable();
+                    button.setTitle("Disable All");
+                } else {
+                    cssButton.disable();
+                    stretchButton.disable();
+                    imgButton.disable();
+                    button.setTitle("Enable All");
+                }
+
+            }
+        });
+
+        HLayout hLayout = new HLayout();
+        hLayout.setMembersMargin(20);
+        hLayout.addMember(stretchButton);
+        hLayout.addMember(cssButton);
+        hLayout.addMember(imgButton);
+
+        VLayout layout = new VLayout();
+        layout.setAutoHeight();
+        layout.setMembersMargin(30);
+        layout.addMember(hLayout);
+        layout.addMember(button);
+        layout.draw();
+    }
+
+}
+
+</textarea>
+<script class='javascript'>
+dp.SyntaxHighlighter.HighlightAll("code");
+</script>
+</body>
+</html>

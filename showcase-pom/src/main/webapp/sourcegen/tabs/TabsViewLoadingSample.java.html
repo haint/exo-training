@@ -1,0 +1,88 @@
+<html>
+<head>
+<link rel='stylesheet' href='../../js/sh/SyntaxHighlighter.css' type='text/css' />
+<script src='../../js/sh/shCore.js'></script>
+<script src='../../js/sh/shBrushJava.js'></script>
+<style>
+* {
+font-family:Courier New,monospace;
+  padding: 0;
+  margin: 0;
+  white-space: nowrap;
+  font-size: 11px;
+}
+.dp-highlighter {
+  white-space: nowrap;
+  overflow: visible;
+  width: 600px;
+  font-size: 11px;
+  font-family:Courier New,monospace;
+}
+</style>
+</head>
+<body>
+<textarea name='code' class='java:nogutter' rows='15' cols='120'>
+/*
+ * Smart GWT (GWT for SmartClient)
+ * Copyright 2008 and beyond, Isomorphic Software, Inc.
+ *
+ * Smart GWT is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License version 3
+ * as published by the Free Software Foundation.  Smart GWT is also
+ * available under typical commercial license terms - see
+ * http://smartclient.com/license
+ *
+ * This software is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * Lesser General Public License for more details.
+ */
+
+import com.smartgwt.client.types.Side;
+import com.smartgwt.client.widgets.Canvas;
+import com.smartgwt.client.widgets.ViewLoader;
+import com.smartgwt.client.widgets.layout.VLayout;
+import com.smartgwt.client.widgets.tab.Tab;
+import com.smartgwt.client.widgets.tab.TabSet;
+
+import com.google.gwt.core.client.EntryPoint;
+
+public class TabsViewLoadingSample implements EntryPoint {
+
+    public void onModuleLoad() {
+
+		final TabSet topTabSet = new TabSet();
+		topTabSet.setTabBarPosition(Side.TOP);
+		topTabSet.setTabBarAlign(Side.LEFT);
+		topTabSet.setTop(40);
+		topTabSet.setWidth(400);
+		topTabSet.setHeight(250);
+
+		final Tab tab1 = new Tab("Tab1");
+		Canvas tab1Content = new Canvas();
+		tab1Content.setContents("Contents of Tab1");
+		tab1.setPane(tab1Content);
+		topTabSet.addTab(tab1);
+
+		final Tab tab2 = new Tab("Tab2");
+		ViewLoader tab2loader = new ViewLoader();
+		tab2loader.setLoadingMessage("Loading Grid..");
+		tab2loader.setViewURL("data/dataIntegration/json/loadedView.js");
+		tab2.setPane(tab2loader);
+		topTabSet.addTab(tab2);
+
+		VLayout vLayout = new VLayout();
+		vLayout.setMembersMargin(15);
+		vLayout.addMember(topTabSet);
+		vLayout.setHeight("auto");
+
+		vLayout.draw();
+	}
+
+}
+</textarea>
+<script class='javascript'>
+dp.SyntaxHighlighter.HighlightAll("code");
+</script>
+</body>
+</html>

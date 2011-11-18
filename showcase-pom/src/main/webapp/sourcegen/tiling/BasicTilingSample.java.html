@@ -1,0 +1,81 @@
+<html>
+<head>
+<link rel='stylesheet' href='../../js/sh/SyntaxHighlighter.css' type='text/css' />
+<script src='../../js/sh/shCore.js'></script>
+<script src='../../js/sh/shBrushJava.js'></script>
+<style>
+* {
+font-family:Courier New,monospace;
+  padding: 0;
+  margin: 0;
+  white-space: nowrap;
+  font-size: 11px;
+}
+.dp-highlighter {
+  white-space: nowrap;
+  overflow: visible;
+  width: 600px;
+  font-size: 11px;
+  font-family:Courier New,monospace;
+}
+</style>
+</head>
+<body>
+<textarea name='code' class='java:nogutter' rows='15' cols='120'>
+/*
+ * Smart GWT (GWT for SmartClient)
+ * Copyright 2008 and beyond, Isomorphic Software, Inc.
+ *
+ * Smart GWT is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License version 3
+ * as published by the Free Software Foundation.  Smart GWT is also
+ * available under typical commercial license terms - see
+ * http://smartclient.com/license
+ *
+ * This software is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * Lesser General Public License for more details.
+ */
+
+import com.smartgwt.client.widgets.Canvas;
+import com.smartgwt.client.widgets.tile.TileGrid;
+import com.smartgwt.client.widgets.viewer.DetailViewerField;
+import com.smartgwt.sample.showcase.client.data.CarData;
+
+import com.google.gwt.core.client.EntryPoint;
+
+public class BasicTilingSample implements EntryPoint {
+
+    public void onModuleLoad() {
+
+        TileGrid tileGrid = new TileGrid();
+        tileGrid.setTileWidth(194);
+        tileGrid.setTileHeight(165);
+        tileGrid.setHeight(400);
+        tileGrid.setWidth100();
+        tileGrid.setCanReorderTiles(true);
+        tileGrid.setShowAllRecords(true);
+        tileGrid.setData(CarData.getRecords());
+
+        DetailViewerField pictureField = new DetailViewerField("picture");
+        pictureField.setType("image");
+        pictureField.setImageURLPrefix("cars/");
+        pictureField.setImageWidth(186);
+        pictureField.setImageHeight(120);
+
+        DetailViewerField nameField = new DetailViewerField("name");
+        DetailViewerField priceField = new DetailViewerField("price");
+
+        tileGrid.setFields(pictureField, nameField, priceField);
+
+        tileGrid.draw();
+    }
+
+}
+</textarea>
+<script class='javascript'>
+dp.SyntaxHighlighter.HighlightAll("code");
+</script>
+</body>
+</html>

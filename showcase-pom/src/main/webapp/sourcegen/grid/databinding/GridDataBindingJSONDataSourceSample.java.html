@@ -1,0 +1,96 @@
+<html>
+<head>
+<link rel='stylesheet' href='../../../js/sh/SyntaxHighlighter.css' type='text/css' />
+<script src='../../../js/sh/shCore.js'></script>
+<script src='../../../js/sh/shBrushJava.js'></script>
+<style>
+* {
+font-family:Courier New,monospace;
+  padding: 0;
+  margin: 0;
+  white-space: nowrap;
+  font-size: 11px;
+}
+.dp-highlighter {
+  white-space: nowrap;
+  overflow: visible;
+  width: 600px;
+  font-size: 11px;
+  font-family:Courier New,monospace;
+}
+</style>
+</head>
+<body>
+<textarea name='code' class='java:nogutter' rows='15' cols='120'>
+/*
+ * Smart GWT (GWT for SmartClient)
+ * Copyright 2008 and beyond, Isomorphic Software, Inc.
+ *
+ * Smart GWT is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License version 3
+ * as published by the Free Software Foundation.  Smart GWT is also
+ * available under typical commercial license terms - see
+ * http://smartclient.com/license
+ *
+ * This software is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * Lesser General Public License for more details.
+ */
+
+import com.smartgwt.client.data.DataSource;
+import com.smartgwt.client.data.DataSourceField;
+import com.smartgwt.client.types.DSDataFormat;
+import com.smartgwt.client.types.FieldType;
+import com.smartgwt.client.widgets.Canvas;
+import com.smartgwt.client.widgets.grid.ListGrid;
+
+import com.google.gwt.core.client.EntryPoint;
+
+public class GridDataBindingJSONDataSourceSample implements EntryPoint {
+
+    public void onModuleLoad() {
+        final ListGrid countryGrid = new ListGrid();
+        countryGrid.setWidth(400);
+        countryGrid.setHeight(224);
+        countryGrid.setShowAllRecords(true);
+        countryGrid.setDataSource(CountryDS.getInstance());
+        countryGrid.setAutoFetchData(true);
+
+        countryGrid.draw();
+    }
+
+    private static class CountryDS extends DataSource {
+        // The DataSource would normally be defined external to any classes that use it.
+
+        private static CountryDS instance = null;
+        
+        public static CountryDS getInstance() {
+            if (instance == null) {
+              instance = new CountryDS("countryDS_JSON");
+            }
+            return instance;
+        }
+
+        public CountryDS(String id) {
+            setID(id);
+            setDataFormat(DSDataFormat.JSON);
+            DataSourceField countryCodeField = new DataSourceField("countryCode", FieldType.TEXT,
+                                                                   "Code");
+            DataSourceField countryNameField = new DataSourceField("countryName", FieldType.TEXT,
+                                                                   "Country");
+            DataSourceField capitalField = new DataSourceField("capital", FieldType.TEXT,
+                                                               "Capital");
+            setFields(countryCodeField, countryNameField, capitalField);
+            setDataURL("ds/test_data/countryData.json");
+        }
+
+    }
+
+}
+</textarea>
+<script class='javascript'>
+dp.SyntaxHighlighter.HighlightAll("code");
+</script>
+</body>
+</html>

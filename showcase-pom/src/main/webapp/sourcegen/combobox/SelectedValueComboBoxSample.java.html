@@ -1,0 +1,150 @@
+<html>
+<head>
+<link rel='stylesheet' href='../../js/sh/SyntaxHighlighter.css' type='text/css' />
+<script src='../../js/sh/shCore.js'></script>
+<script src='../../js/sh/shBrushJava.js'></script>
+<style>
+* {
+font-family:Courier New,monospace;
+  padding: 0;
+  margin: 0;
+  white-space: nowrap;
+  font-size: 11px;
+}
+.dp-highlighter {
+  white-space: nowrap;
+  overflow: visible;
+  width: 600px;
+  font-size: 11px;
+  font-family:Courier New,monospace;
+}
+</style>
+</head>
+<body>
+<textarea name='code' class='java:nogutter' rows='15' cols='120'>
+/*
+ * Smart GWT (GWT for SmartClient)
+ * Copyright 2008 and beyond, Isomorphic Software, Inc.
+ *
+ * Smart GWT is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License version 3
+ * as published by the Free Software Foundation.  Smart GWT is also
+ * available under typical commercial license terms - see
+ * http://smartclient.com/license
+ *
+ * This software is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * Lesser General Public License for more details.
+ */
+
+import com.smartgwt.client.data.DataSource;
+import com.smartgwt.client.types.Alignment;
+import com.smartgwt.client.widgets.Canvas;
+import com.smartgwt.client.widgets.Label;
+import com.smartgwt.client.widgets.form.DynamicForm;
+import com.smartgwt.client.widgets.form.fields.HeaderItem;
+import com.smartgwt.client.widgets.form.fields.SelectItem;
+import com.smartgwt.client.widgets.form.fields.SpinnerItem;
+import com.smartgwt.client.widgets.form.fields.events.ChangeEvent;
+import com.smartgwt.client.widgets.form.fields.events.ChangeHandler;
+import com.smartgwt.client.widgets.grid.ListGridField;
+import com.smartgwt.sample.showcase.client.data.ItemSupplyXmlDS;
+
+import com.google.gwt.core.client.EntryPoint;
+
+public class SelectedValueComboBoxSample implements EntryPoint {
+
+    public void onModuleLoad() {
+
+        Canvas canvas = new Canvas();
+
+        DataSource supplyItemDS = ItemSupplyXmlDS.getInstance();
+
+        final Label label = new Label();
+        label.setAlign(Alignment.CENTER);
+        label.setBorder("1px solid #287fd6");
+        label.setTop(75);
+        label.setHeight(50);
+        label.setWidth(250);
+        label.setMargin(10);
+        label.setContents("Select an item to order");
+        canvas.addChild(label);
+
+        DynamicForm form = new DynamicForm();
+
+        HeaderItem headerItem = new HeaderItem();
+        headerItem.setDefaultValue("Order Supply Item");
+
+        SelectItem selectItem = new SelectItem();
+        selectItem.setDefaultToFirstOption(true); 
+        selectItem.setTitle("Item");
+        selectItem.setDisplayField("itemName");
+        selectItem.setPickListWidth(250);
+        selectItem.setOptionDataSource(supplyItemDS);
+        selectItem.addChangeHandler(new ChangeHandler() {
+            public void onChange(ChangeEvent event) {
+                label.setContents("Selected itemID : " + event.getValue());
+            }
+        });
+
+        SpinnerItem spinnerItem = new SpinnerItem();
+        spinnerItem.setName("Quantity");
+        spinnerItem.setDefaultValue(1);
+        spinnerItem.setMin(1);
+
+        form.setItems(headerItem, selectItem, spinnerItem);
+        canvas.addChild(form);
+
+        final Label label2 = new Label();
+        label2.setAlign(Alignment.CENTER);
+        label2.setBorder("1px solid #287fd6");
+        label2.setTop(75);
+        label2.setLeft(300);
+        label2.setHeight(50);
+        label2.setWidth(250);
+        label2.setMargin(10);
+        label2.setContents("Select an item to order");
+        canvas.addChild(label2);
+
+        DynamicForm form2 = new DynamicForm();
+        form2.setLeft(300);
+
+        HeaderItem headerItem2 = new HeaderItem();
+        headerItem2.setDefaultValue("Order Supply Item");
+
+        ListGridField itemField = new ListGridField("itemName");
+        ListGridField unitsField = new ListGridField("units");
+        ListGridField unitCostField = new ListGridField("unitCost");
+
+        SelectItem selectItem2 = new SelectItem();
+        selectItem2.setTitle("Item");
+        selectItem2.setOptionDataSource(supplyItemDS);
+        selectItem2.setDisplayField("itemName");
+        selectItem2.setValueField("SKU");
+        selectItem2.addChangeHandler(new ChangeHandler() {
+            public void onChange(ChangeEvent event) {
+                label2.setContents("Selected Item SKU: " + event.getValue());
+            }
+        });
+        selectItem2.setPickListWidth(450);
+        selectItem2.setPickListFields(itemField, unitsField, unitCostField);
+
+        SpinnerItem spinnerItem2 = new SpinnerItem();
+        spinnerItem2.setName("Quantity");
+        spinnerItem2.setDefaultValue(1);
+        spinnerItem2.setMin(1);
+
+        form2.setItems(headerItem2, selectItem2, spinnerItem2);
+        canvas.addChild(form2);
+
+        canvas.draw();
+    }
+
+}
+</textarea>
+<script class='javascript'>
+dp.SyntaxHighlighter.HighlightAll("code");
+</script>
+</body>
+</html>

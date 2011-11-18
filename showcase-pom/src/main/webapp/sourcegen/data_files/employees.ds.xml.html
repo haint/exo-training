@@ -1,0 +1,63 @@
+<html>
+<head>
+<link rel='stylesheet' href='../../js/sh/SyntaxHighlighter.css' type='text/css' />
+<script src='../../js/sh/shCore.js'></script>
+<script src='../../js/sh/shBrushXml.js'></script>
+<style>
+* {
+font-family:Courier New,monospace;
+  padding: 0;
+  margin: 0;
+  white-space: nowrap;
+  font-size: 11px;
+}
+.dp-highlighter {
+  white-space: nowrap;
+  overflow: visible;
+  width: 600px;
+  font-size: 11px;
+  font-family:Courier New,monospace;
+}
+</style>
+</head>
+<body>
+<textarea name='code' class='xml:nogutter' rows='15' cols='120'>
+<DataSource
+    ID="employees"
+    serverType="sql"
+    tableName="employeeTable"
+    recordName="employee"
+    testFileName="/examples/shared/ds/test_data/employees.data.xml"
+
+>
+    <fields>
+        <field name="Name"            title="Name"            type="text"     length="128"/>
+        <field name="EmployeeId"      title="Employee ID"     type="integer"  primaryKey="true"  required="true"/>
+        <field name="ReportsTo"       title="Manager"         type="integer"  required="true" 
+               foreignKey="employees.EmployeeId"  rootValue="1"/>
+        <field name="Job"             title="Title"           type="text"     length="128"/> 
+        <field name="Email"           title="Email"           type="text"     length="128"/>
+        <field name="EmployeeType"    title="Employee Type"   type="text"     length="40"/>
+        <field name="EmployeeStatus"  title="Status"          type="text"     length="40"/>
+        <field name="Salary"          title="Salary"          type="float"/>
+        <field name="OrgUnit"         title="Org Unit"        type="text"     length="128"/>
+        <field name="Gender"          title="Gender"          type="text"     length="7">
+            <valueMap>
+                <value>male</value>
+                <value>female</value>
+            </valueMap>
+        </field>
+        <field name="MaritalStatus"   title="Marital Status"  type="text"     length="10">
+            <valueMap>
+                <value>married</value>
+                <value>single</value>
+            </valueMap>
+        </field>
+    </fields>
+</DataSource>
+</textarea>
+<script class='javascript'>
+dp.SyntaxHighlighter.HighlightAll("code");
+</script>
+</body>
+</html>

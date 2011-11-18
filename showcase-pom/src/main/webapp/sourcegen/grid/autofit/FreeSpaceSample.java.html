@@ -1,0 +1,146 @@
+<html>
+<head>
+<link rel='stylesheet' href='../../../js/sh/SyntaxHighlighter.css' type='text/css' />
+<script src='../../../js/sh/shCore.js'></script>
+<script src='../../../js/sh/shBrushJava.js'></script>
+<style>
+* {
+font-family:Courier New,monospace;
+  padding: 0;
+  margin: 0;
+  white-space: nowrap;
+  font-size: 11px;
+}
+.dp-highlighter {
+  white-space: nowrap;
+  overflow: visible;
+  width: 600px;
+  font-size: 11px;
+  font-family:Courier New,monospace;
+}
+</style>
+</head>
+<body>
+<textarea name='code' class='java:nogutter' rows='15' cols='120'>
+/*
+ * Smart GWT (GWT for SmartClient)
+ * Copyright 2008 and beyond, Isomorphic Software, Inc.
+ *
+ * Smart GWT is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License version 3
+ * as published by the Free Software Foundation.  Smart GWT is also
+ * available under typical commercial license terms - see
+ * http://smartclient.com/license
+ *
+ * This software is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * Lesser General Public License for more details.
+ */
+
+import com.smartgwt.client.data.DataSource;
+import com.smartgwt.client.types.Overflow;
+import com.smartgwt.client.types.TreeModelType;
+import com.smartgwt.client.types.VisibilityMode;
+import com.smartgwt.client.widgets.Canvas;
+import com.smartgwt.client.widgets.grid.CellFormatter;
+import com.smartgwt.client.widgets.grid.ListGrid;
+import com.smartgwt.client.widgets.grid.ListGridRecord;
+import com.smartgwt.client.widgets.layout.HLayout;
+import com.smartgwt.client.widgets.layout.SectionStack;
+import com.smartgwt.client.widgets.layout.SectionStackSection;
+import com.smartgwt.client.widgets.tab.Tab;
+import com.smartgwt.client.widgets.tab.TabSet;
+import com.smartgwt.client.widgets.tree.Tree;
+import com.smartgwt.client.widgets.tree.TreeGrid;
+import com.smartgwt.client.widgets.tree.TreeGridField;
+import com.smartgwt.client.widgets.tree.TreeNode;
+import com.smartgwt.sample.showcase.client.data.ItemSupplyXmlDS;
+
+import com.google.gwt.core.client.EntryPoint;
+
+public class FreeSpaceSample implements EntryPoint {
+
+    public void onModuleLoad() {
+
+        DataSource dataSource = ItemSupplyXmlDS.getInstance();
+
+        final ListGrid listGrid = new ListGrid();
+        listGrid.setUseAllDataSourceFields(true);
+        listGrid.setDataSource(dataSource);
+        listGrid.setAutoFetchData(true);
+
+        TabSet tabSet = new TabSet();
+        Tab viewTab = new Tab("View");
+
+        Canvas viewLabel = new Canvas();
+        viewLabel.setContents("[Record Details can be dispalyed here]");
+        viewTab.setPane(viewLabel);
+
+        Tab editTab = new Tab("Edit");
+
+        Canvas editLabel = new Canvas();
+        editLabel.setContents("[Form for edits can be dispalyed here]");
+        editTab.setPane(editLabel);
+
+        tabSet.setTabs(viewTab, editTab);
+
+        TreeGrid treeGrid = new TreeGrid();
+        treeGrid.setWidth("30%");
+        treeGrid.setShowConnectors(true);
+        treeGrid.setShowResizeBar(true);
+
+        Tree data = new Tree();
+        data.setModelType(TreeModelType.CHILDREN);
+        data.setRoot(new TreeNode("root",
+                new TreeNode("File"),
+                new TreeNode("Edit"),
+                new TreeNode("Search"),
+                new TreeNode("Project"),
+                new TreeNode("Tools"),
+                new TreeNode("Window"),
+                new TreeNode("Favourites")));
+
+        treeGrid.setData(data);
+        
+        TreeGridField field = new TreeGridField("Navigation");
+        field.setCellFormatter(new CellFormatter() {
+            public String format(Object value, ListGridRecord record, int rowNum, int colNum) {
+                return record.getAttribute("name");
+            }
+        });
+        treeGrid.setFields(field);
+
+        HLayout navLayout = new HLayout();
+        navLayout.setMembers(treeGrid, listGrid);
+
+        SectionStack sectionStack = new SectionStack();        
+        sectionStack.setWidth(600);
+        sectionStack.setHeight(400);
+        sectionStack.setVisibilityMode(VisibilityMode.MULTIPLE);
+        sectionStack.setAnimateSections(true);
+        sectionStack.setOverflow(Overflow.HIDDEN);
+
+        SectionStackSection summarySection = new SectionStackSection();
+        summarySection.setTitle("Summary");
+        summarySection.setExpanded(true);
+        summarySection.setItems(navLayout);
+
+        SectionStackSection detailsSection = new SectionStackSection();
+        detailsSection.setTitle("Details");
+        detailsSection.setExpanded(true);
+        detailsSection.setItems(tabSet);
+
+        sectionStack.setSections(summarySection, detailsSection);
+
+
+        sectionStack.draw();
+    }
+
+}
+</textarea>
+<script class='javascript'>
+dp.SyntaxHighlighter.HighlightAll("code");
+</script>
+</body>
+</html>

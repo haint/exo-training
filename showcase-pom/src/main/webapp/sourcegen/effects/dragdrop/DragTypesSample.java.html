@@ -1,0 +1,122 @@
+<html>
+<head>
+<link rel='stylesheet' href='../../../js/sh/SyntaxHighlighter.css' type='text/css' />
+<script src='../../../js/sh/shCore.js'></script>
+<script src='../../../js/sh/shBrushJava.js'></script>
+<style>
+* {
+font-family:Courier New,monospace;
+  padding: 0;
+  margin: 0;
+  white-space: nowrap;
+  font-size: 11px;
+}
+.dp-highlighter {
+  white-space: nowrap;
+  overflow: visible;
+  width: 600px;
+  font-size: 11px;
+  font-family:Courier New,monospace;
+}
+</style>
+</head>
+<body>
+<textarea name='code' class='java:nogutter' rows='15' cols='120'>
+/*
+ * Smart GWT (GWT for SmartClient)
+ * Copyright 2008 and beyond, Isomorphic Software, Inc.
+ *
+ * Smart GWT is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License version 3
+ * as published by the Free Software Foundation.  Smart GWT is also
+ * available under typical commercial license terms - see
+ * http://smartclient.com/license
+ *
+ * This software is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * Lesser General Public License for more details.
+ */
+
+import com.smartgwt.client.types.Alignment;
+import com.smartgwt.client.types.DragAppearance;
+import com.smartgwt.client.widgets.Canvas;
+import com.smartgwt.client.widgets.Img;
+import com.smartgwt.client.widgets.layout.HStack;
+import com.smartgwt.client.widgets.layout.VStack;
+
+import com.google.gwt.core.client.EntryPoint;
+
+public class DragTypesSample implements EntryPoint {
+
+    public void onModuleLoad() {
+
+    	DropBox gray = new DropBox("edges/gray/6.png");
+    	gray.addMember(new DragPiece("cube_blue.png", "b"));
+    	gray.addMember(new DragPiece("cube_green.png", "g"));
+    	gray.addMember(new DragPiece("cube_yellow.png", "y"));
+    	gray.setDropTypes("b", "g", "y");
+    	
+    	DropBox blue = new DropBox("edges/blue/6.png");
+    	blue.addMember(new DragPiece("cube_blue.png", "b"));
+    	blue.addMember(new DragPiece("cube_green.png", "g"));
+    	blue.addMember(new DragPiece("cube_yellow.png", "y"));
+    	blue.setDropTypes("b");
+
+    	DropBox green = new DropBox("edges/green/6.png");
+    	green.addMember(new DragPiece("cube_blue.png", "b"));
+    	green.addMember(new DragPiece("cube_green.png", "g"));
+    	green.addMember(new DragPiece("cube_yellow.png", "y"));
+    	green.setDropTypes("g");
+    	
+    	HStack hStack = new HStack(20);
+        hStack.addMember(gray);
+        hStack.addMember(blue);
+        hStack.addMember(green);
+        
+        hStack.draw();
+    }
+
+    
+    private class DropBox extends VStack {
+    	public DropBox() {
+    		setShowEdges(true);
+    		setMembersMargin(10);
+    		setLayoutMargin(10);
+    		setCanAcceptDrop(true);
+    		setAnimateMembers(true);
+    		setDropLineThickness(4);
+    		setAutoHeight();
+    	}
+    	
+    	public DropBox(String edgeImage) {
+    		this();
+    		setEdgeImage(edgeImage);
+    	}
+    }
+    
+    private class DragPiece extends Img {
+    	public DragPiece() {
+    		setWidth(48);
+    		setHeight(48);
+    		setLayoutAlign(Alignment.CENTER);
+    		setCanDragReposition(true);
+    		setCanDrop(true);
+    		setDragAppearance(DragAppearance.TARGET);
+    		setAppImgDir("pieces/48/");
+    	}
+    	
+    	public DragPiece(String src, String dragType) {
+    		this();
+    		setSrc(src);
+    		setDragType(dragType);
+    	}
+    }
+
+}
+</textarea>
+<script class='javascript'>
+dp.SyntaxHighlighter.HighlightAll("code");
+</script>
+</body>
+</html>

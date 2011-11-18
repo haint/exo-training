@@ -1,0 +1,138 @@
+<html>
+<head>
+<link rel='stylesheet' href='../../../js/sh/SyntaxHighlighter.css' type='text/css' />
+<script src='../../../js/sh/shCore.js'></script>
+<script src='../../../js/sh/shBrushJava.js'></script>
+<style>
+* {
+font-family:Courier New,monospace;
+  padding: 0;
+  margin: 0;
+  white-space: nowrap;
+  font-size: 11px;
+}
+.dp-highlighter {
+  white-space: nowrap;
+  overflow: visible;
+  width: 600px;
+  font-size: 11px;
+  font-family:Courier New,monospace;
+}
+</style>
+</head>
+<body>
+<textarea name='code' class='java:nogutter' rows='15' cols='120'>
+/*
+ * Smart GWT (GWT for SmartClient)
+ * Copyright 2008 and beyond, Isomorphic Software, Inc.
+ *
+ * Smart GWT is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License version 3
+ * as published by the Free Software Foundation.  Smart GWT is also
+ * available under typical commercial license terms - see
+ * http://smartclient.com/license
+ *
+ * This software is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * Lesser General Public License for more details.
+ */
+
+import com.smartgwt.client.types.Alignment;
+import com.smartgwt.client.types.DragAppearance;
+import com.smartgwt.client.util.EventHandler;
+import com.smartgwt.client.util.SC;
+import com.smartgwt.client.widgets.Canvas;
+import com.smartgwt.client.widgets.Img;
+import com.smartgwt.client.widgets.Label;
+import com.smartgwt.client.widgets.events.*;
+
+import com.google.gwt.core.client.EntryPoint;
+
+public class DragTrackerSample implements EntryPoint {
+
+    public void onModuleLoad() {
+
+    	DragPiece blue = new DragPiece("pawn_blue.png") {
+            @Override
+			protected boolean setDragTracker() {
+				EventHandler.setDragTracker("Blue Piece");
+				return false;
+			}
+    	};
+        blue.setID("bluePiece");
+    	blue.setTitle("Blue Piece");
+    	blue.setLeft(50);
+    	blue.setTop(50);
+    	    	
+    	DragPiece green = new DragPiece("pawn_green.png"){
+            @Override
+			protected boolean setDragTracker() {
+                String html = Canvas.imgHTML("pieces/24/pawn_green.png", 24, 24);
+				EventHandler.setDragTracker(html);
+				return false;
+			}
+    	};
+        green.setID("greenPiece");
+    	green.setTitle("Green Piece");
+    	green.setLeft(150);
+    	green.setTop(50);
+    	
+
+    	final Label label = new Label("Drop Here");
+    	label.setLeft(250);
+    	label.setTop(50);
+    	label.setShowEdges(true);
+    	label.setAlign(Alignment.CENTER);
+    	label.setCanAcceptDrop(true);
+    	label.addDropOverHandler(new DropOverHandler() {
+			public void onDropOver(DropOverEvent event) {
+				label.setBackgroundColor("#FFFF88");			
+			}
+    	});
+    	
+    	label.addDropOutHandler(new DropOutHandler() {
+			public void onDropOut(DropOutEvent event) {
+				label.setBackgroundColor("#ffffff");
+			}    		
+    	});
+    	
+        label.addDropHandler(new DropHandler() {
+			public void onDrop(DropEvent event) {
+                Canvas target = EventHandler.getDragTarget();
+                SC.say("You dropped the " +  target.getID());				
+			}        	
+        });
+        
+        Canvas canvas = new Canvas();
+        canvas.addChild(blue);
+        canvas.addChild(green);
+        canvas.addChild(label);
+        canvas.draw();
+    }
+
+    
+    
+    private class DragPiece extends Img {
+    	public DragPiece() {
+    		setWidth(48);
+    		setHeight(48);
+    		setCanDrop(true);
+    		setCanDrag(true);
+    		setDragAppearance(DragAppearance.TRACKER);
+    		setAppImgDir("pieces/48/");
+    	}
+    	
+    	public DragPiece(String src) {
+    		this();
+    		super.setSrc(src);
+    	}
+    }
+
+}
+</textarea>
+<script class='javascript'>
+dp.SyntaxHighlighter.HighlightAll("code");
+</script>
+</body>
+</html>

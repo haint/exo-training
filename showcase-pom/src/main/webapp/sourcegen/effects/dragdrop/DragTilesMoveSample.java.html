@@ -1,0 +1,107 @@
+<html>
+<head>
+<link rel='stylesheet' href='../../../js/sh/SyntaxHighlighter.css' type='text/css' />
+<script src='../../../js/sh/shCore.js'></script>
+<script src='../../../js/sh/shBrushJava.js'></script>
+<style>
+* {
+font-family:Courier New,monospace;
+  padding: 0;
+  margin: 0;
+  white-space: nowrap;
+  font-size: 11px;
+}
+.dp-highlighter {
+  white-space: nowrap;
+  overflow: visible;
+  width: 600px;
+  font-size: 11px;
+  font-family:Courier New,monospace;
+}
+</style>
+</head>
+<body>
+<textarea name='code' class='java:nogutter' rows='15' cols='120'>
+/*
+ * Smart GWT (GWT for SmartClient)
+ * Copyright 2008 and beyond, Isomorphic Software, Inc.
+ *
+ * Smart GWT is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License version 3
+ * as published by the Free Software Foundation.  Smart GWT is also
+ * available under typical commercial license terms - see
+ * http://smartclient.com/license
+ *
+ * This software is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * Lesser General Public License for more details.
+ */
+
+import com.smartgwt.client.widgets.Canvas;
+import com.smartgwt.client.widgets.HTMLFlow;
+import com.smartgwt.client.widgets.grid.ListGrid;
+import com.smartgwt.client.widgets.grid.ListGridField;
+import com.smartgwt.client.widgets.layout.HLayout;
+import com.smartgwt.client.widgets.layout.VLayout;
+import com.smartgwt.client.widgets.tile.TileGrid;
+import com.smartgwt.client.widgets.tile.TileRecord;
+import com.smartgwt.client.widgets.viewer.DetailViewerField;
+import com.smartgwt.sample.showcase.client.data.AnimalXmlDS;
+
+import com.google.gwt.core.client.EntryPoint;
+
+public class DragTilesMoveSample implements EntryPoint {
+
+    public void onModuleLoad() {
+        TileGrid tileGrid = new TileGrid();
+        tileGrid.setWidth(500);
+        tileGrid.setHeight(400);
+        tileGrid.setTileWidth(150);
+        tileGrid.setTileHeight(150);
+        tileGrid.setCanAcceptDrop(true);
+        tileGrid.setCanDrag(true);
+        tileGrid.setData(new TileRecord[]{});
+
+        DetailViewerField pictureField = new DetailViewerField("picture");
+        pictureField.setType("image");
+        pictureField.setImageURLPrefix("animals/");
+        DetailViewerField commonNameField = new DetailViewerField("commonName");
+
+        tileGrid.setFields(pictureField, commonNameField);
+
+        ListGrid listGrid = new ListGrid();
+        listGrid.setWidth(300);
+        listGrid.setHeight(400);
+        listGrid.setDataSource(AnimalXmlDS.getInstance());
+        listGrid.setAutoFetchData(true);
+        listGrid.setCanDragRecordsOut(true);
+        listGrid.setCanAcceptDroppedRecords(true);
+        listGrid.setCanReorderRecords(true);
+
+        ListGridField commonNameField2 = new ListGridField("commonName");
+        ListGridField lifeSpanField = new ListGridField("lifeSpan");
+        lifeSpanField.setWidth(50);
+        ListGridField statusField = new ListGridField("status");
+        listGrid.setFields(commonNameField2, lifeSpanField, statusField);
+
+        VLayout vLayout = new VLayout(20);
+        vLayout.setMargin(10);
+        vLayout.addMember(new HTMLFlow(DESCRIPTION));
+
+        HLayout hLayout = new HLayout(10);
+        hLayout.addMember(listGrid);
+        hLayout.addMember(tileGrid);
+
+        vLayout.addMember(hLayout);
+
+        vLayout.draw();
+    }
+
+}
+</textarea>
+<script class='javascript'>
+dp.SyntaxHighlighter.HighlightAll("code");
+</script>
+</body>
+</html>

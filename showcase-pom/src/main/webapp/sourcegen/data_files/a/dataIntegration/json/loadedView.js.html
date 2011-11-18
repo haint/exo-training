@@ -1,0 +1,42 @@
+<html>
+<head>
+<link rel='stylesheet' href='../../../../js/sh/SyntaxHighlighter.css' type='text/css' />
+<script src='../../../../js/sh/shCore.js'></script>
+<script src='../../../../js/sh/shBrushJScript.js'></script>
+<style>
+* {
+font-family:Courier New,monospace;
+  padding: 0;
+  margin: 0;
+  white-space: nowrap;
+  font-size: 11px;
+}
+.dp-highlighter {
+  white-space: nowrap;
+  overflow: visible;
+  width: 600px;
+  font-size: 11px;
+  font-family:Courier New,monospace;
+}
+</style>
+</head>
+<body>
+<textarea name='code' class='js:nogutter' rows='15' cols='120'>
+
+isc.ListGrid.create({
+    autoDraw: false,
+    fields: [
+        {name: "itemName", title: "Item", type: "text"},
+        {name: "unitCost", title: "Unit Cost", type: "number"}
+    ],
+    data: [
+        {itemName: "17\" LCD Monitor", unitCost: 330},
+        {itemName: "Dr. Grip Pens - Black", unitCost: 4.99}
+    ]
+});
+</textarea>
+<script class='javascript'>
+dp.SyntaxHighlighter.HighlightAll("code");
+</script>
+</body>
+</html>

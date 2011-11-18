@@ -1,0 +1,105 @@
+<html>
+<head>
+<link rel='stylesheet' href='../../../js/sh/SyntaxHighlighter.css' type='text/css' />
+<script src='../../../js/sh/shCore.js'></script>
+<script src='../../../js/sh/shBrushJava.js'></script>
+<style>
+* {
+font-family:Courier New,monospace;
+  padding: 0;
+  margin: 0;
+  white-space: nowrap;
+  font-size: 11px;
+}
+.dp-highlighter {
+  white-space: nowrap;
+  overflow: visible;
+  width: 600px;
+  font-size: 11px;
+  font-family:Courier New,monospace;
+}
+</style>
+</head>
+<body>
+<textarea name='code' class='java:nogutter' rows='15' cols='120'>
+/*
+ * Smart GWT (GWT for SmartClient)
+ * Copyright 2008 and beyond, Isomorphic Software, Inc.
+ *
+ * Smart GWT is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License version 3
+ * as published by the Free Software Foundation.  Smart GWT is also
+ * available under typical commercial license terms - see
+ * http://smartclient.com/license
+ *
+ * This software is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * Lesser General Public License for more details.
+ */
+
+import com.smartgwt.client.types.Alignment;
+import com.smartgwt.client.types.VerticalAlignment;
+import com.smartgwt.client.widgets.Canvas;
+import com.smartgwt.client.widgets.IButton;
+import com.smartgwt.client.widgets.Label;
+import com.smartgwt.client.widgets.events.ClickEvent;
+import com.smartgwt.client.widgets.events.ClickHandler;
+import com.smartgwt.client.widgets.layout.HLayout;
+import com.smartgwt.client.widgets.layout.VLayout;
+
+import com.google.gwt.core.client.EntryPoint;
+
+public class AnimateMoveSample implements EntryPoint {
+
+    public void onModuleLoad() {
+
+        VLayout layout = new VLayout();
+		layout.setMembersMargin(10);
+
+		final Label label = new Label("Vision is the art of seeing the invisible");
+		label.setParentElement(layout);
+		label.setShowEdges(true);
+		label.setBackgroundColor("#ffffd0");
+		label.setPadding(5);
+		label.setWidth(200);
+		label.setTop(50);
+		label.setLeft(-220); //start off screen
+		label.setValign(VerticalAlignment.CENTER);
+		label.setAlign(Alignment.CENTER);
+		label.setAnimateTime(1200); // milliseconds
+
+		IButton moveInButton = new IButton();
+		moveInButton.setTitle("Move In");
+		moveInButton.setLeft(40);
+		moveInButton.addClickHandler(new ClickHandler() {
+			public void onClick(ClickEvent event) {
+				label.animateMove(10, 50);
+
+			}
+		});
+
+		IButton moveOutButton = new IButton();
+		moveOutButton.setTitle("Move Out");
+		moveOutButton.addClickHandler(new ClickHandler() {
+			public void onClick(ClickEvent event) {
+				label.animateMove(-220, 50);
+			}
+		});
+
+		HLayout hLayout = new HLayout();
+		hLayout.setMembersMargin(10);
+		hLayout.addMember(moveInButton);
+		hLayout.addMember(moveOutButton);
+		layout.addMember(hLayout);
+
+		layout.draw();
+	}
+
+}
+</textarea>
+<script class='javascript'>
+dp.SyntaxHighlighter.HighlightAll("code");
+</script>
+</body>
+</html>

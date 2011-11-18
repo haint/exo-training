@@ -1,0 +1,148 @@
+<html>
+<head>
+<link rel='stylesheet' href='../../js/sh/SyntaxHighlighter.css' type='text/css' />
+<script src='../../js/sh/shCore.js'></script>
+<script src='../../js/sh/shBrushJava.js'></script>
+<style>
+* {
+font-family:Courier New,monospace;
+  padding: 0;
+  margin: 0;
+  white-space: nowrap;
+  font-size: 11px;
+}
+.dp-highlighter {
+  white-space: nowrap;
+  overflow: visible;
+  width: 600px;
+  font-size: 11px;
+  font-family:Courier New,monospace;
+}
+</style>
+</head>
+<body>
+<textarea name='code' class='java:nogutter' rows='15' cols='120'>
+/*
+ * Smart GWT (GWT for SmartClient)
+ * Copyright 2008 and beyond, Isomorphic Software, Inc.
+ *
+ * Smart GWT is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License version 3
+ * as published by the Free Software Foundation.  Smart GWT is also
+ * available under typical commercial license terms - see
+ * http://smartclient.com/license
+ *
+ * This software is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * Lesser General Public License for more details.
+ */
+
+import com.google.gwt.user.client.ui.*;
+import com.smartgwt.client.types.Alignment;
+import com.smartgwt.client.types.ListGridFieldType;
+import com.smartgwt.client.util.SC;
+import com.smartgwt.client.widgets.Canvas;
+import com.smartgwt.client.widgets.grid.ListGrid;
+import com.smartgwt.client.widgets.grid.ListGridField;
+import com.smartgwt.client.widgets.tab.Tab;
+import com.smartgwt.client.widgets.tab.TabSet;
+import com.smartgwt.sample.showcase.client.data.CountryData;
+
+import com.google.gwt.core.client.EntryPoint;
+
+public class GwtShowcaseSample implements EntryPoint {
+
+    public void onModuleLoad() {
+        TabSet tabSet = new TabSet();
+        tabSet.setWidth(580);
+        tabSet.setHeight(400);
+
+        Tab smartTab1 = new Tab("Smart GWT Tab &nbsp;", "pieces/16/pawn_blue.png");
+        Canvas tabPane1 = new Canvas();
+        tabPane1.setWidth100();
+        tabPane1.setHeight100();
+        tabPane1.addChild(getGwtTab());
+        smartTab1.setPane(tabPane1);
+
+        Tab smartTab2 = new Tab("Another Tab &nbsp;", "pieces/16/pawn_blue.png");
+        smartTab2.setPane(new CountryListGrid());
+        tabSet.setTabs(smartTab1, smartTab2);
+
+        tabSet.draw();
+    }
+
+    private Widget getGwtTab() {
+        DecoratedTabPanel tabPanel = new DecoratedTabPanel();
+        tabPanel.setWidth("550px");
+        tabPanel.setAnimationEnabled(true);
+        
+        VerticalPanel vPanel0 = new VerticalPanel();
+        vPanel0.setStyleName("vpDotted");
+        vPanel0.setHeight("500px");
+        vPanel0.setSpacing(15);
+        HTML homeText = new HTML("I am a GWT 'HTML' Widget. Click one of the tabs to see more content.");
+        vPanel0.add(homeText);
+
+        tabPanel.add(vPanel0, "GWT Tabs");
+
+        // Add a tab with an image
+        VerticalPanel vPanel = new VerticalPanel();
+        Image gwtImage = new Image("images/gwt/logo.png");
+        gwtImage.setTitle("I am a GWT Image Widget");
+        vPanel.add(gwtImage);
+
+        VerticalPanel vPanel2 = new VerticalPanel();
+        vPanel2.setSpacing(15);
+        vPanel2.setHeight("500px");
+        Button gwtButton = new Button("GWT  Button",
+                new ClickListener() {
+                    public void onClick(Widget sender) {
+                        SC.say("Smart GWT Dialog");
+                    }
+                });
+        vPanel2.add(gwtButton);
+
+        tabPanel.add(vPanel2, "GWT Button");
+
+        tabPanel.add(vPanel, "GWT Logo");
+
+        // Add a tab
+        HTML moreInfo = new HTML("Tabs are highly customizable using CSS.");
+        tabPanel.add(moreInfo, "More Info");
+
+        // Return the content
+        tabPanel.selectTab(0);
+        tabPanel.ensureDebugId("cwTabPanel");
+        return tabPanel;
+    }
+
+    class CountryListGrid extends ListGrid {
+        CountryListGrid() {
+            setWidth(500);
+            setHeight(184);
+            setShowAllRecords(true);
+            setCanDragSelect(true);
+
+            ListGridField countryCodeField = new ListGridField("countryCode", "Flag", 40);
+            countryCodeField.setAlign(Alignment.CENTER);
+            countryCodeField.setType(ListGridFieldType.IMAGE);
+            countryCodeField.setImageURLPrefix("flags/16/");
+            countryCodeField.setImageURLSuffix(".png");
+
+            ListGridField nameField = new ListGridField("countryName", "Country");
+            ListGridField capitalField = new ListGridField("capital", "Capital");
+            ListGridField continentField = new ListGridField("continent", "Continent");
+            setFields(countryCodeField, nameField, capitalField, continentField);
+
+            setData(CountryData.getRecords());
+        }
+    }
+
+}
+</textarea>
+<script class='javascript'>
+dp.SyntaxHighlighter.HighlightAll("code");
+</script>
+</body>
+</html>

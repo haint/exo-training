@@ -1,0 +1,122 @@
+<html>
+<head>
+<link rel='stylesheet' href='../../../js/sh/SyntaxHighlighter.css' type='text/css' />
+<script src='../../../js/sh/shCore.js'></script>
+<script src='../../../js/sh/shBrushJava.js'></script>
+<style>
+* {
+font-family:Courier New,monospace;
+  padding: 0;
+  margin: 0;
+  white-space: nowrap;
+  font-size: 11px;
+}
+.dp-highlighter {
+  white-space: nowrap;
+  overflow: visible;
+  width: 600px;
+  font-size: 11px;
+  font-family:Courier New,monospace;
+}
+</style>
+</head>
+<body>
+<textarea name='code' class='java:nogutter' rows='15' cols='120'>
+/*
+ * Smart GWT (GWT for SmartClient)
+ * Copyright 2008 and beyond, Isomorphic Software, Inc.
+ *
+ * Smart GWT is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License version 3
+ * as published by the Free Software Foundation.  Smart GWT is also
+ * available under typical commercial license terms - see
+ * http://smartclient.com/license
+ *
+ * This software is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * Lesser General Public License for more details.
+ */
+
+import com.smartgwt.client.types.Alignment;
+import com.smartgwt.client.widgets.Canvas;
+import com.smartgwt.client.widgets.IButton;
+import com.smartgwt.client.widgets.Img;
+import com.smartgwt.client.widgets.events.ClickEvent;
+import com.smartgwt.client.widgets.events.ClickHandler;
+import com.smartgwt.client.widgets.layout.HLayout;
+import com.smartgwt.client.widgets.layout.HStack;
+import com.smartgwt.client.widgets.layout.VLayout;
+
+import com.google.gwt.core.client.EntryPoint;
+
+public class AnimateLayoutSample implements EntryPoint {
+
+    public void onModuleLoad() {
+
+        VLayout layout = new VLayout();
+        layout.setMembersMargin(10);
+
+        final HStack starsLayout = new HStack();
+        starsLayout.setTop(50);
+        starsLayout.setMembersMargin(10);
+        starsLayout.setLayoutMargin(10);
+        starsLayout.setShowEdges(true);
+        starsLayout.setAnimateMembers(true);
+
+        final Img blueImg = createImage("star_blue.png");
+        final Img greenImg = createImage("star_green.png");
+        final Img yellowImg = createImage("star_yellow.png");
+
+        starsLayout.addMember(blueImg);
+        starsLayout.addMember(greenImg);
+        starsLayout.addMember(yellowImg);
+
+        IButton showButton = new IButton();
+        showButton.setTitle("Show");
+        showButton.setIconOrientation("right");
+        showButton.setIcon("pieces/16/star_green.png");
+        showButton.setLeft(40);
+
+        IButton hideButton = new IButton();
+        hideButton.setTitle("Hide");
+        hideButton.setIcon("pieces/16/star_green.png");
+        hideButton.setIconOrientation("right");
+        hideButton.addClickHandler(new ClickHandler() {
+            public void onClick(ClickEvent event) {
+                starsLayout.hideMember(greenImg);
+            }
+        });
+
+        showButton.addClickHandler(new ClickHandler() {
+            public void onClick(ClickEvent event) {
+                starsLayout.showMember(greenImg);
+            }
+        });
+
+        HLayout hLayout = new HLayout();
+        hLayout.setMembersMargin(10);
+        hLayout.addMember(hideButton);
+        hLayout.addMember(showButton);
+        layout.addMember(hLayout);
+        layout.addChild(starsLayout);
+
+
+        layout.draw();
+    }
+
+    private Img createImage(String src) {
+        Img img = new Img(src);
+        img.setAppImgDir("pieces/48/");
+        img.setWidth(48);
+        img.setHeight(48);
+        img.setLayoutAlign(Alignment.CENTER);
+        return img;
+    }
+}
+</textarea>
+<script class='javascript'>
+dp.SyntaxHighlighter.HighlightAll("code");
+</script>
+</body>
+</html>

@@ -1,0 +1,134 @@
+<html>
+<head>
+<link rel='stylesheet' href='../../js/sh/SyntaxHighlighter.css' type='text/css' />
+<script src='../../js/sh/shCore.js'></script>
+<script src='../../js/sh/shBrushJava.js'></script>
+<style>
+* {
+font-family:Courier New,monospace;
+  padding: 0;
+  margin: 0;
+  white-space: nowrap;
+  font-size: 11px;
+}
+.dp-highlighter {
+  white-space: nowrap;
+  overflow: visible;
+  width: 600px;
+  font-size: 11px;
+  font-family:Courier New,monospace;
+}
+</style>
+</head>
+<body>
+<textarea name='code' class='java:nogutter' rows='15' cols='120'>
+/*
+ * Smart GWT (GWT for SmartClient)
+ * Copyright 2008 and beyond, Isomorphic Software, Inc.
+ *
+ * Smart GWT is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License version 3
+ * as published by the Free Software Foundation.  Smart GWT is also
+ * available under typical commercial license terms - see
+ * http://smartclient.com/license
+ *
+ * This software is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * Lesser General Public License for more details.
+ */
+
+import com.smartgwt.client.types.Overflow;
+import com.smartgwt.client.types.VisibilityMode;
+import com.smartgwt.client.widgets.Canvas;
+import com.smartgwt.client.widgets.HTMLFlow;
+import com.smartgwt.client.widgets.IButton;
+import com.smartgwt.client.widgets.Img;
+import com.smartgwt.client.widgets.events.ClickEvent;
+import com.smartgwt.client.widgets.events.ClickHandler;
+import com.smartgwt.client.widgets.layout.HLayout;
+import com.smartgwt.client.widgets.layout.SectionStack;
+import com.smartgwt.client.widgets.layout.SectionStackSection;
+import com.smartgwt.client.widgets.layout.VLayout;
+
+import com.google.gwt.core.client.EntryPoint;
+
+public class ExpandCollapseSample implements EntryPoint {
+
+    public void onModuleLoad() {
+        HTMLFlow htmlFlow = new HTMLFlow();
+        htmlFlow.setOverflow(Overflow.AUTO);
+        htmlFlow.setPadding(10);
+
+        String contents = "<b>Severity 1</b> - Critical problem<br>System is unavailable in production or " +
+                "is corrupting data, and the error severely impacts the user's operations." +
+                "<br><br><b>Severity 2</b> - Major problem<br>An important function of the system " +
+                "is not available in production, and the user's operations are restricted." +
+                "<br><br><b>Severity 3</b> - Minor problem<br>Inability to use a function of the " +
+                "system occurs, but it does not seriously affect the user's operations.";
+
+        htmlFlow.setContents(contents);
+
+        final SectionStack sectionStack = new SectionStack();
+        sectionStack.setVisibilityMode(VisibilityMode.MULTIPLE);
+        sectionStack.setWidth(300);
+        sectionStack.setHeight(350);
+
+        SectionStackSection section1 = new SectionStackSection("Blue Pawn");
+        section1.setExpanded(true);
+        section1.addItem(new Img("pieces/48/pawn_blue.png", 48, 48));
+        sectionStack.addSection(section1);
+
+        SectionStackSection section2 = new SectionStackSection("HTML Flow");
+        section2.setExpanded(true);
+        section2.setCanCollapse(true);
+        section2.addItem(htmlFlow);
+        sectionStack.addSection(section2);
+
+        SectionStackSection section3 = new SectionStackSection("Green Pawn");
+        section3.setExpanded(true);
+        section3.setCanCollapse(false);
+        section3.addItem(new Img("pieces/48/pawn_green.png", 48, 48));
+        sectionStack.addSection(section3);
+
+        SectionStackSection section4 = new SectionStackSection("Yellow Piece");
+        section4.setExpanded(false);
+        section4.addItem(new Img("pieces/48/piece_yellow.png", 48, 48));
+        sectionStack.addSection(section4);
+
+        IButton expandButton = new IButton("Expand Blue");
+        expandButton.setWidth(150);
+        expandButton.addClickHandler(new ClickHandler() {
+            public void onClick(ClickEvent event) {
+                sectionStack.expandSection(0);
+            }
+        });
+
+        IButton collapseButton = new IButton("Collapse Blue");
+        collapseButton.setWidth(150);
+        collapseButton.addClickHandler(new ClickHandler() {
+            public void onClick(ClickEvent event) {
+                sectionStack.collapseSection(0);
+            }
+        });
+
+        HLayout layout = new HLayout();
+        layout.setMembersMargin(20);
+        layout.addMember(sectionStack);
+
+        VLayout buttons = new VLayout();
+        buttons.setMembersMargin(10);
+        buttons.addMember(expandButton);
+        buttons.addMember(collapseButton);
+
+        layout.addMember(buttons);
+        layout.draw();
+    }
+
+}
+</textarea>
+<script class='javascript'>
+dp.SyntaxHighlighter.HighlightAll("code");
+</script>
+</body>
+</html>

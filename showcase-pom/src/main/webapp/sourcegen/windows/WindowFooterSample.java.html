@@ -1,0 +1,84 @@
+<html>
+<head>
+<link rel='stylesheet' href='../../js/sh/SyntaxHighlighter.css' type='text/css' />
+<script src='../../js/sh/shCore.js'></script>
+<script src='../../js/sh/shBrushJava.js'></script>
+<style>
+* {
+font-family:Courier New,monospace;
+  padding: 0;
+  margin: 0;
+  white-space: nowrap;
+  font-size: 11px;
+}
+.dp-highlighter {
+  white-space: nowrap;
+  overflow: visible;
+  width: 600px;
+  font-size: 11px;
+  font-family:Courier New,monospace;
+}
+</style>
+</head>
+<body>
+<textarea name='code' class='java:nogutter' rows='15' cols='120'>
+/*
+ * Smart GWT (GWT for SmartClient)
+ * Copyright 2008 and beyond, Isomorphic Software, Inc.
+ *
+ * Smart GWT is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License version 3
+ * as published by the Free Software Foundation.  Smart GWT is also
+ * available under typical commercial license terms - see
+ * http://smartclient.com/license
+ *
+ * This software is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * Lesser General Public License for more details.
+ */
+
+import com.smartgwt.client.types.Alignment;
+import com.smartgwt.client.widgets.Canvas;
+import com.smartgwt.client.widgets.Label;
+import com.smartgwt.client.widgets.Window;
+import com.smartgwt.client.widgets.events.ClickEvent;
+import com.smartgwt.client.widgets.events.ClickHandler;
+
+import com.google.gwt.core.client.EntryPoint;
+
+public class WindowFooterSample implements EntryPoint {
+
+    public void onModuleLoad() {
+        Canvas canvas = new Canvas();
+
+        final Window window = new Window();
+        window.setTitle("Window with footer");
+        window.setWidth(200);
+        window.setHeight(200);
+        window.setCanDragResize(true);
+        window.setShowFooter(true);
+
+        Label label = new Label();
+        label.setContents("Click Me");
+        label.setAlign(Alignment.CENTER);
+        label.setPadding(5);
+        label.setHeight100();
+        label.addClickHandler(new ClickHandler() {
+            public void onClick(ClickEvent event) {
+                window.setStatus("Click at: " + event.getX() + ", " + event.getY());
+            }
+        });
+        window.addItem(label);
+        canvas.addChild(window);
+
+        canvas.draw();
+    }
+
+}
+</textarea>
+<script class='javascript'>
+dp.SyntaxHighlighter.HighlightAll("code");
+</script>
+</body>
+</html>

@@ -1,0 +1,129 @@
+<html>
+<head>
+<link rel='stylesheet' href='../../../js/sh/SyntaxHighlighter.css' type='text/css' />
+<script src='../../../js/sh/shCore.js'></script>
+<script src='../../../js/sh/shBrushJava.js'></script>
+<style>
+* {
+font-family:Courier New,monospace;
+  padding: 0;
+  margin: 0;
+  white-space: nowrap;
+  font-size: 11px;
+}
+.dp-highlighter {
+  white-space: nowrap;
+  overflow: visible;
+  width: 600px;
+  font-size: 11px;
+  font-family:Courier New,monospace;
+}
+</style>
+</head>
+<body>
+<textarea name='code' class='java:nogutter' rows='15' cols='120'>
+/*
+ * Smart GWT (GWT for SmartClient)
+ * Copyright 2008 and beyond, Isomorphic Software, Inc.
+ *
+ * Smart GWT is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License version 3
+ * as published by the Free Software Foundation.  Smart GWT is also
+ * available under typical commercial license terms - see
+ * http://smartclient.com/license
+ *
+ * This software is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * Lesser General Public License for more details.
+ */
+
+import com.smartgwt.client.widgets.Canvas;
+import com.smartgwt.client.widgets.Label;
+import com.smartgwt.client.widgets.Slider;
+import com.smartgwt.client.widgets.events.DrawEvent;
+import com.smartgwt.client.widgets.events.DrawHandler;
+import com.smartgwt.client.widgets.events.ValueChangedEvent;
+import com.smartgwt.client.widgets.events.ValueChangedHandler;
+
+import com.google.gwt.core.client.EntryPoint;
+
+public class ShadowsSample implements EntryPoint {
+
+    private static final String EXAMPLE_TEXT = "When in the Course of human events, it becomes necessary for one people to " +
+            "dissolve the political bands which have connected them with another, and to assume among the powers of the earth, " +
+            "the separate and equal station to which the Laws of Nature and of Nature's God entitle them, a decent respect to " +
+            "the opinions of mankind requires that they should declare the causes which impel them to the separation.";
+
+    public void onModuleLoad() {
+
+        Canvas canvas = new Canvas();
+
+
+        final Label label = new Label(EXAMPLE_TEXT);
+        label.setWidth(250);
+        label.setPadding(10);
+        label.setLeft(160);
+        label.setTop(20);
+        label.setBackgroundColor("white");
+        label.setBorder("1px solid #c0c0c0");
+        label.setCanDragReposition(true);
+        label.setShowShadow(true);
+        label.setShadowSoftness(10);
+        label.setShadowOffset(5);
+        label.setKeepInParentRect(true);
+
+        final Slider softness = new Slider("Softness");
+        softness.setMinValue(1);
+        softness.setMaxValue(10);
+        softness.setNumValues(11);
+        softness.setShowRange(false);
+        softness.setLabelWidth(20);
+        softness.setValue(10);
+        softness.addDrawHandler(new DrawHandler() {
+            public void onDraw(DrawEvent event) {
+                softness.addValueChangedHandler(new ValueChangedHandler() {
+                    public void onValueChanged(ValueChangedEvent event) {
+                        label.setShadowSoftness(event.getValue());
+                        label.updateShadow();
+                    }
+                });
+            }
+        });
+
+
+        final Slider offset = new Slider("Offset");
+        offset.setMinValue(0);
+        offset.setMaxValue(20);
+        offset.setNumValues(21);
+        offset.setShowRange(false);
+        offset.setLabelWidth(20);
+        offset.setLeft(60);
+        offset.setValue(5);
+        
+        offset.addDrawHandler(new DrawHandler() {
+            public void onDraw(DrawEvent event) {
+                offset.addValueChangedHandler(new ValueChangedHandler() {
+                    public void onValueChanged(ValueChangedEvent event) {
+                        label.setShadowOffset(event.getValue());
+                        label.updateShadow();
+                    }
+                });
+            }
+        });
+
+
+        canvas.addChild(softness);
+        canvas.addChild(offset);
+        canvas.addChild(label);
+
+        canvas.draw();
+    }
+
+}
+</textarea>
+<script class='javascript'>
+dp.SyntaxHighlighter.HighlightAll("code");
+</script>
+</body>
+</html>

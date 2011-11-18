@@ -1,0 +1,153 @@
+<html>
+<head>
+<link rel='stylesheet' href='../../js/sh/SyntaxHighlighter.css' type='text/css' />
+<script src='../../js/sh/shCore.js'></script>
+<script src='../../js/sh/shBrushJava.js'></script>
+<style>
+* {
+font-family:Courier New,monospace;
+  padding: 0;
+  margin: 0;
+  white-space: nowrap;
+  font-size: 11px;
+}
+.dp-highlighter {
+  white-space: nowrap;
+  overflow: visible;
+  width: 600px;
+  font-size: 11px;
+  font-family:Courier New,monospace;
+}
+</style>
+</head>
+<body>
+<textarea name='code' class='java:nogutter' rows='15' cols='120'>
+/*
+ * Smart GWT (GWT for SmartClient)
+ * Copyright 2008 and beyond, Isomorphic Software, Inc.
+ *
+ * Smart GWT is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU Lesser General Public License version 3
+ * as published by the Free Software Foundation.  Smart GWT is also
+ * available under typical commercial license terms - see
+ * http://smartclient.com/license
+ *
+ * This software is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * Lesser General Public License for more details.
+ */
+
+import com.smartgwt.client.data.DataSource;
+import com.smartgwt.client.rpc.RPCManager;
+import com.smartgwt.client.types.ListGridFieldType;
+import com.smartgwt.client.types.PromptStyle;
+import com.smartgwt.client.widgets.Canvas;
+import com.smartgwt.client.widgets.grid.CellFormatter;
+import com.smartgwt.client.widgets.grid.ListGrid;
+import com.smartgwt.client.widgets.grid.ListGridField;
+import com.smartgwt.client.widgets.grid.ListGridRecord;
+import com.smartgwt.sample.showcase.client.data.ItemSupplyXmlDS;
+
+import com.google.gwt.core.client.EntryPoint;
+
+public class LiveGridFetchSample implements EntryPoint {
+
+    public void onModuleLoad() {
+
+        RPCManager.setPromptStyle(PromptStyle.CURSOR);
+        DataSource dataSource = ItemSupplyXmlDS.getInstance();
+
+        ListGridField rowNum = new ListGridField("itemNum", "Item No.");
+        rowNum.setWidth(65);
+        rowNum.setCellFormatter(new CellFormatter() {
+            public String format(Object value, ListGridRecord record, int rowNum, int colNum) {
+                return rowNum +"";
+            }
+        });
+
+        ListGridField itemName = new ListGridField("itemName", 100);
+        ListGridField sku = new ListGridField("SKU", 100);
+        ListGridField description = new ListGridField("description", 150);
+        ListGridField category = new ListGridField("category", 100);
+        ListGridField units = new ListGridField("units", 100);
+
+        ListGridField unitCost = new ListGridField("unitCost", 100);
+        unitCost.setType(ListGridFieldType.FLOAT);
+
+        ListGridField inStock = new ListGridField("inStock", 100);
+        inStock.setType(ListGridFieldType.BOOLEAN);
+
+        ListGridField nextShipment = new ListGridField("nextShipment", 100);
+        nextShipment.setType(ListGridFieldType.DATE);
+
+        // Additional fields to display - use "setDisplayField" to simply re-display data from
+        // other fields in each record.
+        ListGridField itemName2 = new ListGridField("itemName2", 100);
+        itemName2.setTitle("Item Name 2");
+        itemName2.setDisplayField("itemName");
+        
+        ListGridField sku2 = new ListGridField("sku2", 100);
+        sku2.setTitle("SKU 2");
+        sku2.setDisplayField("SKU");
+        
+        ListGridField description2 = new ListGridField("description2", 150);
+        description2.setTitle("Description 2");
+        description2.setDisplayField("description");
+        
+        ListGridField category2 = new ListGridField("category2", 100);
+        category2.setTitle("Category 2");
+        category2.setDisplayField("category");
+        
+        ListGridField units2 = new ListGridField ("units2", 100);
+        units2.setTitle("Units 2");
+        units2.setDisplayField("units");
+        
+        ListGridField unitCost2 = new ListGridField("unitCost2", 100);
+        unitCost2.setTitle("Unit Cost 2");
+        unitCost2.setDisplayField("unitCost");
+        
+        ListGridField itemName3 = new ListGridField("itemName3", 100);
+        itemName3.setTitle("Item Name 3");
+        itemName3.setDisplayField("itemName");
+        
+        ListGridField sku3 = new ListGridField("sku3", 100);
+        sku3.setTitle("SKU 3");
+        sku3.setDisplayField("SKU");
+        
+        ListGridField description3 = new ListGridField("description3", 150);
+        description3.setTitle("Description 3");
+        description3.setDisplayField("description");
+        
+        ListGridField category3 = new ListGridField("category3", 100);
+        category3.setTitle("Category 3");
+        category3.setDisplayField("category");
+        
+        ListGridField units3 = new ListGridField ("units3", 100);
+        units3.setTitle("Units 3");
+        units3.setDisplayField("units");
+        
+        ListGridField unitCost3 = new ListGridField("unitCost3", 100);
+        unitCost3.setTitle("Unit Cost 3");
+        unitCost3.setDisplayField("unitCost");
+        
+        final ListGrid listGrid = new ListGrid();
+        listGrid.setWidth100();
+        listGrid.setHeight100();
+        listGrid.setAutoFetchData(true);
+        listGrid.setDataSource(dataSource);
+
+        listGrid.setFields(rowNum, itemName, sku, description, category, units, unitCost,
+                            itemName2, sku2, description2, category2, units2, unitCost2,
+                            itemName3, sku3, description3, category3, units3, unitCost3);
+
+        listGrid.draw();
+    }
+
+}
+</textarea>
+<script class='javascript'>
+dp.SyntaxHighlighter.HighlightAll("code");
+</script>
+</body>
+</html>
