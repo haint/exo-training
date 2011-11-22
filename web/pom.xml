@@ -5,32 +5,157 @@
   <artifactId>web</artifactId>
   <packaging>war</packaging>
   <version>1.0-SNAPSHOT</version>
-  <name>web Maven Webapp</name>
-  <url>http://maven.apache.org</url>
+  <name>org.remak.gwt</name>
+  
+  <properties>
+    <!-- Convenience property to set the GWT version -->
+    <gwtVersion>2.4.0</gwtVersion>
+    <!-- GWT needs at least java 1.6 -->
+    <smartgwt.version>2.5</smartgwt.version>
+    <maven.compiler.source>1.6</maven.compiler.source>
+    <maven.compiler.target>1.6</maven.compiler.target>
+  </properties>
+  
   <dependencies>
-    <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <version>3.8.1</version>
-      <scope>test</scope>
-    </dependency>
     <dependency>
       <groupId>javax.servlet</groupId>
       <artifactId>servlet-api</artifactId>
       <version>2.5</version>
       <scope>provided</scope>
     </dependency>
+    <dependency>
+      <groupId>org.mortbay.jetty</groupId>
+      <artifactId>jetty</artifactId>
+      <version>6.1.25</version>
+      <scope>provided</scope>
+    </dependency>
+    
+    <dependency>
+      <groupId>com.google.gwt</groupId>
+      <artifactId>gwt-servlet</artifactId>
+      <version>${gwtVersion}</version>
+      <scope>runtime</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.google.gwt</groupId>
+      <artifactId>gwt-user</artifactId>
+      <version>${gwtVersion}</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.google.gwt</groupId>
+      <artifactId>gwt-dev</artifactId>
+      <version>${gwtVersion}</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.smartgwt</groupId>
+      <artifactId>smartgwt</artifactId>
+      <version>${smartgwt.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>com.smartgwt</groupId>
+      <artifactId>smartgwt-skins</artifactId>
+      <version>${smartgwt.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>4.8.1</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>javax.validation</groupId>
+      <artifactId>validation-api</artifactId>
+      <version>1.0.0.GA</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>javax.validation</groupId>
+      <artifactId>validation-api</artifactId>
+      <version>1.0.0.GA</version>
+      <classifier>sources</classifier>
+      <scope>provided</scope>
+    </dependency>
   </dependencies>
   <build>
-    <finalName>web</finalName>
+    <finalName>remak</finalName>
+    <outputDirectory>target/remak/WEB-INF/classes</outputDirectory>
+
     <plugins>
-			<plugin>
-				<groupId>org.mortbay.jetty</groupId>
-				<artifactId>jetty-maven-plugin</artifactId>
-				<configuration>
-					<war>target/web</war>
-				</configuration>
-			</plugin>
-    </plugins>
-  </build>
+      <!-- <plugin> <groupId>org.mortbay.jetty</groupId> <artifactId>jetty-maven-plugin</artifactId> 
+    <configuration> <war>target/web</war> </configuration> </plugin> -->
+    <plugin>
+      <artifactId>maven-resources-plugin</artifactId>
+      <version>2.4.2</version>
+      <executions>
+        <execution>
+          <phase>compile</phase>
+          <goals>
+            <goal>copy-resources</goal>
+          </goals>
+          <configuration>
+            <outputDirectory>target/remak</outputDirectory>
+            <resources>
+              <resource>
+                <directory>src/main/webapp</directory>
+              </resource>
+            </resources>
+          </configuration>
+        </execution>
+      </executions>
+    </plugin>
+
+    <plugin>
+      <groupId>org.codehaus.mojo</groupId>
+      <artifactId>gwt-maven-plugin</artifactId>
+      <version>2.4.0</version>
+      <dependencies>
+        <dependency>
+          <groupId>com.google.gwt</groupId>
+          <artifactId>gwt-user</artifactId>
+          <version>${gwtVersion}</version>
+        </dependency>
+        <dependency>
+          <groupId>com.google.gwt</groupId>
+          <artifactId>gwt-dev</artifactId>
+          <version>${gwtVersion}</version>
+        </dependency>
+        <dependency>
+          <groupId>com.google.gwt</groupId>
+          <artifactId>gwt-servlet</artifactId>
+          <version>${gwtVersion}</version>
+        </dependency>
+      </dependencies>
+      <!-- JS is only needed in the package phase, this speeds up testing --> 
+      <executions>
+        <execution>
+          <phase>prepare-package</phase>
+          <goals>
+            <goal>compile</goal>
+          </goals>
+        </execution>
+      </executions>
+      <configuration>
+        <!-- URL that should be automatically opened in the GWT shell (gwt:run). -->
+        <runTarget>index.html</runTarget>
+        <!-- Location of the develop-mode web application structure (gwt:run). -->
+        <hostedWebapp>target/remak</hostedWebapp>
+        <!-- Ask GWT to create the Story of Your Compile (SOYC) (gwt:compile) -->
+        <compileReport>true</compileReport>
+        <webappDirectory>target/remak</webappDirectory>
+        <generateDirectory>src/main/java/</generateDirectory>
+        <extraJvmArgs>-Xshare:auto -Xms128m -Xmx1024m</extraJvmArgs>
+      </configuration>
+      </plugin>
+  </plugins>
+</build>
+
+<repositories>
+  <repository>
+    <id>smartclient</id>
+    <name>smartclient.com</name>
+    <url>http://www.smartclient.com/maven2</url>
+  </repository>
+</repositories>
 </project>

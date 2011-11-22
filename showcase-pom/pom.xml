@@ -8,7 +8,7 @@
   <artifactId>gwt</artifactId>
   <packaging>war</packaging>
   <version>1.0-SNAPSHOT</version>
-  <name>org.remak.gwt</name>
+  <name>SmartGWT Showcase</name>
 
   <properties>
     <!-- Convenience property to set the GWT version -->
