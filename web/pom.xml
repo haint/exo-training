@@ -52,11 +52,13 @@
       <groupId>com.smartgwt</groupId>
       <artifactId>smartgwt</artifactId>
       <version>${smartgwt.version}</version>
+      <scope>compile</scope>
     </dependency>
     <dependency>
       <groupId>com.smartgwt</groupId>
       <artifactId>smartgwt-skins</artifactId>
       <version>${smartgwt.version}</version>
+      <scope>compile</scope>
     </dependency>
     <dependency>
       <groupId>junit</groupId>

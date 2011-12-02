@@ -18,12 +18,17 @@
  */
 package org.remak.client;
 
+import com.smartgwt.client.widgets.layout.HLayout;
+
 /**
  * @author <a href="mailto:haithanh0809@gmail.com">Hai Thanh Nguyen</a>
  * @version $Id$
  *
  */
-public interface Application
+public class Display extends HLayout implements Application
 {
-
+   public Display()
+   {
+      setShowEdges(true);
+   }
 }

@@ -18,12 +18,27 @@
  */
 package org.remak.client;
 
+import com.smartgwt.client.types.VisibilityMode;
+import com.smartgwt.client.widgets.layout.SectionStack;
+import com.smartgwt.client.widgets.layout.SectionStackSection;
+
 /**
  * @author <a href="mailto:haithanh0809@gmail.com">Hai Thanh Nguyen</a>
  * @version $Id$
  *
  */
-public interface Application
+public class ControlPanel extends SectionStack implements Application
 {
-
+   public ControlPanel() {
+      setWidth(250);
+      setVisibilityMode(VisibilityMode.MULTIPLE);
+      setAnimateSections(true);
+      setCanReorderSections(true);
+      setShowEdges(true);
+      setShowResizeBar(true);
+      
+      SectionStackSection mainSection = new SectionStackSection("Main Example Items");
+      mainSection.setExpanded(true);
+      setSections(mainSection);
+   }
 }

@@ -18,12 +18,35 @@
  */
 package org.remak.client;
 
+import com.google.gwt.core.client.EntryPoint;
+import com.smartgwt.client.widgets.layout.HLayout;
+
 /**
  * @author <a href="mailto:haithanh0809@gmail.com">Hai Thanh Nguyen</a>
  * @version $Id$
  *
  */
-public interface Application
+public class Main extends HLayout implements EntryPoint
 {
+   
+   public Main()
+   {
+      setHeight100();
+      setWidth100();
+      setLayoutMargin(5);
+   }
 
+   /**
+    * @see com.google.gwt.core.client.EntryPoint#onModuleLoad()
+    */
+   @Override
+   public void onModuleLoad()
+   {
+      ApplicationManager manager = ApplicationManager.getInstance();
+      Display display = (Display)manager.getSystemApp(Display.class);
+      ControlPanel controlPanel = (ControlPanel)manager.getSystemApp(ControlPanel.class);
+      addMember(controlPanel);
+      addMember(display);
+      draw();
+   }
 }

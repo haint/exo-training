@@ -10,5 +10,5 @@
     <inherits name="com.smartgwt.tools.SmartGwtTools"/>
     <inherits name="com.smartclient.theme.graphite.GraphiteResources"/>
     
-	<entry-point class='org.remak.client.Application'/>
+	<entry-point class='org.remak.client.Main'/>
 </module>
