@@ -19,20 +19,61 @@
 package org.exoplatform.portal.webui;
 
 import org.exoplatform.webui.config.annotation.ComponentConfig;
+import org.exoplatform.webui.config.annotation.EventConfig;
 import org.exoplatform.webui.core.lifecycle.UIFormLifecycle;
+import org.exoplatform.webui.event.Event;
+import org.exoplatform.webui.event.EventListener;
 import org.exoplatform.webui.form.UIForm;
-import org.exoplatform.webui.form.input.UIUploadInput;
+import org.exoplatform.webui.form.UIFormStringInput;
+import org.exoplatform.webui.form.UIFormTextAreaInput;
 
 /**
  * @author <a href="mailto:haithanh0809@gmail.com">Hai Thanh Nguyen</a>
  * @version $Id$
- *
+ * 
  */
-@ComponentConfig(lifecycle = UIFormLifecycle.class, template = "system:/groovy/webui/form/UIFormWithTitle.gtmpl")
+@ComponentConfig(lifecycle = UIFormLifecycle.class, template = "app:/groovy/webui/form/UIMockForm.gtmpl", events = {
+   @EventConfig(listeners = UIMockForm.SaveActionListener.class),
+   @EventConfig(listeners = UIMockForm.ResetActionListener.class)})
 public class UIMockForm extends UIForm
 {
-   public UIMockForm()
+   public UIMockForm() throws Exception
    {
-      addChild(new UIUploadInput("UploadFile", "UploadFile", 0));
+      setActions(new String[] { "Save", "Reset" });
+      addUIFormInput(new UIFormStringInput("input", "input", null));
+      addUIFormInput(new UIFormTextAreaInput("output", "output", null));
+      
+      //Test UIDropDownControl
+      addUIFormInput(new UIMockDropDownInputBase("item1", "item2", "item3"));
+   }
+   
+   public static class SaveActionListener extends EventListener<UIMockForm> 
+   {
+      /**
+       * @see org.exoplatform.webui.event.EventListener#execute(org.exoplatform.webui.event.Event)
+       */
+      @Override
+      public void execute(Event<UIMockForm> event) throws Exception
+      {
+         UIMockForm uiform = event.getSource();
+         UIFormStringInput input = uiform.getUIStringInput("input");
+         String value = input.getValue();
+         UIFormTextAreaInput output = uiform.getUIFormTextAreaInput("output");
+         output.setValue(value);
+      }
+   }
+   
+   public static class ResetActionListener extends EventListener<UIMockForm> 
+   {
+
+      /**
+       * @see org.exoplatform.webui.event.EventListener#execute(org.exoplatform.webui.event.Event)
+       */
+      @Override
+      public void execute(Event<UIMockForm> event) throws Exception
+      {
+         UIMockForm form = event.getSource();
+         form.reset();
+      }
    }
 }
