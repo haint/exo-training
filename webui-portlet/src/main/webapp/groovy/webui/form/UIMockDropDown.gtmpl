@@ -1,0 +1,8 @@
+<%
+	import org.exoplatform.webui.core.UIDropDownControl;
+%>
+<div class="UIItemSelector">
+			<% 
+			uicomponent.renderChild(UIDropDownControl.class);
+			%>
+</div>

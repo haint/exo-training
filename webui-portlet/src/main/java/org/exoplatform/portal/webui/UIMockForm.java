@@ -40,11 +40,11 @@ public class UIMockForm extends UIForm
    public UIMockForm() throws Exception
    {
       setActions(new String[] { "Save", "Reset" });
+      addUIFormInput(new UIMockDropDownInputBase("item1", "item2", "item3"));
       addUIFormInput(new UIFormStringInput("input", "input", null));
       addUIFormInput(new UIFormTextAreaInput("output", "output", null));
-      
       //Test UIDropDownControl
-      addUIFormInput(new UIMockDropDownInputBase("item1", "item2", "item3"));
+//      addUIFormInput(new UIMockDropDownControl("item1", "item2", "item3"));
    }
    
    public static class SaveActionListener extends EventListener<UIMockForm> 

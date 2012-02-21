@@ -22,6 +22,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.exoplatform.webui.application.WebuiRequestContext;
+import org.exoplatform.webui.config.annotation.ComponentConfig;
 import org.exoplatform.webui.core.UIDropDownControl;
 import org.exoplatform.webui.core.model.SelectItemOption;
 import org.exoplatform.webui.form.UIFormInputBase;
@@ -31,20 +32,29 @@ import org.exoplatform.webui.form.UIFormInputBase;
  * @version $Id$
  *
  */
+@ComponentConfig(template = "app:/groovy/webui/form/UIMockDropDown.gtmpl")
 public class UIMockDropDownInputBase extends UIFormInputBase<String>
 {
+   
+   public UIMockDropDownInputBase() {
+      
+   }
+   
    public UIMockDropDownInputBase(String ... options) throws Exception {
+      super("dropdown", "dropdown", String.class);
+      setComponentConfig(UIMockDropDownInputBase.class, null);
       List<SelectItemOption<String>> holder = new ArrayList<SelectItemOption<String>>();
       for(String opt : options) {
          SelectItemOption<String> item = new SelectItemOption<String>(opt);
          holder.add(item);
       }
-      UIDropDownControl dropDownControl = new UIDropDownControl();
+      
+      UIDropDownControl dropDownControl = addChild(UIDropDownControl.class, null, null);
       dropDownControl.setAction("test");
       dropDownControl.setOptions(holder);
       addChild(dropDownControl);
    }
-
+   
    @Override
    public void decode(Object input, WebuiRequestContext context) throws Exception
    {
