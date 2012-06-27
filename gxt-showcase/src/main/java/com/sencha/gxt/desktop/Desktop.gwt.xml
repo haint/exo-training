@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+    Sencha GXT 3.0.0b - Sencha for GWT
+    Copyright(c) 2007-2012, Sencha, Inc.
+    licensing@sencha.com
+
+    http://www.sencha.com/products/gxt/license/
+
+-->
+<module>
+  <inherits name='com.sencha.gxt.ui.GXT' />
+  <replace-with class="com.sencha.gxt.desktop.client.theme.base.shortcut.ShortcutCellDefaultAppearance">
+    <when-type-is class="com.sencha.gxt.desktop.client.widget.ShortcutCell.ShortcutCellAppearance" />
+  </replace-with>
+  <replace-with class="com.sencha.gxt.desktop.client.theme.base.startbutton.StartButtonCellDefaultAppearance">
+    <when-type-is class="com.sencha.gxt.desktop.client.widget.StartButtonCell.StartButtonCellAppearance" />
+  </replace-with>
+  <replace-with class="com.sencha.gxt.desktop.client.theme.base.taskbutton.TaskButtonCellDefaultAppearance">
+    <when-type-is class="com.sencha.gxt.desktop.client.widget.TaskButtonCell.TaskButtonCellAppearance" />
+  </replace-with>
+</module>

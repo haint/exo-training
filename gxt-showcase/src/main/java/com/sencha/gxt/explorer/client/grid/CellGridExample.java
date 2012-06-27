@@ -1,0 +1,211 @@
+/**
+ * Sencha GXT 3.0.0b - Sencha for GWT
+ * Copyright(c) 2007-2012, Sencha, Inc.
+ * licensing@sencha.com
+ *
+ * http://www.sencha.com/products/gxt/license/
+ */
+package com.sencha.gxt.explorer.client.grid;
+
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
+import com.google.gwt.cell.client.Cell.Context;
+import com.google.gwt.core.client.EntryPoint;
+import com.google.gwt.core.client.GWT;
+import com.google.gwt.editor.client.Editor.Path;
+import com.google.gwt.event.logical.shared.SelectionEvent;
+import com.google.gwt.event.logical.shared.SelectionHandler;
+import com.google.gwt.event.logical.shared.ValueChangeEvent;
+import com.google.gwt.event.logical.shared.ValueChangeHandler;
+import com.google.gwt.i18n.shared.DateTimeFormat;
+import com.google.gwt.i18n.shared.DateTimeFormat.PredefinedFormat;
+import com.google.gwt.safecss.shared.SafeStyles;
+import com.google.gwt.safecss.shared.SafeStylesUtils;
+import com.google.gwt.user.client.Random;
+import com.google.gwt.user.client.ui.IsWidget;
+import com.google.gwt.user.client.ui.RootPanel;
+import com.google.gwt.user.client.ui.Widget;
+import com.sencha.gxt.cell.core.client.ProgressBarCell;
+import com.sencha.gxt.cell.core.client.SliderCell;
+import com.sencha.gxt.cell.core.client.TextButtonCell;
+import com.sencha.gxt.cell.core.client.form.DateCell;
+import com.sencha.gxt.core.client.ValueProvider;
+import com.sencha.gxt.core.client.resources.CommonStyles;
+import com.sencha.gxt.data.shared.ListStore;
+import com.sencha.gxt.data.shared.ModelKeyProvider;
+import com.sencha.gxt.data.shared.PropertyAccess;
+import com.sencha.gxt.examples.resources.client.TestData;
+import com.sencha.gxt.examples.resources.client.model.Plant;
+import com.sencha.gxt.explorer.client.model.Example.Detail;
+import com.sencha.gxt.theme.blue.client.colorpalette.BlueColorPaletteAppearance;
+import com.sencha.gxt.widget.core.client.ColorPaletteCell;
+import com.sencha.gxt.widget.core.client.FramedPanel;
+import com.sencha.gxt.widget.core.client.button.TextButton;
+import com.sencha.gxt.widget.core.client.container.BoxLayoutContainer.BoxLayoutPack;
+import com.sencha.gxt.widget.core.client.event.SelectEvent;
+import com.sencha.gxt.widget.core.client.event.SelectEvent.SelectHandler;
+import com.sencha.gxt.widget.core.client.form.DateTimePropertyEditor;
+import com.sencha.gxt.widget.core.client.grid.ColumnConfig;
+import com.sencha.gxt.widget.core.client.grid.ColumnModel;
+import com.sencha.gxt.widget.core.client.grid.Grid;
+import com.sencha.gxt.widget.core.client.info.Info;
+
+@Detail(name = "Cell Grid", icon = "cellgrid", category = "Grid", classes = Plant.class)
+public class CellGridExample implements IsWidget, EntryPoint {
+
+  private static final String[] COLORS = new String[] {
+      "161616", "002241", "006874", "82a700", "bbc039", "f3f1cd"};
+
+  interface PlaceProperties extends PropertyAccess<Plant> {
+    ValueProvider<Plant, Date> available();
+
+    @Path("name")
+    ModelKeyProvider<Plant> key();
+
+    ValueProvider<Plant, String> name();
+    
+    ValueProvider<Plant, Integer> difficulty();
+    
+    ValueProvider<Plant, Double> progress();
+
+    ValueProvider<Plant, String> color();
+  }
+
+  private static final PlaceProperties properties = GWT.create(PlaceProperties.class);
+  private ListStore<Plant> store;
+
+  @Override
+  public Widget asWidget() {
+    // reduce the padding on text element as we have widgets in the cells
+    SafeStyles textStyles = SafeStylesUtils.fromTrustedString("padding: 1px 3px;");
+
+    ColumnConfig<Plant, String> nameColumn = new ColumnConfig<Plant, String>(properties.name(), 100, "Name");
+    // IMPORTANT we want the text element (cell parent) to only be as wide as
+    // the cell and not fill the cell
+    nameColumn.setColumnTextClassName(CommonStyles.get().inlineBlock());
+    nameColumn.setColumnTextStyle(textStyles);
+
+    TextButtonCell button = new TextButtonCell();
+    button.addSelectHandler(new SelectHandler() {
+
+      @Override
+      public void onSelect(SelectEvent event) {
+        Context c = event.getContext();
+        int row = c.getIndex();
+        Plant p = store.get(row);
+        Info.display("Event", "The " + p.getName() + " was clicked.");
+      }
+    });
+    nameColumn.setCell(button);
+
+    DateCell dateCell = new DateCell();
+    dateCell.getDatePicker().addValueChangeHandler(new ValueChangeHandler<Date>() {
+      
+      @Override
+      public void onValueChange(ValueChangeEvent<Date> event) {
+        Info.display("Date Selected", "You selected " + DateTimeFormat.getFormat(PredefinedFormat.DATE_SHORT).format(event.getValue()));
+      }
+    });
+    dateCell.setPropertyEditor(new DateTimePropertyEditor(DateTimeFormat.getFormat(PredefinedFormat.DATE_SHORT)));
+
+    ColumnConfig<Plant, Date> availableColumn = new ColumnConfig<Plant, Date>(properties.available(), 170, "Date");
+    availableColumn.setColumnTextStyle(SafeStylesUtils.fromTrustedString("padding: 2px 3px;"));
+    availableColumn.setCell(dateCell);
+
+    ColumnConfig<Plant, String> colorColumn = new ColumnConfig<Plant, String>(properties.color(), 140, "Color");
+    colorColumn.setColumnTextStyle(SafeStylesUtils.fromTrustedString("padding: 2px 3px;"));
+    
+    BlueColorPaletteAppearance appearance = new BlueColorPaletteAppearance();
+    appearance.setColumnCount(6);
+    
+    ColorPaletteCell colorPalette = new ColorPaletteCell(appearance, COLORS, COLORS) {
+      @Override
+      public boolean handlesSelection() {
+        return true;
+      }
+    };
+    colorPalette.addSelectionHandler(new SelectionHandler<String>() {
+      
+      @Override
+      public void onSelection(SelectionEvent<String> event) {
+        Info.display("Color Selected", "You selected " + event.getSelectedItem());
+      }
+    });
+    colorColumn.setCell(colorPalette);
+    
+    ColumnConfig<Plant, Integer> difficultyColumn = new ColumnConfig<Plant, Integer>(properties.difficulty(), 150, "Durability");
+    SliderCell slider = new SliderCell() {
+        @Override
+        public boolean handlesSelection() {
+            return true;
+        }
+    };
+    slider.setWidth(140);
+    difficultyColumn.setCell(slider);
+    
+    ColumnConfig<Plant, Double> progressColumn = new ColumnConfig<Plant, Double>(properties.progress(), 150, "Progress");
+    ProgressBarCell progress = new ProgressBarCell() {
+      @Override
+      public boolean handlesSelection() {
+        return true;
+      }
+    };
+    progress.setProgressText("{0}% Complete");
+    progress.setWidth(140);
+    progressColumn.setCell(progress);
+    
+
+    List<ColumnConfig<Plant, ?>> l = new ArrayList<ColumnConfig<Plant, ?>>();
+    l.add(nameColumn);
+    l.add(availableColumn);
+    l.add(colorColumn);
+    l.add(difficultyColumn);
+    l.add(progressColumn);
+    ColumnModel<Plant> cm = new ColumnModel<Plant>(l);
+
+    store = new ListStore<Plant>(properties.key());
+    
+    List<Plant> plants =  new ArrayList<Plant>(TestData.getPlants());
+    for (Plant p : plants) {
+      p.setColor(COLORS[Random.nextInt(4)]);
+    }
+    
+    store.addAll(plants);
+
+    Grid<Plant> grid = new Grid<Plant>(store, cm);
+    grid.setBorders(true);
+    grid.getView().setAutoExpandColumn(nameColumn);
+    grid.getView().setTrackMouseOver(false);
+
+    FramedPanel cp = new FramedPanel();
+    cp.setHeadingText("Cell Grid Example");
+    cp.setWidget(grid);
+    cp.setPixelSize(780, 410);
+    cp.addStyleName("margin-10");
+    
+    cp.setButtonAlign(BoxLayoutPack.CENTER);
+    cp.addButton(new TextButton("Reset", new SelectHandler() {
+
+      @Override
+      public void onSelect(SelectEvent event) {
+        store.rejectChanges();
+      }
+    }));
+
+    cp.addButton(new TextButton("Save", new SelectHandler() {
+
+      @Override
+      public void onSelect(SelectEvent event) {
+        store.commitChanges();
+      }
+    }));
+    return cp;
+  }
+
+  @Override
+  public void onModuleLoad() {
+    RootPanel.get().add(asWidget());
+  }
+}

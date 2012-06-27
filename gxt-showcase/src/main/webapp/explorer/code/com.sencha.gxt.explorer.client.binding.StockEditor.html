@@ -1,0 +1,111 @@
+<html>
+<head>
+<link rel="stylesheet" href="../../samples/css/shCoreEclipse.css" type="text/css" />
+<link rel="stylesheet" href="../../samples/css/shThemeEclipse.css" type="text/css" />
+<script src="../../samples/js/shCore.js"></script>
+<script src="../../samples/js/shBrushJava.js"></script>
+<style>
+* {
+font-family:monospace;
+  padding: 0px;
+  margin: 0px;
+  white-space: nowrap;
+  font-size: 11px;
+}
+body {
+  border: none;
+  border-left: 8px solid #EBE9ED;
+}
+
+
+.syntaxhighlighter.nogutter td.code .container textarea, .syntaxhighlighter.nogutter td.code .line {
+    padding: 0 1em !important;
+}
+.syntaxhighlighter {
+  overflow: hidden !important;
+  margin: 0 !important;
+}
+.syntaxhighlighter .toolbar {
+  display: none;
+}
+.syntaxhighlighter div.container div.alt2 {
+  background-color: #F7F6F7 !important;
+}
+</style>
+</head>
+<body style="overflow-x: hidden">
+<textarea class="brush: java; gutter: false;">/**
+ * Sencha GXT 3.0.0b - Sencha for GWT
+ * Copyright(c) 2007-2012, Sencha, Inc.
+ * licensing@sencha.com
+ *
+ * http://www.sencha.com/products/gxt/license/
+ */
+package com.sencha.gxt.explorer.client.binding;
+
+import com.google.gwt.editor.client.Editor;
+import com.google.gwt.user.client.ui.IsWidget;
+import com.google.gwt.user.client.ui.Widget;
+import com.sencha.gxt.examples.resources.client.model.Stock;
+import com.sencha.gxt.widget.core.client.button.TextButton;
+import com.sencha.gxt.widget.core.client.container.VerticalLayoutContainer;
+import com.sencha.gxt.widget.core.client.container.VerticalLayoutContainer.VerticalLayoutData;
+import com.sencha.gxt.widget.core.client.event.SelectEvent.HasSelectHandlers;
+import com.sencha.gxt.widget.core.client.form.FieldLabel;
+import com.sencha.gxt.widget.core.client.form.FormPanel;
+import com.sencha.gxt.widget.core.client.form.TextField;
+
+public class StockEditor implements IsWidget, Editor<Stock> {
+
+  private FormPanel panel;
+  private VerticalLayoutContainer container;
+
+  TextField name;
+  TextField symbol;
+
+  private TextButton save;
+
+  public StockEditor() {
+    panel = new FormPanel();
+    panel.setLabelWidth(50);
+
+    container = new VerticalLayoutContainer();
+    panel.setWidget(container);
+
+    name = new TextField();
+    symbol = new TextField();
+
+    container.add(new FieldLabel(name, "Name"), new VerticalLayoutData(1, -1));
+    container.add(new FieldLabel(symbol, "Symbol"), new VerticalLayoutData(1, -1));
+
+    save = new TextButton("Save");
+    save.setEnabled(false);
+    container.add(save);
+
+    panel.setLabelWidth(50);
+  }
+
+  @Override
+  public Widget asWidget() {
+    return panel;
+  }
+  
+  public void setSaveEnabled(boolean enabled) {
+    save.setEnabled(enabled);
+    if (!enabled) {
+      name.setValue("");
+      symbol.setValue("");
+    }
+  }
+  
+  public HasSelectHandlers getSaveButton() {
+    return save;
+  }
+}
+</textarea>
+<script type="text/javascript">
+  SyntaxHighlighter.config.tagName = "textarea";
+  SyntaxHighlighter.all();
+</script>
+</body>
+</html>

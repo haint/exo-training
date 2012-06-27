@@ -1,0 +1,98 @@
+<!--
+
+    Sencha GXT 3.0.0b - Sencha for GWT
+    Copyright(c) 2007-2012, Sencha, Inc.
+    licensing@sencha.com
+
+    http://www.sencha.com/products/gxt/license/
+
+-->
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder' xmlns:gxt="urn:import:com.sencha.gxt.widget.core.client"
+  xmlns:row="urn:import:com.sencha.gxt.widget.core.client.container" xmlns:toolbar="urn:import:com.sencha.gxt.widget.core.client.toolbar"
+  xmlns:menu="urn:import:com.sencha.gxt.widget.core.client.menu" xmlns:button="urn:import:com.sencha.gxt.widget.core.client.button"
+  xmlns:g="urn:import:com.google.gwt.user.client.ui" xmlns:form="urn:import:com.sencha.gxt.widget.core.client.form">
+
+  <ui:with type="com.sencha.gxt.examples.resources.client.images.ExampleImages" field="images" />
+
+  <ui:with type="com.sencha.gxt.widget.core.client.container.VerticalLayoutContainer.VerticalLayoutData" field="toolBarRowData">
+    <ui:attributes width="1" height="-1" />
+  </ui:with>
+
+  <ui:style>
+    .background {
+    	background-color: white;
+    }
+  </ui:style>
+
+  <g:VerticalPanel spacing="10">
+    <gxt:FramedPanel ui:field="panel" collapsible="true" headingText="ToolBar &amp; Menu Demo"
+      pixelSize="550, 300">
+      <row:VerticalLayoutContainer borders="true" addStyleNames="{style.background}">
+        <row:child layoutData="{toolBarRowData}">
+          <toolbar:ToolBar>
+
+            <button:TextButton text="Button w/ Menu" icon="{images.menu_show}">
+              <button:menu>
+                <menu:Menu ui:field="menu1">
+                  <form:ComboBox name="name" forceSelection="true" triggerAction="ALL" />
+                  <menu:CheckMenuItem text="I Like Cats" checked="true" />
+                  <menu:CheckMenuItem text="I Like Dogs" />
+                  <menu:SeparatorMenuItem />
+                  <menu:MenuItem text="Radio Options">
+                    <menu:submenu>
+                      <menu:Menu>
+                        <menu:CheckMenuItem text="Blue Theme" group="radios" checked="true" />
+                        <menu:CheckMenuItem text="Gray Theme" group="radios" />
+                      </menu:Menu>
+                    </menu:submenu>
+                  </menu:MenuItem>
+                  <menu:MenuItem text="Choose a Date" icon="{images.calendar}">
+                    <menu:submenu>
+                      <menu:DateMenu ui:field="dateMenu" />
+                    </menu:submenu>
+                  </menu:MenuItem>
+                  <menu:MenuItem text="Choose a Color">
+                    <menu:submenu>
+                      <menu:ColorMenu ui:field="colorMenu" />
+                    </menu:submenu>
+                  </menu:MenuItem>
+                </menu:Menu>
+              </button:menu>
+            </button:TextButton>
+
+            <toolbar:SeparatorToolItem />
+
+            <button:SplitButton text="Split Button" icon="{images.list_items}">
+              <button:menu>
+                <menu:Menu ui:field="splitButtonMenu">
+                  <menu:MenuItem HTML="&lt;b&gt;Bold&lt;/b&gt;" />
+                  <menu:MenuItem HTML="&lt;i&gt;Italic&lt;/i&gt;" />
+                  <menu:MenuItem HTML="&lt;u&gt;Underline&lt;/u&gt;" />
+                </menu:Menu>
+              </button:menu>
+            </button:SplitButton>
+
+            <toolbar:SeparatorToolItem />
+
+            <button:ToggleButton text="Toggle" value="true" />
+
+            <toolbar:SeparatorToolItem />
+
+            <button:TextButton text="Scrolling Menu">
+              <button:menu>
+                <menu:Menu ui:field="scrollMenu" maxHeight="200" />
+              </button:menu>
+            </button:TextButton>
+
+            <toolbar:SeparatorToolItem />
+
+            <toolbar:FillToolItem />
+
+          </toolbar:ToolBar>
+        </row:child>
+      </row:VerticalLayoutContainer>
+    </gxt:FramedPanel>
+  </g:VerticalPanel>
+
+</ui:UiBinder>

@@ -1,0 +1,81 @@
+<html>
+<head>
+<link rel="stylesheet" href="../../samples/css/shCoreEclipse.css" type="text/css" />
+<link rel="stylesheet" href="../../samples/css/shThemeEclipse.css" type="text/css" />
+<script src="../../samples/js/shCore.js"></script>
+<script src="../../samples/js/shBrushJava.js"></script>
+<style>
+* {
+font-family:monospace;
+  padding: 0px;
+  margin: 0px;
+  white-space: nowrap;
+  font-size: 11px;
+}
+body {
+  border: none;
+  border-left: 8px solid #EBE9ED;
+}
+
+
+.syntaxhighlighter.nogutter td.code .container textarea, .syntaxhighlighter.nogutter td.code .line {
+    padding: 0 1em !important;
+}
+.syntaxhighlighter {
+  overflow: hidden !important;
+  margin: 0 !important;
+}
+.syntaxhighlighter .toolbar {
+  display: none;
+}
+.syntaxhighlighter div.container div.alt2 {
+  background-color: #F7F6F7 !important;
+}
+</style>
+</head>
+<body style="overflow-x: hidden">
+<textarea class="brush: java; gutter: false;"><!--
+
+    Sencha GXT 3.0.0b - Sencha for GWT
+    Copyright(c) 2007-2012, Sencha, Inc.
+    licensing@sencha.com
+
+    http://www.sencha.com/products/gxt/license/
+
+-->
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder' xmlns:g="urn:import:com.google.gwt.user.client.ui"
+  xmlns:gxt="urn:import:com.sencha.gxt.widget.core.client">
+
+  <ui:with type="java.lang.String" field="dummyTextShort" />
+
+  <g:AbsolutePanel>
+    <g:at left="10" top="10">
+      <gxt:ContentPanel ui:field="proxy" collapsible="true" bodyStyleName="pad-text" headingText="Proxy Drag"
+        width="200">
+        <g:Label text="{dummyTextShort}" />
+      </gxt:ContentPanel>
+    </g:at>
+
+    <g:at left="240" top="10">
+      <gxt:ContentPanel ui:field="direct" collapsible="true" bodyStyleName="pad-text" headingText="Direct Drag"
+        width="200">
+        <g:Label text="Drags can only be started from the header." />
+      </gxt:ContentPanel>
+    </g:at>
+
+    <g:at left="465" top="10">
+      <gxt:ContentPanel ui:field="vertical" bodyStyleName="pad-text" headingText="Constrain" width="200">
+        <g:Label text="Can only be dragged vertically." />
+      </gxt:ContentPanel>
+    </g:at>
+
+  </g:AbsolutePanel>
+
+</ui:UiBinder></textarea>
+<script type="text/javascript">
+  SyntaxHighlighter.config.tagName = "textarea";
+  SyntaxHighlighter.all();
+</script>
+</body>
+</html>

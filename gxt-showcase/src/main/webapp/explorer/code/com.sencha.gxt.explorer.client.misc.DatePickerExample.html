@@ -1,0 +1,95 @@
+<html>
+<head>
+<link rel="stylesheet" href="../../samples/css/shCoreEclipse.css" type="text/css" />
+<link rel="stylesheet" href="../../samples/css/shThemeEclipse.css" type="text/css" />
+<script src="../../samples/js/shCore.js"></script>
+<script src="../../samples/js/shBrushJava.js"></script>
+<style>
+* {
+font-family:monospace;
+  padding: 0px;
+  margin: 0px;
+  white-space: nowrap;
+  font-size: 11px;
+}
+body {
+  border: none;
+  border-left: 8px solid #EBE9ED;
+}
+
+
+.syntaxhighlighter.nogutter td.code .container textarea, .syntaxhighlighter.nogutter td.code .line {
+    padding: 0 1em !important;
+}
+.syntaxhighlighter {
+  overflow: hidden !important;
+  margin: 0 !important;
+}
+.syntaxhighlighter .toolbar {
+  display: none;
+}
+.syntaxhighlighter div.container div.alt2 {
+  background-color: #F7F6F7 !important;
+}
+</style>
+</head>
+<body style="overflow-x: hidden">
+<textarea class="brush: java; gutter: false;">/**
+ * Sencha GXT 3.0.0b - Sencha for GWT
+ * Copyright(c) 2007-2012, Sencha, Inc.
+ * licensing@sencha.com
+ *
+ * http://www.sencha.com/products/gxt/license/
+ */
+package com.sencha.gxt.explorer.client.misc;
+
+import java.util.Date;
+
+import com.google.gwt.core.client.EntryPoint;
+import com.google.gwt.event.logical.shared.ValueChangeEvent;
+import com.google.gwt.event.logical.shared.ValueChangeHandler;
+import com.google.gwt.i18n.client.DateTimeFormat;
+import com.google.gwt.i18n.client.DateTimeFormat.PredefinedFormat;
+import com.google.gwt.user.client.ui.IsWidget;
+import com.google.gwt.user.client.ui.RootPanel;
+import com.google.gwt.user.client.ui.VerticalPanel;
+import com.google.gwt.user.client.ui.Widget;
+import com.sencha.gxt.explorer.client.model.Example.Detail;
+import com.sencha.gxt.widget.core.client.DatePicker;
+import com.sencha.gxt.widget.core.client.info.Info;
+
+public class DatePickerExample implements IsWidget, EntryPoint {
+
+  @Override
+  public Widget asWidget() {
+    VerticalPanel vp = new VerticalPanel();
+    vp.setSpacing(10);
+
+    DatePicker picker = new DatePicker();
+    picker.addValueChangeHandler(new ValueChangeHandler<Date>() {
+      
+      @Override
+      public void onValueChange(ValueChangeEvent<Date> event) {
+        Date d = event.getValue();
+        DateTimeFormat f = DateTimeFormat.getFormat(PredefinedFormat.DATE_SHORT);
+        Info.display("Value Changed", "You selected " + f.format(d));
+      }
+    });
+    vp.add(picker);
+
+    return vp;
+  }
+
+  @Override
+  public void onModuleLoad() {
+    RootPanel.get().add(asWidget());
+  }
+
+}
+</textarea>
+<script type="text/javascript">
+  SyntaxHighlighter.config.tagName = "textarea";
+  SyntaxHighlighter.all();
+</script>
+</body>
+</html>

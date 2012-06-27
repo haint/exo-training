@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="ISO-8859-1" standalone="no"?>
+<!--
+
+    Sencha GXT 3.0.0b - Sencha for GWT
+    Copyright(c) 2007-2012, Sencha, Inc.
+    licensing@sencha.com
+
+    http://www.sencha.com/products/gxt/license/
+
+-->
+<web-app xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="2.4"
+  xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
+
+  <servlet>
+    <servlet-name>requestFactoryServlet</servlet-name>
+    <servlet-class>com.google.web.bindery.requestfactory.server.RequestFactoryServlet</servlet-class>
+  </servlet>
+
+  <servlet>
+    <servlet-name>service</servlet-name>
+    <servlet-class>com.sencha.gxt.examples.resources.server.ExampleServiceImpl</servlet-class>
+  </servlet>
+  
+  <servlet>
+    <servlet-name>fileservice</servlet-name>
+    <servlet-class>com.sencha.gxt.examples.resources.server.FileServiceImpl</servlet-class>
+  </servlet>
+
+  <servlet>
+    <servlet-name>jsontree</servlet-name>
+    <servlet-class>com.sencha.gxt.examples.resources.server.JsonTreeServlet</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>requestFactoryServlet</servlet-name>
+    <url-pattern>/gwtRequest</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>service</servlet-name>
+    <url-pattern>/test/service</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>service</servlet-name>
+    <url-pattern>/explorer/service</url-pattern>
+  </servlet-mapping>
+
+  
+  <servlet-mapping>
+    <servlet-name>fileservice</servlet-name>
+    <url-pattern>/explorer/fileservice</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>fileservice</servlet-name>
+    <url-pattern>/test/fileservice</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>jsontree</servlet-name>
+    <url-pattern>/explorer/jsontreeloader</url-pattern>
+  </servlet-mapping>
+
+  <filter>
+    <filter-name>ExamplesRequestFilter</filter-name>
+    <filter-class>com.sencha.gxt.examples.resources.server.EntityManagerFilter</filter-class>
+  </filter>
+
+  <filter-mapping>
+    <filter-name>ExamplesRequestFilter</filter-name>
+    <url-pattern>/gwtRequest</url-pattern>
+  </filter-mapping>
+
+  <listener>
+    <listener-class>com.sencha.gxt.examples.resources.server.DataLoader</listener-class>
+  </listener>
+
+
+</web-app>

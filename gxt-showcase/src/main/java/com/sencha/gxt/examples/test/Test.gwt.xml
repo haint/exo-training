@@ -1,0 +1,23 @@
+<!--
+
+    Sencha GXT 3.0.0b - Sencha for GWT
+    Copyright(c) 2007-2012, Sencha, Inc.
+    licensing@sencha.com
+
+    http://www.sencha.com/products/gxt/license/
+
+-->
+<module rename-to='test'>
+  <inherits name='com.sencha.gxt.examples.resources.Resources' />
+  <inherits name='com.sencha.gxt.chart.Chart' />
+
+  <set-property name="gwt.logging.logLevel" value="FINEST" />
+  <set-property name="gwt.logging.enabled" value="TRUE" />
+  <set-property name="gwt.logging.popupHandler" value="DISABLED" />
+  
+  <!-- <set-property name="gxt.logging.enabled" value="true" /> -->
+  
+  <!-- <set-configuration-property name="CssResource.style" value="pretty"/> -->
+  
+  <entry-point class='com.sencha.gxt.examples.test.client.Test' />
+</module>

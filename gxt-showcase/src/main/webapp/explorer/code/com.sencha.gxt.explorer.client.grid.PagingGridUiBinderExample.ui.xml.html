@@ -1,0 +1,92 @@
+<html>
+<head>
+<link rel="stylesheet" href="../../samples/css/shCoreEclipse.css" type="text/css" />
+<link rel="stylesheet" href="../../samples/css/shThemeEclipse.css" type="text/css" />
+<script src="../../samples/js/shCore.js"></script>
+<script src="../../samples/js/shBrushJava.js"></script>
+<style>
+* {
+font-family:monospace;
+  padding: 0px;
+  margin: 0px;
+  white-space: nowrap;
+  font-size: 11px;
+}
+body {
+  border: none;
+  border-left: 8px solid #EBE9ED;
+}
+
+
+.syntaxhighlighter.nogutter td.code .container textarea, .syntaxhighlighter.nogutter td.code .line {
+    padding: 0 1em !important;
+}
+.syntaxhighlighter {
+  overflow: hidden !important;
+  margin: 0 !important;
+}
+.syntaxhighlighter .toolbar {
+  display: none;
+}
+.syntaxhighlighter div.container div.alt2 {
+  background-color: #F7F6F7 !important;
+}
+</style>
+</head>
+<body style="overflow-x: hidden">
+<textarea class="brush: java; gutter: false;"><!--
+
+    Sencha GXT 3.0.0b - Sencha for GWT
+    Copyright(c) 2007-2012, Sencha, Inc.
+    licensing@sencha.com
+
+    http://www.sencha.com/products/gxt/license/
+
+-->
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder' xmlns:gxt="urn:import:com.sencha.gxt.widget.core.client"
+  xmlns:row="urn:import:com.sencha.gxt.widget.core.client.container" xmlns:toolbar="urn:import:com.sencha.gxt.widget.core.client.toolbar"
+  xmlns:menu="urn:import:com.sencha.gxt.widget.core.client.menu" xmlns:button="urn:import:com.sencha.gxt.widget.core.client.button"
+  xmlns:g="urn:import:com.google.gwt.user.client.ui" xmlns:tb="urn:import:com.sencha.gxt.widget.core.client.toolbar"
+  xmlns:grid="urn:import:com.sencha.gxt.widget.core.client.grid">
+
+
+  <ui:with type="com.sencha.gxt.widget.core.client.grid.ColumnModel" field="cm"></ui:with>
+  <ui:with type="com.sencha.gxt.data.shared.ListStore" field="store"></ui:with>
+
+  <ui:with type="com.sencha.gxt.widget.core.client.container.VerticalLayoutContainer.VerticalLayoutData" field="middleData">
+    <ui:attributes width="1" height="1" />
+  </ui:with>
+
+  <ui:with type="com.sencha.gxt.widget.core.client.container.VerticalLayoutContainer.VerticalLayoutData" field="bottomData">
+    <ui:attributes width="1" height="-1" />
+  </ui:with>
+
+  <ui:with type="com.sencha.gxt.widget.core.client.grid.GridView" field="view">
+    <ui:attributes stripeRows="true" forceFit="true"></ui:attributes>
+  </ui:with>
+
+  <gxt:FramedPanel ui:field="panel" headingText="Grid UiBinder Example" pixelSize="600, 300"
+    collapsible="true" addStyleNames="margin-10">
+    <row:VerticalLayoutContainer borders="true">
+      <row:child layoutData="{middleData}">
+        <grid:Grid ui:field="grid" cm="{cm}" store="{store}" view="{view}" loadMask="true" columnReordering="true"
+          borders="false">
+        </grid:Grid>
+
+      </row:child>
+      <row:child layoutData="{bottomData}">
+        <toolbar:PagingToolBar pageSize="50" ui:field="toolBar"></toolbar:PagingToolBar>
+      </row:child>
+    </row:VerticalLayoutContainer>
+  </gxt:FramedPanel>
+
+
+
+</ui:UiBinder></textarea>
+<script type="text/javascript">
+  SyntaxHighlighter.config.tagName = "textarea";
+  SyntaxHighlighter.all();
+</script>
+</body>
+</html>

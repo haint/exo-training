@@ -1,0 +1,280 @@
+/**
+ * Sencha GXT 3.0.0b - Sencha for GWT
+ * Copyright(c) 2007-2012, Sencha, Inc.
+ * licensing@sencha.com
+ *
+ * http://www.sencha.com/products/gxt/license/
+ */
+* {
+  font-family: arial, helvetica, tahoma, sans-serif;
+}
+
+.test-button {
+  border: 1px solid red;
+  font-size: 12px;
+}
+
+.pad-text {
+  font-size: 12px;
+  padding: 5px;
+}
+
+.nowrap {
+  white-space: nowrap;
+}
+
+.white-bg {
+  background-color: white;
+}
+
+.padding-10 {
+  padding: 10px;
+}
+
+.padding-20 {
+  padding: 20px;
+}
+
+.padding-5 {
+  padding: 5px;
+}
+
+.margin-5 {
+  margin: 5px;
+}
+
+.margin-10 {
+  margin: 10px;
+}
+
+.margin-20 {
+  margin: 20px;
+}
+
+.relative {
+  position: relative;
+}
+
+.red-border {
+  border: 1px solid red;
+}
+
+.cursor-hand {
+  cursor: defaul;
+}
+
+#demo-header {
+  background: url("../images/bg/hd-bg.gif") repeat-x scroll 0 50% #1E4176;
+  border: 0 none;
+  padding-left: 3px;
+}
+
+#demo-theme {
+  float: right;
+  padding-right: 8px;
+  padding-top: 5px;
+  position: relative;
+}
+
+#demo-title {
+  color: white;
+  font: 16px tahoma, arial, sans-serif;
+  padding: 6px 0 8px 6px;
+}
+
+.sample-box {
+  float: left;
+  width: 135px;
+  margin: 5px 5px 0 5px;
+  text-align: center;
+  height: 114px;
+  cursor: default;
+  color: #444;
+  overflow: hidden;
+  padding-top: 4px;
+  border: none !important;
+}
+
+.sample-over {
+  background: transparent url(../images/thumbs/sample-over.gif) no-repeat;
+}
+
+.sample-over div {
+  color: #1860A8;
+}
+
+.sample-box div,#sample-box div a {
+  font-size: 10px;
+  line-height: 12px;
+  font-family: tahoma, arial, sans-serif;
+}
+
+.sample-box dt a {
+  border: 0 none !important;
+}
+
+/* chooser */
+#img-chooser-dlg .details {
+  padding: 10px;
+  text-align: center;
+}
+
+#img-chooser-dlg .details-info {
+  border-top: 1px solid #cccccc;
+  font: 11px Arial, Helvetica, sans-serif;
+  margin-top: 5px;
+  padding-top: 5px;
+  text-align: left;
+}
+
+#img-chooser-dlg .details-info b {
+  color: #555555;
+  display: block;
+  margin-bottom: 4px;
+}
+
+#img-chooser-dlg .details-info span {
+  display: block;
+  margin-bottom: 5px;
+  margin-left: 5px;
+}
+
+#img-chooser-view {
+  background: white;
+  font: 11px Arial, Helvetica, sans-serif;
+}
+
+#img-chooser-view .thumb {
+  background: #dddddd;
+  padding: 3px;
+}
+
+#img-chooser-view .thumb img {
+  height: 60px;
+  width: 80px;
+}
+
+#img-chooser-view .thumb-wrap {
+  float: left;
+  margin: 4px;
+  margin-right: 0;
+  padding: 5px;
+}
+
+#img-chooser-view .thumb-wrap span {
+  display: block;
+  overflow: hidden;
+  text-align: center;
+}
+
+#img-chooser-view .x-view-over {
+  border: 1px solid #dddddd;
+  background: #efefef repeat-x left top;
+  padding: 4px;
+}
+
+#img-chooser-view .x-view-selected {
+  background: #DFEDFF;
+  border: 1px solid #6593cf;
+  padding: 4px;
+}
+
+#img-chooser-view .x-view-selected .thumb {
+  background: transparent;
+}
+
+#img-chooser-view .x-view-selected span {
+  color: #1A4D8F;
+}
+
+#img-chooser-view .loading-indicator {
+  font-size: 11px;
+  background-image: url('../../resources/images/grid/loading.gif');
+  background-repeat: no-repeat;
+  background-position: left;
+  padding-left: 20px;
+  margin: 10px;
+}
+
+/* list view */
+#images-view .x-panel-body {
+  background: white;
+  font: 11px Arial, Helvetica, sans-serif;
+}
+
+#images-view .thumb {
+  background: #dddddd;
+  padding: 3px;
+}
+
+#images-view .thumb img {
+  height: 60px;
+  width: 80px;
+}
+
+#images-view .thumb-wrap {
+  float: left;
+  margin: 4px;
+  margin-right: 0;
+  padding: 5px;
+  border: 1px solid white;
+}
+
+.x-theme-access #images-view .thumb-wrap {
+  border: 1px solid #232D38;
+}
+
+#images-view .thumb-wrap span {
+  display: block;
+  overflow: hidden;
+  text-align: center;
+}
+
+#images-view .x-view-over {
+  border: 1px solid #dddddd;
+  background: #efefef url(../../gxt/images/default/grid/row-over.gif) repeat-x left top;
+  padding: 4px;
+}
+
+#images-view .x-view-selected {
+  background: #eff5fb no-repeat right bottom;
+  border: 1px solid #99bbe8;
+  padding: 4px;
+}
+
+#images-view .x-view-selected .thumb {
+  background: transparent;
+}
+
+#images-view .loading-indicator {
+  font-size: 11px;
+  background-image: url(../../gxt/resources/images/default/grid/loading.gif);
+  background-repeat: no-repeat;
+  background-position: left;
+  padding-left: 20px;
+  margin: 10px;
+}
+
+.x-panel-body.white-bg {
+  background-color: white;
+}
+
+.source .x-panel-header {
+  background-image: none;
+}
+
+.x-grid3-summary-row {
+  background: none repeat scroll 0 50% #F1F2F4;
+  border-left: 1px solid #FFFFFF;
+  border-right: 1px solid #FFFFFF;
+  color: #333333;
+}
+
+.x-grid3-summary-row .x-grid3-cell-inner {
+  font-weight: bold;
+  padding-bottom: 4px;
+}
+
+.x-grid3-body .x-grid3-td-cost {
+  background-color: #F1F2F4;
+}

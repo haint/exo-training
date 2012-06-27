@@ -1,0 +1,85 @@
+<html>
+<head>
+<link rel="stylesheet" href="../../samples/css/shCoreEclipse.css" type="text/css" />
+<link rel="stylesheet" href="../../samples/css/shThemeEclipse.css" type="text/css" />
+<script src="../../samples/js/shCore.js"></script>
+<script src="../../samples/js/shBrushJava.js"></script>
+<style>
+* {
+font-family:monospace;
+  padding: 0px;
+  margin: 0px;
+  white-space: nowrap;
+  font-size: 11px;
+}
+body {
+  border: none;
+  border-left: 8px solid #EBE9ED;
+}
+
+
+.syntaxhighlighter.nogutter td.code .container textarea, .syntaxhighlighter.nogutter td.code .line {
+    padding: 0 1em !important;
+}
+.syntaxhighlighter {
+  overflow: hidden !important;
+  margin: 0 !important;
+}
+.syntaxhighlighter .toolbar {
+  display: none;
+}
+.syntaxhighlighter div.container div.alt2 {
+  background-color: #F7F6F7 !important;
+}
+</style>
+</head>
+<body style="overflow-x: hidden">
+<textarea class="brush: java; gutter: false;"><!--
+
+    Sencha GXT 3.0.0b - Sencha for GWT
+    Copyright(c) 2007-2012, Sencha, Inc.
+    licensing@sencha.com
+
+    http://www.sencha.com/products/gxt/license/
+
+-->
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder' xmlns:gxt="urn:import:com.sencha.gxt.widget.core.client"
+  xmlns:container="urn:import:com.sencha.gxt.widget.core.client.container" xmlns:g="urn:import:com.google.gwt.user.client.ui"
+  xmlns:b="urn:import:com.sencha.gxt.widget.core.client.button">
+
+  <ui:style>
+    .text {
+      font-size: 11px
+    }
+  </ui:style>
+
+  <g:VerticalPanel spacing="10">
+    <gxt:FramedPanel ui:field="panel" pixelSize="400, 100" headingText="CardLayout Example">
+      <container:CardLayoutContainer ui:field="layout">
+        <g:Label text="This is the contents for card: 1" styleName="{style.text}" />
+        <g:Label text="This is the contents for card: 2" styleName="{style.text}" />
+        <g:Label text="This is the contents for card: 3" styleName="{style.text}" />
+        <g:Label text="This is the contents for card: 4" styleName="{style.text}" />
+      </container:CardLayoutContainer>
+      <gxt:button>
+        <b:TextButton ui:field="card1Button" text="Card 1" />
+      </gxt:button>
+      <gxt:button>
+        <b:TextButton ui:field="card2Button" text="Card 2" />
+      </gxt:button>
+      <gxt:button>
+        <b:TextButton ui:field="card3Button" text="Card 3" />
+      </gxt:button>
+      <gxt:button>
+        <b:TextButton ui:field="card4Button" text="Card 4" />
+      </gxt:button>
+    </gxt:FramedPanel>
+  </g:VerticalPanel>
+</ui:UiBinder></textarea>
+<script type="text/javascript">
+  SyntaxHighlighter.config.tagName = "textarea";
+  SyntaxHighlighter.all();
+</script>
+</body>
+</html>

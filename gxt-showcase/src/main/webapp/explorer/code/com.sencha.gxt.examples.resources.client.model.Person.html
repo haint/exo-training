@@ -1,0 +1,120 @@
+<html>
+<head>
+<link rel="stylesheet" href="../../samples/css/shCoreEclipse.css" type="text/css" />
+<link rel="stylesheet" href="../../samples/css/shThemeEclipse.css" type="text/css" />
+<script src="../../samples/js/shCore.js"></script>
+<script src="../../samples/js/shBrushJava.js"></script>
+<style>
+* {
+font-family:monospace;
+  padding: 0px;
+  margin: 0px;
+  white-space: nowrap;
+  font-size: 11px;
+}
+body {
+  border: none;
+  border-left: 8px solid #EBE9ED;
+}
+
+
+.syntaxhighlighter.nogutter td.code .container textarea, .syntaxhighlighter.nogutter td.code .line {
+    padding: 0 1em !important;
+}
+.syntaxhighlighter {
+  overflow: hidden !important;
+  margin: 0 !important;
+}
+.syntaxhighlighter .toolbar {
+  display: none;
+}
+.syntaxhighlighter div.container div.alt2 {
+  background-color: #F7F6F7 !important;
+}
+</style>
+</head>
+<body style="overflow-x: hidden">
+<textarea class="brush: java; gutter: false;">/**
+ * Sencha GXT 3.0.0b - Sencha for GWT
+ * Copyright(c) 2007-2012, Sencha, Inc.
+ * licensing@sencha.com
+ *
+ * http://www.sencha.com/products/gxt/license/
+ */
+package com.sencha.gxt.examples.resources.client.model;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class Person {
+  private String name;
+  private String company;
+  private String product;
+  private String location;
+  private double income;
+  private List<Kid> kids = new ArrayList<Kid>();
+  
+  public List<Kid> getKids() {
+    return kids;
+  }
+
+  public void setKids(List<Kid> kids) {
+    this.kids = kids;
+  }
+
+  public Person(String name, String company, String product, String location, double income) {
+    setName(name);
+    setCompany(company);
+    setProduct(product);
+    setLocation(location);
+    setIncome(income);
+  }
+
+  public String getName() {
+    return name;
+  }
+
+  public void setName(String name) {
+    this.name = name;
+  }
+
+  public String getCompany() {
+    return company;
+  }
+
+  public void setCompany(String company) {
+    this.company = company;
+  }
+
+  public String getProduct() {
+    return product;
+  }
+
+  public void setProduct(String product) {
+    this.product = product;
+  }
+
+  public String getLocation() {
+    return location;
+  }
+
+  public void setLocation(String location) {
+    this.location = location;
+  }
+
+  public double getIncome() {
+    return income;
+  }
+
+  public void setIncome(double income) {
+    this.income = income;
+  }
+
+}
+</textarea>
+<script type="text/javascript">
+  SyntaxHighlighter.config.tagName = "textarea";
+  SyntaxHighlighter.all();
+</script>
+</body>
+</html>

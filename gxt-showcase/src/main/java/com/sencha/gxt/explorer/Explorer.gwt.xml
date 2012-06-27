@@ -1,0 +1,44 @@
+<!--
+
+    Sencha GXT 3.0.0b - Sencha for GWT
+    Copyright(c) 2007-2012, Sencha, Inc.
+    licensing@sencha.com
+
+    http://www.sencha.com/products/gxt/license/
+
+-->
+<module rename-to='explorer'>
+  <inherits name='com.sencha.gxt.examples.resources.Resources' />
+  <inherits name='com.google.gwt.activity.Activity' />
+  <inherits name='com.google.gwt.place.Place' />
+  <inherits name="com.google.gwt.inject.Inject" />
+
+  <inherits name='com.sencha.gxt.chart.Chart' />
+
+  <set-property name="gwt.logging.logLevel" value="FINEST" />
+  <set-property name="gwt.logging.enabled" value="TRUE" />
+  <set-property name="gwt.logging.popupHandler" value="DISABLED" />
+
+  <!-- <set-property name="gxt.logging.enabled" value="true" /> -->
+
+  <inherits name="com.sencha.gwt.uibinder.UiBinder" />
+
+  <!-- Specify the paths for translatable code -->
+  <source path='client' />
+  <source path='shared' />
+
+  <!-- GZip the output files by default -->
+  <inherits name='com.google.gwt.precompress.Precompress' />
+
+  <!-- <set-configuration-property name="CssResource.style" value="pretty" /> -->
+
+  <set-configuration-property name="UiBinder.useLazyWidgetBuilders" value="true" />
+
+  <generate-with class="com.sencha.gxt.explorer.rebind.SampleGenerator">
+    <when-type-assignable class="com.sencha.gxt.explorer.client.model.ExampleModel" />
+  </generate-with>
+
+  <set-configuration-property name="GXT.state.autoBeanFactory" value="com.sencha.gxt.explorer.client.misc.WindowStateExample.ExampleAutoBeanFactory" />
+
+  <entry-point class='com.sencha.gxt.explorer.client.Explorer' />
+</module>

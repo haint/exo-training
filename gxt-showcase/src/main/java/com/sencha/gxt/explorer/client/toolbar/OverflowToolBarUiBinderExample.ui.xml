@@ -1,0 +1,87 @@
+<!--
+
+    Sencha GXT 3.0.0b - Sencha for GWT
+    Copyright(c) 2007-2012, Sencha, Inc.
+    licensing@sencha.com
+
+    http://www.sencha.com/products/gxt/license/
+
+-->
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder' xmlns:c="urn:import:com.sencha.gxt.widget.core.client"
+  xmlns:button="urn:import:com.sencha.gxt.widget.core.client.button" xmlns:container="urn:import:com.sencha.gxt.widget.core.client.container"
+  xmlns:toolbar="urn:import:com.sencha.gxt.widget.core.client.toolbar" xmlns:g="urn:import:com.google.gwt.user.client.ui">
+
+  <ui:with type="com.sencha.gxt.examples.resources.client.images.ExampleImages" field="images" />
+
+  <c:Window ui:field="window" headingText="Overflow UiBinder Example" pixelSize="400, 200" minWidth="50"
+    minButtonWidth="100" buttonAlign="CENTER">
+
+    <container:NorthSouthContainer>
+      <container:north>
+        <toolbar:ToolBar borders="true">
+          <button:ButtonGroup headingText="Clipboard">
+            <g:Grid>
+              <g:row>
+                <g:customCell>
+                  <button:TextButton text="Cool" icon="{images.add16}" />
+                </g:customCell>
+                <g:customCell>
+                  <button:TextButton text="Copy" icon="{images.add16}" />
+                </g:customCell>
+              </g:row>
+              <g:row>
+                <g:customCell>
+                  <button:TextButton text="Add" icon="{images.user_add}" />
+                </g:customCell>
+                <g:customCell>
+                  <button:TextButton text="Delete" icon="{images.user_delete}" />
+                </g:customCell>
+              </g:row>
+            </g:Grid>
+          </button:ButtonGroup>
+
+          <toolbar:FillToolItem />
+
+          <button:ButtonGroup headingText="Other Bogus Actions">
+            <g:Grid>
+              <g:row>
+                <g:customCell>
+                  <button:TextButton text="Cool" icon="{images.add16}" />
+                </g:customCell>
+                <g:customCell>
+                  <button:TextButton text="Copy" icon="{images.add16}" />
+                </g:customCell>
+              </g:row>
+              <g:row>
+                <g:customCell>
+                  <button:TextButton text="Add" icon="{images.user_add}" />
+                </g:customCell>
+                <g:customCell>
+                  <button:TextButton text="Delete" icon="{images.user_delete}" />
+                </g:customCell>
+              </g:row>
+            </g:Grid>
+          </button:ButtonGroup>
+        </toolbar:ToolBar>
+      </container:north>
+    </container:NorthSouthContainer>
+
+    <c:button>
+      <button:TextButton text="Save" />
+    </c:button>
+    <c:button>
+      <button:TextButton text="Cancel" />
+    </c:button>
+    <c:button>
+      <button:TextButton text="Close" />
+    </c:button>
+    <c:button>
+      <button:TextButton text="Highlight" />
+    </c:button>
+    <c:button>
+      <button:TextButton text="Shutdown" />
+    </c:button>
+  </c:Window>
+
+</ui:UiBinder>

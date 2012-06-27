@@ -1,0 +1,138 @@
+<html>
+<head>
+<link rel="stylesheet" href="../../samples/css/shCoreEclipse.css" type="text/css" />
+<link rel="stylesheet" href="../../samples/css/shThemeEclipse.css" type="text/css" />
+<script src="../../samples/js/shCore.js"></script>
+<script src="../../samples/js/shBrushJava.js"></script>
+<style>
+* {
+font-family:monospace;
+  padding: 0px;
+  margin: 0px;
+  white-space: nowrap;
+  font-size: 11px;
+}
+body {
+  border: none;
+  border-left: 8px solid #EBE9ED;
+}
+
+
+.syntaxhighlighter.nogutter td.code .container textarea, .syntaxhighlighter.nogutter td.code .line {
+    padding: 0 1em !important;
+}
+.syntaxhighlighter {
+  overflow: hidden !important;
+  margin: 0 !important;
+}
+.syntaxhighlighter .toolbar {
+  display: none;
+}
+.syntaxhighlighter div.container div.alt2 {
+  background-color: #F7F6F7 !important;
+}
+</style>
+</head>
+<body style="overflow-x: hidden">
+<textarea class="brush: java; gutter: false;"><!--
+
+    Sencha GXT 3.0.0b - Sencha for GWT
+    Copyright(c) 2007-2012, Sencha, Inc.
+    licensing@sencha.com
+
+    http://www.sencha.com/products/gxt/license/
+
+-->
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder' xmlns:c="urn:import:com.sencha.gxt.widget.core.client"
+  xmlns:button="urn:import:com.sencha.gxt.widget.core.client.button" xmlns:container="urn:import:com.sencha.gxt.widget.core.client.container"
+  xmlns:form="urn:import:com.sencha.gxt.widget.core.client.form" xmlns:g="urn:import:com.google.gwt.user.client.ui">
+
+  <ui:with type="com.sencha.gxt.widget.core.client.container.VerticalLayoutContainer.VerticalLayoutData" field="layoutData">
+    <ui:attributes width="1" height="-1" />
+  </ui:with>
+
+  <ui:with type="com.sencha.gxt.widget.core.client.form.NumberPropertyEditor" field="doublePropertyEditor" />
+  <ui:with type="com.google.gwt.i18n.client.NumberFormat" field="numberFormat" />
+  <ui:with type="com.sencha.gxt.data.shared.ListStore" field="stockStore" />
+  <ui:with type="com.sencha.gxt.data.shared.LabelProvider" field="stockLabelProvider" />
+
+  <g:HorizontalPanel spacing="10">
+
+    <g:HTML ui:field="display" />
+
+    <c:ContentPanel width="400" bodyStyle="padding: 5px;" headerVisible="false">
+      <container:VerticalLayoutContainer>
+
+        <container:child layoutData="{layoutData}">
+          <form:FieldLabel text="Select Company">
+            <form:widget>
+              <form:ComboBox ui:field="scb" store="{stockStore}" labelProvider="{stockLabelProvider}"
+                forceSelection="true" allowBlank="false" typeAhead="true" name="company" triggerAction="ALL" />
+            </form:widget>
+          </form:FieldLabel>
+        </container:child>
+
+        <container:child layoutData="{layoutData}">
+          <form:FieldLabel text="Name">
+            <form:widget>
+              <form:TextField ui:field="name" allowBlank="false" />
+            </form:widget>
+          </form:FieldLabel>
+        </container:child>
+
+        <container:child layoutData="{layoutData}">
+          <form:FieldLabel text="Symbol">
+            <form:widget>
+              <form:TextField ui:field="symbol" name="symbol" />
+            </form:widget>
+          </form:FieldLabel>
+        </container:child>
+
+        <container:child layoutData="{layoutData}">
+          <form:FieldLabel text="Last">
+            <form:widget>
+              <form:NumberField ui:field="last" editor="{doublePropertyEditor}" allowBlank="false"
+                allowNegative="false" name="last" format="{numberFormat}" />
+            </form:widget>
+          </form:FieldLabel>
+        </container:child>
+
+        <container:child layoutData="{layoutData}">
+          <form:FieldLabel text="Change">
+            <form:widget>
+              <form:NumberField ui:field="change" editor="{doublePropertyEditor}" allowBlank="false"
+                name="change" format="{numberFormat}" />
+            </form:widget>
+          </form:FieldLabel>
+        </container:child>
+
+        <container:child layoutData="{layoutData}">
+          <form:FieldLabel text="Updated">
+            <form:widget>
+              <form:DateField ui:field="lastTrans" name="date" />
+            </form:widget>
+          </form:FieldLabel>
+        </container:child>
+
+
+      </container:VerticalLayoutContainer>
+
+      <c:button>
+        <button:TextButton ui:field="reset" text="Cancel" />
+      </c:button>
+
+      <c:button>
+        <button:TextButton ui:field="save" text="Save" />
+      </c:button>
+    </c:ContentPanel>
+
+  </g:HorizontalPanel>
+
+</ui:UiBinder></textarea>
+<script type="text/javascript">
+  SyntaxHighlighter.config.tagName = "textarea";
+  SyntaxHighlighter.all();
+</script>
+</body>
+</html>

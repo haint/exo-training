@@ -1,0 +1,185 @@
+<!--
+
+    Sencha GXT 3.0.0b - Sencha for GWT
+    Copyright(c) 2007-2012, Sencha, Inc.
+    licensing@sencha.com
+
+    http://www.sencha.com/products/gxt/license/
+
+-->
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder' xmlns:g="urn:import:com.google.gwt.user.client.ui"
+  xmlns:c="urn:import:com.sencha.gxt.widget.core.client" xmlns:container="urn:import:com.sencha.gxt.widget.core.client.container"
+  xmlns:form="urn:import:com.sencha.gxt.widget.core.client.form" xmlns:button="urn:import:com.sencha.gxt.widget.core.client.button">
+
+  <ui:with type="com.sencha.gxt.widget.core.client.container.VerticalLayoutContainer.VerticalLayoutData" field="verticalLayoutData">
+    <ui:attributes width="1" height="-1" />
+  </ui:with>
+
+  <ui:with type="com.sencha.gxt.widget.core.client.container.VerticalLayoutContainer.VerticalLayoutData" field="descriptionLayoutData">
+    <ui:attributes width="1" height="100" />
+  </ui:with>
+  
+  <ui:with type="java.util.Date" field="minValue" />
+  <ui:with type="java.util.Date" field="maxValue" />
+  
+  <g:VerticalPanel spacing="10">
+
+    <c:FramedPanel headingText="Simple Form" width="350" bodyStyle="background: none; padding: 5px">
+      <container:VerticalLayoutContainer>
+
+        <container:child layoutData="{verticalLayoutData}">
+          <form:FieldLabel text="Name">
+            <form:widget>
+              <form:TextField ui:field="firstName" allowBlank="false" emptyText="Enter your name..." />
+            </form:widget>
+          </form:FieldLabel>
+        </container:child>
+
+        <container:child layoutData="{verticalLayoutData}">
+          <form:FieldLabel text="Email">
+            <form:widget>
+              <form:TextField ui:field="email" allowBlank="false" />
+            </form:widget>
+          </form:FieldLabel>
+        </container:child>
+        
+        <container:child layoutData="{verticalLayoutData}">
+          <form:FieldLabel text="Password">
+            <form:widget>
+              <form:PasswordField ui:field="password" />
+            </form:widget>
+          </form:FieldLabel>
+        </container:child>
+        
+        <container:child layoutData="{verticalLayoutData}">
+          <form:FieldLabel text="Age">
+            <form:widget>
+              <form:NumberField ui:field="age" allowBlank="false" />
+            </form:widget>
+          </form:FieldLabel>
+        </container:child>
+
+        <container:child layoutData="{verticalLayoutData}">
+          <form:FieldLabel text="Company">
+            <form:widget>
+              <form:ComboBox ui:field="combo" allowBlank="true" forceSelection="true" triggerAction="ALL" />
+            </form:widget>
+          </form:FieldLabel>
+        </container:child>
+
+        <container:child layoutData="{verticalLayoutData}">
+          <form:FieldLabel text="Birthday">
+            <form:widget>
+              <form:DateField ui:field="date" />
+            </form:widget>
+          </form:FieldLabel>
+        </container:child>
+        
+        <container:child layoutData="{verticalLayoutData}">
+          <form:FieldLabel text="Time">
+            <form:widget>
+              <form:TimeField ui:field="time" minValue="{minValue}" maxValue="{maxValue}" />
+            </form:widget>
+          </form:FieldLabel>
+        </container:child>
+
+        <container:child layoutData="{verticalLayoutData}">
+          <form:FieldLabel text="Size">
+            <form:widget>
+              <c:Slider minValue="40" maxValue="90" value="0" increment="5" message="{0} inches tall" />
+            </form:widget>
+          </form:FieldLabel>
+        </container:child>
+
+        <container:child layoutData="{verticalLayoutData}">
+          <form:FieldLabel text="Music">
+            <form:widget>
+              <g:HorizontalPanel>
+                <form:CheckBox ui:field="check1" boxLabel="Classical" />
+                <form:CheckBox ui:field="check2" boxLabel="Rock" value="true" />
+                <form:CheckBox ui:field="check3" boxLabel="Blues" />
+              </g:HorizontalPanel>
+            </form:widget>
+          </form:FieldLabel>
+        </container:child>
+
+
+        <container:child layoutData="{verticalLayoutData}">
+          <form:FieldLabel text="Color">
+            <form:widget>
+              <g:HorizontalPanel>
+                <form:Radio ui:field="radio" boxLabel="Red" />
+                <form:Radio ui:field="radio2" boxLabel="Blue" value="true" />
+              </g:HorizontalPanel>
+            </form:widget>
+          </form:FieldLabel>
+        </container:child>
+
+
+        <container:child layoutData="{descriptionLayoutData}">
+          <form:FieldLabel text="Description">
+            <form:widget>
+              <form:TextArea ui:field="description" preventScrollbars="true" />
+            </form:widget>
+          </form:FieldLabel>
+        </container:child>
+
+        <container:child layoutData="{verticalLayoutData}">
+          <form:FieldLabel text="Duration(s)">
+            <form:widget>
+              <form:SpinnerField ui:field="spinnerField" />
+            </form:widget>
+          </form:FieldLabel>
+        </container:child>
+      </container:VerticalLayoutContainer>
+
+      <c:button>
+        <button:TextButton text="Save" />
+      </c:button>
+      <c:button>
+        <button:TextButton text="Cancel" />
+      </c:button>
+
+    </c:FramedPanel>
+
+
+    <c:FramedPanel ui:field="form2" headingText="Simple Form with FieldSets" width="350">
+
+      <form:FieldSet ui:field="fieldSet" headingText="User Information" collapsible="true">
+        <container:VerticalLayoutContainer>
+          <container:child layoutData="{verticalLayoutData}">
+            <form:FieldLabel text="First Name">
+              <form:widget>
+                <form:TextField allowBlank="false" />
+              </form:widget>
+            </form:FieldLabel>
+          </container:child>
+          <container:child layoutData="{verticalLayoutData}">
+            <form:FieldLabel text="Last Name">
+              <form:widget>
+                <form:TextField allowBlank="false" />
+              </form:widget>
+            </form:FieldLabel>
+          </container:child>
+          <container:child layoutData="{verticalLayoutData}">
+            <form:FieldLabel text="Email">
+              <form:widget>
+                <form:TextField allowBlank="false" />
+              </form:widget>
+            </form:FieldLabel>
+          </container:child>
+        </container:VerticalLayoutContainer>
+      </form:FieldSet>
+
+      <c:button>
+        <button:TextButton text="Save" />
+      </c:button>
+      <c:button>
+        <button:TextButton text="Cancel" />
+      </c:button>
+    </c:FramedPanel>
+
+  </g:VerticalPanel>
+
+</ui:UiBinder>
